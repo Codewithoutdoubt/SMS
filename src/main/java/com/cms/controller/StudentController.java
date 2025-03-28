@@ -34,12 +34,12 @@ public class StudentController {
     public String showStudentForm(Model model) {
         model.addAttribute("branches", branchService.getAllBranches());
         model.addAttribute("semesters", semesterService.getAllSemesters());
-        return "add-student-page"; // Updated JSP file name
+        return "add-student"; // Updated JSP file name
     }
 	@PostMapping("/savestudent")
 	public ModelAndView addStudent(Student student) {
 		studentServcie.addStudent(student);
-		ModelAndView mav = new ModelAndView("student-page"); // Updated JSP file name
+		ModelAndView mav = new ModelAndView("student"); // Updated JSP file name
 		mav.addObject("students", studentServcie.getAllStudents());
 		return mav;
 	}
@@ -49,7 +49,7 @@ public class StudentController {
 	public String showAllCourses(HttpServletRequest request){
 		request.setAttribute("students", studentServcie.getAllStudents());
 		request.setAttribute("mode", "ALL_STUDENTS");
-		return "allstudentspage" ; 
+		return "student" ; 
 	}	
 	@GetMapping("/showstudents/{id}")
 	public String  getStudentProfile(@PathVariable("id") int id , HttpServletRequest request)

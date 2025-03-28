@@ -5,84 +5,159 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Student Dashboard</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <style>
-.active { background-color: white; 
-color:wheat;font-weight:bold;
-width: 185px;border-top-right-radius: 5px;
-}
-body { margin: 0; padding: 0; }
-.sidebar { padding: 25px 10px; box-shadow: 1px 2px 4px;border:solid 1px; align-items: center;margin-top: 15% }
-.sidebar button { display: block; width: 90%; background-color: rgb(84, 126, 232); margin: 5px 0px; border: 1px solid wheat; border-radius: 10px; }
-.student { display: grid; grid-template-columns: 12% 88%; }
-.student-table { padding: 5px 10px; margin: 0px 5px; }
-.student-table th, .student-table td { border: solid 1px; padding: 5px 5px; font-size: 14px; }
-.btn { height: 30px; margin-top: -5px; padding-top: 2px; }
-hr{border: solid 2px wheat;
-}
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f8f9fa;
+    }
+
+    /* Sidebar Styling */
+    .sidebar {
+        width: 250px;
+        height: calc(100vh - 56px);
+        background: linear-gradient(135deg, #232526, #414345);
+        color: white;
+        position: absolute;
+        top: 56px;
+        left: 0;
+        transition: width 0.3s ease-in-out;
+        padding-top: 20px;
+    }
+
+    .sidebar a {
+        display: flex;
+        align-items: center;
+        padding: 12px 20px;
+        color: white;
+        font-size: 16px;
+        text-decoration: none;
+        transition: 0.3s;
+        border-radius: 5px;
+    }
+
+    .sidebar a i {
+        margin-right: 10px;
+        min-width: 30px;
+        text-align: center;
+    }
+
+    .sidebar a:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .content {
+        margin-left: 260px;
+        padding: 20px;
+        transition: margin-left 0.3s;
+    }
+
+    .collapsed .sidebar {
+        width: 80px;
+    }
+
+    .collapsed .content {
+        margin-left: 100px;
+    }
+
+    .toggle-btn {
+        position: absolute;
+        left: 260px;
+        top: 70px;
+        font-size: 20px;
+        cursor: pointer;
+        color: #333;
+        transition: left 0.3s;
+    }
+
+    .collapsed .toggle-btn {
+        left: 100px;
+    }
+
+    .student-table {
+        margin-top: 20px;
+    }
+
+    .table th, .table td {
+        text-align: center;
+    }
+
+    /* Responsive Design */
+    @media screen and (max-width: 768px) {
+        .sidebar {
+            width: 80px;
+        }
+        .content {
+            margin-left: 100px;
+        }
+        .toggle-btn {
+            left: 100px;
+        }
+    }
 </style>
 </head>
 <body>
-    <div class="navbar bg-dark p-0">
-        <nav class="nav justify-content-center">
-            <a class="nav-link active" href="#">Students Dashboard</a>
-            <a class="nav-link text-light" href="addstudent">Add Student</a>
-        </nav>
-        <form action="searchstudent" method="post">
-            <input type="text" placeholder="Search" id="ssearch">
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </div>
-    <div class="student">
-        <div class="sidebar">
-            <div class="branch">
-                <h3>Filter by</h3>
-                <hr>
-                <h4>Branch</h4>
-                <button>CSE</button>
-                <button>ET</button>
-                <button>ME</button>
-                <button>CE</button>
-                <button>Electrical</button>
-            </div>
-            <div class="semester">
-                <h4>Semester</h4>
-                <button>1st</button>
-                <button>2nd</button>
-                <button>3rd</button>
-                <button>4th</button>
-                <button>5th</button>
-            </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Student Management System</a>
         </div>
-        <div class="student-table table-striped">
-            <table>
-                <tr>
-                    <th>Sr.</th>
-                    <th>Roll No.</th>
-                    <th>Student Name</th>
-                    <th>Father Name</th>
-                    <th>Mobile No.</th>                  
-                    <th>Branch</th>
-                    <th>Semester</th>
-                    <th>Admission Year</th>
-                    <th>Edit</th>
-                </tr>
-                <c:forEach var="student" items="${students}" varStatus="status">
+    </nav>
+
+    <div class="sidebar">
+        <h4>Admin Menu</h4>
+        <a href="/adduser"><i class="fas fa-user-plus"></i> <span>Add User</span></a>
+        <a href="/addstudent"><i class="fas fa-user-graduate"></i> <span>Add Student</span></a>
+        <a href="/showstudents"><i class="fas fa-user-graduate"></i> <span>Student List</span></a>
+        <a href="/branches/list"><i class="fas fa-list"></i> <span>Branch List</span></a>
+        <a href="/scholarship"><i class="fas fa-award"></i> <span>Scholarship</span></a>
+        <a href="/"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
+    </div>
+
+    <span class="toggle-btn" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+    </span>
+
+    <div class="content">
+        <h2>Student Dashboard</h2>
+        <div class="table-responsive student-table">
+            <table class="table table-bordered table-striped table-hover">
+                <thead class="thead-dark">
                     <tr>
-                        <td>${status.index + 1}</td>
-                        <td>${student.rollNo}</td>
-                        <td>${student.studentName}</td>
-                        <td>${student.fatherName}</td>
-                        <td>${student.mobileNo}</td>
-                        <td>${student.branch.name}</td>
-                        <td>${student.semester.name}</td>
-						<td>${student.admissionYear}</td>
-						
-                        <td><a href="editstudent?id=${student.rollNo}" class="btn btn-warning mt-1">Edit</a></td>
+                        <th>Sr.</th>
+                        <th>Roll No.</th>
+                        <th>Student Name</th>
+                        <th>Father Name</th>
+                        <th>Mobile No.</th>
+                        <th>Branch</th>
+                        <th>Semester</th>
+                        <th>Admission Year</th>
+                        <th>Edit</th>
                     </tr>
-                </c:forEach>
+                </thead>
+                <tbody>
+                    <c:forEach var="student" items="${students}" varStatus="status">
+                        <tr>
+                            <td>${status.index + 1}</td>
+                            <td>${student.rollNo}</td>
+                            <td>${student.studentName}</td>
+                            <td>${student.fatherName}</td>
+                            <td>${student.mobileNo}</td>
+                            <td>${student.branch.name}</td>
+                            <td>${student.semester.name}</td>
+                            <td>${student.admissionYear}</td>
+                            <td><a href="editstudent?id=${student.rollNo}" class="btn btn-warning">Edit</a></td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
             </table>
         </div>
     </div>
+
+    <script>
+        function toggleSidebar() {
+            document.body.classList.toggle("collapsed");
+        }
+    </script>
 </body>
 </html>

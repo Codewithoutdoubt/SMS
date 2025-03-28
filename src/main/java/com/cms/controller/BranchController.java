@@ -21,13 +21,13 @@ public class BranchController {
     public String listBranches(Model model) {
         List<Branch> branches = branchService.getAllBranches();
         model.addAttribute("branchList", branches);
-        return "branchList"; // Redirects to branchList.jsp
+        return "branch-list"; // 
     }
 
     @GetMapping("/add")
     public String showAddBranchForm(Model model) {
         model.addAttribute("branch", new Branch());
-        return "addBranch"; // Redirects to addBranch.jsp
+        return "add-branch"; // Redirects to addBranch.jsp
     }
 
     @PostMapping("/save")

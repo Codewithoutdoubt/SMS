@@ -26,7 +26,7 @@ public class SemesterController {
     public String listSemesters(Model model) {
         List<Semester> semesters = semesterService.getAllSemesters();
         model.addAttribute("semesters", semesters);
-        return "semesterList";
+        return "semester-list";
     }
 
     @GetMapping("/add")

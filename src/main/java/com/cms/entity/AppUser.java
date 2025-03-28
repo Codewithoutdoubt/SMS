@@ -35,6 +35,4 @@ public class AppUser {
     public AppUser() {
     	
     }
-	    
-
 }
