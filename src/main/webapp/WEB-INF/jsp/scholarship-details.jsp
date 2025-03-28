@@ -16,7 +16,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="sc">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Logout</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/">Logout</a></li>
                 </ul>
             </div>
         </div>
@@ -92,11 +92,11 @@
                             <tbody>
                                 <tr>
                                     <td>1</td>
-                                    <td>Deepak Vishwakarma</td>
-                                    <td>2201C04003</td>
-                                    <td>C04</td>
-                                    <td>6th Semester</td>
-                                    <td>OBC</td>
+                                    <td>Pr033020001</td>
+                                    <td>Renewal</td>
+                                    <td>2025</td>
+                                    <td>S03034020</td>
+                                    <td>14440</td>
                                     <td>Pending</td>
                                     <td><button class="btn btn-danger btn-sm">Edit</button></td>
                                 </tr>
