@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scholarship Details</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+        button a{
+            text-decoration: none;
+            color: rgb(255, 255, 255);
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -15,7 +22,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="sc">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="scholarship-home.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="/">Logout</a></li>
                 </ul>
             </div>
@@ -26,8 +33,10 @@
         <div class="row">
             <!-- Main Content -->
             <main class="col-md-12 px-md-4">
+                <div class="d-flex justify-content-between">
                 <h4 class="text-left mt-4">Student Details</h4>
-                
+                <button class="text-left mb-2 mt-3 btn btn-primary"><a href="add-documents.html"><i class="fas fa-upload mx-2" style="color: #ffffff;"></i>Upload Document Details</a></button>
+            </div>
                 <!-- Student Details -->
                 <div class="card p-4">
                     <div class="row mb-2">
@@ -73,7 +82,10 @@
                         <div class="col-md-3">Yes</div>
                     </div>
                 </div>
-                    <h4 class="text-center mt-4">Scholarship Details</h4>   
+                <div class="d-flex justify-content-between">
+                    <h4 class="text-center mt-4">Scholarship Details</h4>
+                    <button class="text-left mb-2 mt-3 btn btn-primary"><a href="add-documents.html">Add Application</a></button>
+                </div>
                     <!-- Student Table -->
                     <div class="card p-4">
                         <table class="table table-striped">
@@ -98,7 +110,7 @@
                                     <td>S03034020</td>
                                     <td>14440</td>
                                     <td>Pending</td>
-                                    <td><button class="btn btn-danger btn-sm">Edit</button></td>
+                                    <td><button class="btn btn-danger btn-sm"><a href="update-application-details.html">Edit</a></button></td>
                                 </tr>
                                 <!-- More students can be dynamically added -->
                             </tbody>

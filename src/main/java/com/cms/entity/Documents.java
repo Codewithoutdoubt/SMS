@@ -17,21 +17,19 @@ public class Documents {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // Unique identifier for the student
 
-    @Column(name = "caste", length = 50)
-    private String caste;
 
-    @Column(name = "aadhar_no", length = 12)
+    @Column(name = "aadhar_no")
     private String aadharNo;
 
-    @Column(name = "application_no", length = 20)
-    private String applicationNo;
+    @Column(name = "caste_certificate_no")
+    private String casteCertificateNo;
 
-    @Column(name = "application_type", length = 50)
-    private String applicationType;
+    @Column(name = "income_certificate_no")
+    private String incomeCertificateNo;
 
-    @Column(name = "application_status", length = 20)
-    private String applicationStatus;
+    @Column(name = "residence_certificate_no")
+    private String residenceCertificateNo;
 
     // Constructor, if needed, can be added here
-}
 
+}
