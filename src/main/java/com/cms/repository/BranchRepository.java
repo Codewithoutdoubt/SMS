@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BranchRepository extends JpaRepository<Branch, Long> {
     // You can add custom query methods if needed
-    Branch findByCode(String code);
+	Branch findByBranchCode(String branchCode); 
 }

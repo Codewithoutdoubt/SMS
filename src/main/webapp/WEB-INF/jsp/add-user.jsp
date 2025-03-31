@@ -180,7 +180,7 @@
                         <select class="form-control" name="access" required>
                             <option value="" disabled selected>Select Access Level</option>
                             <option value="admin">Admin</option>
-                            <option value="scholarship">Scholarship</option>
+                            <option value="scholarship-home">Scholarship</option>
                             <option value="attendance">Attendance</option>
                             <option value="fees">Fees</option>
                             <option value="result">Result</option>

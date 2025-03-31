@@ -22,8 +22,12 @@ public class Student implements Serializable {
     @Column(name = "sname", length = 255, nullable = false)
     private String studentName;
 
+
     @Column(name = "fname", length = 255, nullable = false)
     private String fatherName;
+
+    @Column(name = "caste", length = 255, nullable = false)
+    private String caste;
 
     @Column(name = "mobileno", nullable = true)
     private Long mobileNo;
@@ -46,4 +50,8 @@ public class Student implements Serializable {
     @JoinColumn(name = "semester_id", nullable = false)
     private Semester semester;
 
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
+    
 }

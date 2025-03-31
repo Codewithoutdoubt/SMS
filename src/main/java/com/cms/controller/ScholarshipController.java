@@ -1,32 +1,35 @@
 package com.cms.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import com.cms.entity.Scholarship;
-import com.cms.services.ScholarshipService;
-
-import org.springframework.web.servlet.ModelAndView;
-
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.cms.entity.Scholarship;
+import com.cms.services.ScholarshipService;
+import com.cms.services.StudentService;
+
 @Controller
+@RequestMapping("/scholarship")
 public class ScholarshipController {
 
     @Autowired
     private ScholarshipService scholarshipService;
 
-    @RequestMapping("/sc")
-    public String requestMethodName() {
-        return "scholarship";
+    @Autowired
+    private StudentService studentService;
+
+    @GetMapping
+    public ModelAndView getAllStudents() {
+        ModelAndView mav = new ModelAndView("scholarship-home");
+        mav.addObject("students", studentService.getAllStudents());
+        return mav;
     }
-    @GetMapping("/scholarship")
-    public ModelAndView getAllScholarships() {
-        List<Scholarship> scholarships = scholarshipService.getAllScholarships();
-        ModelAndView modelAndView = new ModelAndView("scholarship"); // Updated JSP file name
-        modelAndView.addObject("scholarships", scholarships);
-        return modelAndView;
-    }
+  
     @GetMapping("/scholarship-details")
     public String getScholarshipDetails(){
         System.out.println("Error");
@@ -39,12 +42,6 @@ public class ScholarshipController {
         ModelAndView modelAndView = new ModelAndView("scholarship-details-page"); // Updated JSP file name
         modelAndView.addObject("scholarship", scholarship);
         return modelAndView;
-    }
-
-    @PostMapping
-    public String addScholarship(@ModelAttribute Scholarship scholarship) {
-        scholarshipService.addScholarship(scholarship);
-        return "redirect:/scholarships";
     }
 
     @GetMapping("/student/{studentId}")

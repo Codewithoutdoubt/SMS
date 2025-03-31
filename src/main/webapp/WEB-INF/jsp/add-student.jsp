@@ -159,6 +159,16 @@
                             <input type="text" class="form-control" name="fatherName" placeholder="Enter Father Name" required>
                         </div>
                         <div class="mb-3">
+                        	<label class="form-label">Caste</label>
+                            <select class="form-select" name="branch" required>
+                                <option selected disabled>Select Caste</option>
+                                <option value="General">General</option>
+                                <option value="OBC">OBC</option>
+                                <option value="SC">SC</option>
+                                <option value="ST">ST</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
                             <label class="form-label">Mobile No.</label>
                             <input type="tel" class="form-control" name="mobileNo" placeholder="Enter Mobile No" required>
                         </div>
