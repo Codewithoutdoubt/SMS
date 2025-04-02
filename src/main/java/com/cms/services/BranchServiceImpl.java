@@ -27,9 +27,10 @@ public class BranchServiceImpl implements BranchService {
     public Optional<Branch> getBranchById(Long id) {
         return branchRepository.findById(id);
     }
+
+	@Override
+	public Branch getBranchByCode(String code) {
+		return null;
+	}
     
-    @Override
-    public Branch getBranchByCode(String code) {
-        return branchRepository.findByCode(code);
-    }
 }

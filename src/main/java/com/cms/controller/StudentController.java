@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -51,11 +50,4 @@ public class StudentController {
 		request.setAttribute("mode", "ALL_STUDENTS");
 		return "student" ; 
 	}	
-	@GetMapping("/showstudents/{id}")
-	public String  getStudentProfile(@PathVariable("id") int id , HttpServletRequest request)
-	{
-		request.setAttribute("mode","MODE_STUDENT_PROFILE");
-		request.setAttribute("student", studentServcie.getStudent(id));
-		return "studentprofilepage" ;
-	}
 }

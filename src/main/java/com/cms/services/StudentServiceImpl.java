@@ -32,10 +32,10 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public Student getStudent(int id) {
-		return studentRepository.findById(id);
+	public Student getStudent(Long id) {
+	    return studentRepository.findById(id)
+	           .orElseThrow(() -> new RuntimeException("Student not found"));
 	}
-
 
 
 }

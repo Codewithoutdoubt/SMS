@@ -108,7 +108,7 @@
                                  	<td>${Scholarship.applicationStatus}</td>
                                     <td>
                                         <button class="btn btn-danger btn-sm">
-                                            <a href="scholarship-details/${student.id}" class="text-white">View</a>
+                                            <a href="scholarship/${student.id}" class="text-white">View</a>
                                         </button>
                                     </td>
                                 </tr>

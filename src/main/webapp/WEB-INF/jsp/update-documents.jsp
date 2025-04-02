@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document Upload Form</title>
+    <title>Update Document Details</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -27,40 +28,37 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card p-4 shadow">
-                    <h2 class="text-center mb-4">Document Upload Details</h2>
+                    <h2 class="text-center mb-4">Update Document Details</h2>
 
-                    <!-- ✅ Fixed Form -->
-                    <form action="/documents/save" method="post" enctype="multipart/form-data">
-                    <input type="hidden" name="studentId" value="${students.id}"/>
+                    <form action="/documents/update" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="documentId" value="${document.id}"/>
+                        <input type="hidden" name="studentId" value="${document.student.id}"/>
                         <div class="row mb-3">
                             <label for="aadharNo" class="col-sm-4 col-form-label">Aadhar No.</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="aadharNo" name="aadharNo" placeholder="Enter Aadhar No." required>
+                                <input type="text" class="form-control" id="aadharNo" name="aadharNo" value="<c:out value='${document.aadharNo}'/>" required>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="casteCertificate" class="col-sm-4 col-form-label">Caste Certificate No.</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="casteCertificate" name="casteCertificateNo" placeholder="Enter Caste Certificate No." required>
+                                <input type="text" class="form-control" id="casteCertificate" name="casteCertificateNo" value="<c:out value='${document.casteCertificateNo}'/>" required>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="incomeCertificateNo" class="col-sm-4 col-form-label">Income Certificate No.</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="incomeCertificate" name="incomeCertificateNo" placeholder="Enter Income Certificate No." required>
+                                <input type="text" class="form-control" id="incomeCertificate" name="incomeCertificateNo" value="<c:out value='${document.incomeCertificateNo}'/>" required>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="residenceCertificateNo" class="col-sm-4 col-form-label">Residence Certificate No.</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="residenceCertificate" name="residenceCertificateNo" placeholder="Enter Residence Certificate No." required>
+                                <input type="text" class="form-control" id="residenceCertificate" name="residenceCertificateNo" value="<c:out value='${document.residenceCertificateNo}'/>" required>
                             </div>
                         </div>
 
-                        <!-- Hidden Field for Student ID -->
-                        <input type="hidden" name="studentId" id="studentId" value="${param.studentId}"/>
-
-                        <button type="submit" class="btn btn-primary w-100">Submit</button>
+                        <button type="submit" class="btn btn-primary w-100">Update</button>
                     </form>
                 </div>
             </div>

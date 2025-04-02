@@ -1,8 +1,18 @@
 package com.cms.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
@@ -22,7 +32,6 @@ public class Student implements Serializable {
     @Column(name = "sname", length = 255, nullable = false)
     private String studentName;
 
-
     @Column(name = "fname", length = 255, nullable = false)
     private String fatherName;
 
@@ -41,7 +50,6 @@ public class Student implements Serializable {
     @Column(name = "address", length = 255)
     private String address;
     
-    
     @ManyToOne
     @JoinColumn(name = "branch_id", nullable = false)
     private Branch branch;
@@ -49,9 +57,11 @@ public class Student implements Serializable {
     @ManyToOne
     @JoinColumn(name = "semester_id", nullable = false)
     private Semester semester;
+    
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Documents> documents; // Updated field name
 
     public static long getSerialversionuid() {
         return serialVersionUID;
     }
-    
 }

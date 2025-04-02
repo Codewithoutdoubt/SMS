@@ -10,7 +10,7 @@ import com.cms.entity.Student;
 public interface StudentService {
 
 	Student addStudent(Student student);
-	Student getStudent(int id);
+	Student getStudent(Long id);
 	List<Student> getAllStudents();
 
 }

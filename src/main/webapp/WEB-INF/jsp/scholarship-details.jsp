@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <style>
-        button a{
+        button a {
             text-decoration: none;
             color: rgb(255, 255, 255);
         }
@@ -34,52 +37,79 @@
             <!-- Main Content -->
             <main class="col-md-12 px-md-4">
                 <div class="d-flex justify-content-between">
-                <h4 class="text-left mt-4">Student Details</h4>
-                <button class="text-left mb-2 mt-3 btn btn-primary"><a href="add-documents.html"><i class="fas fa-upload mx-2" style="color: #ffffff;"></i>Upload Document Details</a></button>
-            </div>
+                    <h4 class="text-left mt-4">Student Details</h4>
+                    <form action="/documents/add" method="post">
+                        <input type="hidden" name="studentId" value="${student.id}"/>
+                        <c:forEach var="document" items="${student.documents}">
+                            <a href="/documents/update?documentId=${document.id}" class="btn btn-primary">Edit Document</a>
+                        </c:forEach>
+                    </form>
+                </div>  
+                <button type="submit" class="text-left mb-2 mt-3 btn btn-primary">
+                    <i class="fas fa-upload mx-2" style="color: #ffffff;"></i>Upload Document Details
+                </button>
+                
                 <!-- Student Details -->
                 <div class="card p-4">
                     <div class="row mb-2">
                         <div class="col-md-3"><strong>Profile Id:</strong></div>
                         <div class="col-md-3">PR2201C04003</div>
                         <div class="col-md-3"><strong>Roll No.:</strong></div>
-                        <div class="col-md-3">22014C04003</div>
+                        <div class="col-md-3"><c:out value="${student.rollNo}"/></div>
                     </div>
                     <div class="row mb-2">
                         <div class="col-md-3"><strong>Name:</strong></div>
-                        <div class="col-md-3">Deepak Vishwakarma</div>
+                        <div class="col-md-3"><c:out value="${student.studentName}"/></div>
                         <div class="col-md-3"><strong>Father Name:</strong></div>
-                        <div class="col-md-3">Aman Vishwakarma</div>
+                        <div class="col-md-3"><c:out value="${student.fatherName}"/></div>
                     </div>
                     <div class="row mb-2">
                         <div class="col-md-3"><strong>Branch:</strong></div>
-                        <div class="col-md-3">Computer Science And Engineering</div>
+                        <div class="col-md-3"><c:out value="${student.branch.branchName}"/></div>
                         <div class="col-md-3"><strong>Semester:</strong></div>
-                        <div class="col-md-3">6th Semester</div>
+                        <div class="col-md-3"><c:out value="${student.semester.semesterName}"/></div>
                     </div>
                     <div class="row mb-2">
                         <div class="col-md-3"><strong>Mobile No:</strong></div>
-                        <div class="col-md-3">7805961023</div>
+                        <div class="col-md-3"><c:out value="${student.mobileNo}"/></div>
                         <div class="col-md-3"><strong>Admission Year</strong></div>
-                        <div class="col-md-3">2022-23</div>
+                        <div class="col-md-3"><c:out value="${student.admissionYear}"/></div>
                     </div>
                     <div class="row mb-2">
-                        <div class="col-md-3"><strong>Cast:</strong></div>
-                        <div class="col-md-3">OBC</div>
+                        
                         <div class="col-md-3"><strong>Aadhar No.:</strong></div>
-                        <div class="col-md-3">9993 3443 6556</div>
+                        <div class="col-md-3">
+                            <c:forEach var="document" items="${student.documents}">
+                                <c:out value="${document.aadharNo}"/>
+                            </c:forEach>
+                        </div>
+                        <div class="col-md-3"><strong>Income Certificate No.:</strong></div>
+                        <div class="col-md-3">
+                            <c:forEach var="document" items="${student.documents}">
+                                <c:out value="${document.incomeCertificateNo}"/>
+                            </c:forEach>
+                        </div>
                     </div>
                     <div class="row mb-2">
-                        <div class="col-md-3"><strong>Income Certificate:</strong></div>
-                        <div class="col-md-3">Yes</div>
+                        <div class="col-md-3"><strong>Caste Certificate No.:</strong></div>
+                        <div class="col-md-3">
+                            <c:forEach var="document" items="${student.documents}">
+                                <c:out value="${document.casteCertificateNo}"/>
+                            </c:forEach>
+                        </div>
+                        <div class="col-md-3"><strong>Caste:</strong></div>
+                        <div class="col-md-3"><c:out value="${student.caste}"/></div>
+                    </div>
+
+                    <div class="row mb-2">
                         <div class="col-md-3"><strong>Residence Certificate No.:</strong></div>
-                        <div class="col-md-3">123456</div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col-md-3"><strong>Caste Certificate:</strong></div>
-                        <div class="col-md-3">Yes</div>
+                        <div class="col-md-3">
+                            <c:forEach var="document" items="${student.documents}">
+                                <c:out value="${document.residenceCertificateNo}"/>
+                            </c:forEach>
+                        </div>
                         <div class="col-md-3"><strong>Address:</strong></div>
-                        <div class="col-md-3">Yes</div>
+                        <div class="col-md-3"><c:out value="${student.address}"/></div>
                     </div>
                 </div>
                 <div class="d-flex justify-content-between">
@@ -102,17 +132,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Pr033020001</td>
-                                    <td>Renewal</td>
-                                    <td>2025</td>
-                                    <td>S03034020</td>
-                                    <td>14440</td>
-                                    <td>Pending</td>
-                                    <td><button class="btn btn-danger btn-sm"><a href="update-application-details.html">Edit</a></button></td>
-                                </tr>
-                                <!-- More students can be dynamically added -->
+                                <c:forEach var="scholarship" items="${scholarships}">
+                                    <tr>
+                                        <td>${scholarship.id}</td>
+                                        <td>${scholarship.applicationNo}</td>
+                                        <td>${scholarship.applicationType}</td>
+                                        <td>${scholarship.academicYear}</td>
+                                        <td>${scholarship.scholarId}</td>
+                                        <td>${scholarship.entitlementAmount}</td>
+                                        <td>${scholarship.status}</td>
+                                        <td>
+                                            <button class="btn btn-danger btn-sm">
+                                                <a href="update-application-details.html?id=${scholarship.id}">Edit</a>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
                             </tbody>
                         </table>
                     </div>
