@@ -30,7 +30,13 @@ public class BranchServiceImpl implements BranchService {
 
 	@Override
 	public Branch getBranchByCode(String code) {
-		return null;
+		return branchRepository.findByCode(code);
 	}
+
+	@Override
+	public void deleteBranch(Long id) {
+		branchRepository.deleteById(id);
+	}
+    
     
 }

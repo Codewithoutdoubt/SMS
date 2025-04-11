@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cms.entity.Semester;
 import com.cms.services.SemesterService;
@@ -26,37 +27,54 @@ public class SemesterController {
     public String listSemesters(Model model) {
         List<Semester> semesters = semesterService.getAllSemesters();
         model.addAttribute("semesters", semesters);
-        return "semester-list";
+        return "view-semesters";
     }
 
     @GetMapping("/add")
-    public String showAddSemesterForm(Model model) {
+    public String showSemesterForm(Model model) {
         model.addAttribute("semester", new Semester());
-        return "addSemester";
-    }
-
-    @PostMapping("/save")
-    public String saveSemester(@ModelAttribute Semester semester) {
-        semesterService.saveSemester(semester);
-        return "redirect:/semesters";
+        return "add-semester";
     }
 
     @GetMapping("/edit/{id}")
-    public String showEditSemesterForm(@PathVariable Long id, Model model) {
+    public String showSemesterForm(@PathVariable Long id, Model model) {
         Optional<Semester> semester = semesterService.getSemesterById(id);
         semester.ifPresent(s -> model.addAttribute("semester", s));
-        return "editSemester";
+        return "add-semester";
+    }
+
+    @PostMapping("/save")
+    public String saveSemester(@ModelAttribute Semester semester, RedirectAttributes redirectAttributes) {
+        try {
+            semesterService.saveSemester(semester);
+            redirectAttributes.addFlashAttribute("successMessage", "Semester saved successfully");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Error saving semester: " + e.getMessage());
+        }
+        return "redirect:/semesters";
     }
 
     @PostMapping("/update")
-    public String updateSemester(@ModelAttribute Semester semester) {
-        semesterService.saveSemester(semester);
+    public String updateSemester(@ModelAttribute Semester semester, RedirectAttributes redirectAttributes) {
+        try {
+            semesterService.saveSemester(semester);
+            redirectAttributes.addFlashAttribute("successMessage", "Semester updated successfully");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Error updating semester: " + e.getMessage());
+        }
         return "redirect:/semesters";
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteSemester(@PathVariable Long id) {
-        semesterService.deleteSemester(id);
+    public String deleteSemester(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        try {
+            semesterService.deleteSemester(id);
+            redirectAttributes.addFlashAttribute("successMessage", "Semester deleted successfully");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", 
+                "Error deleting semester: " + e.getMessage() + 
+                ". Please ensure no students or courses are associated with this semester.");
+        }
         return "redirect:/semesters";
     }
 }

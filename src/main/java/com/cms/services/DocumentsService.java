@@ -9,4 +9,5 @@ public interface DocumentsService {
     Documents updateDocument(Long id, Documents document);
     void deleteDocument(Long id);
     List<Documents> getAllDocuments();
+    Object getDocumentByStudentId(Long id);
 }

@@ -3,6 +3,7 @@ package com.cms.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,9 +22,12 @@ public class LoginController {
 
     @RequestMapping("/")
     public String home() {
-        return "login-check";
+        return "index";
     }
-
+    @GetMapping("/loginpage")
+    public String loginPage() {
+        return "login-check";
+        }
     @PostMapping("/login")
     public ModelAndView login(@RequestParam String username, @RequestParam String password, Model model) {
         String access = userService.login(username, password);
@@ -32,7 +36,7 @@ public class LoginController {
             if (access.equals("scholarship-home")) {
                 return scholarship(); // Call scholarship method
             }
-            return new ModelAndView(access); // Redirect to other pages
+            return new ModelAndView("redirect:/"+access); // Redirect to other pages
         } else {
             model.addAttribute("error", "Invalid username or password.");
             return new ModelAndView("login-check"); // Redirect to login page

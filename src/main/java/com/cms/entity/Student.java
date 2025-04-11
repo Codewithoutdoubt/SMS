@@ -61,7 +61,11 @@ public class Student implements Serializable {
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Documents> documents; // Updated field name
 
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Scholarship> scholarships;
+
     public static long getSerialversionuid() {
         return serialVersionUID;
     }
+
 }

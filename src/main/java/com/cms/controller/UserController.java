@@ -4,6 +4,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.cms.services.UserService;
+
+import java.util.List;
+
 import com.cms.entity.AppUser;
 import com.cms.services.StudentService;
 
@@ -15,8 +18,15 @@ public class UserController {
 
     @Autowired
     StudentService studentService;
-    
-    @RequestMapping("/adduser")
+
+	@GetMapping("/users")
+	public String getUsers(Model model) {
+		List<AppUser> users = userService.getAllUsers();
+		model.addAttribute("users", users);
+		return "user-list";
+	}
+
+    @RequestMapping("/addUser")
 	public String addUser() {
 		return "add-user";
 	}
@@ -33,8 +43,13 @@ public class UserController {
 
 		// Save user
 		userService.save(user);
-		model.addAttribute("message", "user added successfully");
-		return "admin";
+		return "redirect:/users";
 	}
-}
+
+	@PostMapping("/delete/{id}")
+	public String delete(@PathVariable Integer id) {
+		userService.deleteUser(id);
+		return "redirect:/users";
+
+	}}
 

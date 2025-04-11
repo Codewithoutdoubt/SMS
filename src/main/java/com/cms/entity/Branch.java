@@ -26,10 +26,10 @@ public class Branch implements Serializable {
 
 
     @Column(name = "branch_name", length = 255, nullable = false)
-    private String branchName;
+    private String name;
     
     @Column(name = "branch_code", length = 50, unique = true, nullable = false)
-    private String branchCode;
+    private String code;
 
     @OneToMany(mappedBy = "branch", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Student> students;

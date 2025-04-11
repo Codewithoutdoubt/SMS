@@ -32,6 +32,14 @@ public class SemesterServiceImpl implements SemesterService {
 
     @Override
     public void deleteSemester(Long id) {
-        semesterRepository.deleteById(id);
+        try {
+            if (semesterRepository.existsById(id)) {
+                semesterRepository.deleteById(id);
+            } else {
+                throw new RuntimeException("Semester not found with id: " + id);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to delete semester: " + e.getMessage());
+        }
     }
 }

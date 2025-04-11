@@ -15,10 +15,7 @@ public class ScholarshipServiceImpl implements ScholarshipService {
     @Autowired
     private ScholarshipRepository scholarshipRepository;
 
-    @Override
-    public List<Scholarship> getScholarshipsByStudentId(Long studentId) {
-        return scholarshipRepository.findByScholarId(studentId);
-    }
+
 
     @Override
     public Scholarship addScholarship(Scholarship scholarship) {
@@ -27,13 +24,45 @@ public class ScholarshipServiceImpl implements ScholarshipService {
 
     @Override
     public List<Scholarship> getAllScholarships() {
-        List<Scholarship> scholarships = new ArrayList<>();
-        scholarshipRepository.findAll().forEach(scholarships::add);
-        return scholarships;
+        return scholarshipRepository.findAll();
     }
 
     @Override
     public Scholarship getScholarship(Long id) {
         return scholarshipRepository.findById(id).orElse(null);
     }
+
+    @Override
+    public void saveScholarship(Scholarship scholarship, Long studentId) {
+        scholarshipRepository.save(scholarship);
+    }
+
+    @Override
+    public List<Scholarship> getScholarshipsByStudentId(Long studentId) {
+        return scholarshipRepository.findByStudentId(studentId);
+    }
+
+    @Override
+    public List<Scholarship> getScholarshipsByRollNo(String rollNo) {
+        return scholarshipRepository.findByStudentRollNo(rollNo);
+    }
+
+    @Override
+    public Scholarship updateScholarship(Scholarship scholarship) {
+        if (scholarship == null || scholarship.getScholarshipId() == null) {
+            return null;
+        }
+        if (scholarshipRepository.existsById(scholarship.getScholarshipId())) {
+            return scholarshipRepository.save(scholarship);
+        }
+        return null;
+    }
+
+    @Override
+    public void deleteScholarship(Long id) {
+        if (id != null && scholarshipRepository.existsById(id)) {
+            scholarshipRepository.deleteById(id);
+        }
+    }
+    
 }

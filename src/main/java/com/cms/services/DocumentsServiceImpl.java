@@ -28,12 +28,15 @@ public class DocumentsServiceImpl implements DocumentsService {
 
     @Override
     public Documents updateDocument(Long id, Documents document) {
-        if (documentsRepository.existsById(id)) {
-            document.setId(id);
-            return documentsRepository.save(document);
-        }
-        return null;
-    }
+        Documents existDocument = getDocumentById(id);
+        existDocument.setProfileId(document.getProfileId());
+        existDocument.setAadharNo(document.getAadharNo());
+        existDocument.setCasteCertificateNo(document.getCasteCertificateNo());
+        existDocument.setIncomeCertificateNo(document.getIncomeCertificateNo());
+        existDocument.setResidenceCertificateNo(document.getResidenceCertificateNo());
+        documentsRepository.save(existDocument);
+        return existDocument;
+    } 
 
     @Override
     public void deleteDocument(Long id) {
@@ -44,4 +47,12 @@ public class DocumentsServiceImpl implements DocumentsService {
     public List<Documents> getAllDocuments() {
         return documentsRepository.findAll();
     }
+
+    @Override
+public Documents getDocumentByStudentId(Long id) {
+    return documentsRepository.findByStudentId(0);
+}
+
+
+
 }

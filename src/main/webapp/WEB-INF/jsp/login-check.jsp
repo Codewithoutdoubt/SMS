@@ -1,39 +1,77 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scholarship Details</title>
+    <title>Login - Student Management System</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .login-container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            background-color: white;
+        }
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #343a40;
+        }
+        .form-label {
+            font-weight: 500;
+        }
+        .btn-login {
+            width: 100%;
+            padding: 10px;
+            font-weight: 600;
+        }
+    </style>
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Student Management System</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand fs-4" href="#">Student Management System</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#">Logout</a></li>
-                </ul>
-            </div>
         </div>
     </nav>
 
-	<h2>Login Form</h2>
-	<form action="login" method="post">
-		<label>Username:</label> <input type="text" name="username" required /><br>
-		<br> <label>Password:</label> <input type="password"
-			name="password" required /><br>
-		<c:if test="${not empty error}">
-			<p style="color: red;">${error}</p>
-		</c:if>
+    <div class="container">
+        <div class="login-container">
+            <div class="login-header">
+                <h2>Login to Your Account</h2>
+                <p class="text-muted">Enter your credentials to continue</p>
+            </div>
+            
+            <form action="login" method="post">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" required>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                
+                <c:if test="${not empty error}">
+                    <div class="alert alert-danger mb-4">${error}</div>
+                </c:if>
+                
+                <button type="submit" class="btn btn-primary btn-login">Login</button>
+            </form>
+        </div>
+    </div>
 
-		<input type="submit" value="Login" />
-	</form>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -2,6 +2,8 @@ package com.cms.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,30 +14,67 @@ import com.cms.repository.StudentRepository;
 @Service
 public class StudentServiceImpl implements StudentService {
 
-	@Autowired
-	private StudentRepository studentRepository;
+    @Autowired
+    private StudentRepository studentRepository;
 
-    public StudentServiceImpl(StudentRepository studentRepository) {
-        this.studentRepository = studentRepository;
+    @Override
+    public Student addStudent(Student student) {
+        return studentRepository.save(student);
     }
-	
-	@Override
-	public Student addStudent(Student student) {
-		return studentRepository.save(student);
-	}
 
-	@Override
-	public List<Student> getAllStudents() {
-		List<Student> students = new ArrayList<>();
-		studentRepository.findAll().forEach(students::add);
-		return students;
-	}
+    @Override
+    public List<Student> getAllStudents() {
+        List<Student> students = new ArrayList<>();
+        studentRepository.findAll().forEach(students::add);
+        return students;
+    }
 
-	@Override
-	public Student getStudent(Long id) {
-	    return studentRepository.findById(id)
-	           .orElseThrow(() -> new RuntimeException("Student not found"));
-	}
+    @Override
+    public Student getStudentById(Long id) {
+        Optional<Student> student = studentRepository.findById(id);
+        return student.orElse(null);
+    }
 
+    @Override
+    public void deleteStudent(Long id) {
+        studentRepository.deleteById(id);
+    }
 
+    @Override
+    public Student updateStudent(Student student) {
+        return studentRepository.save(student);
+    }
+
+    @Override
+    public List<Student> getAllStudentsWithScholarships() {
+        return studentRepository.findAllWithScholarships();
+    }
+
+    @Override
+    public List<Student> getFilteredStudents(String branchCode, String semester, String cast, String status) {
+        // First get all students with scholarships
+        List<Student> students = studentRepository.findAllWithScholarships();
+        
+        // Apply filters
+        return students.stream()
+            .filter(student -> 
+                (branchCode == null || branchCode.isEmpty() || 
+                 student.getBranch().getCode().equals(branchCode)))
+            .filter(student -> 
+                (semester == null || semester.isEmpty() || 
+                 student.getSemester().getName().equals(semester)))
+            .filter(student -> 
+                (cast == null || cast.isEmpty() || 
+                 student.getCaste().equals(cast)))
+            .filter(student -> 
+                (status == null || status.isEmpty() || 
+                 (status.equals("Applied") && !student.getScholarships().isEmpty()) ||
+                 (status.equals("Not Applied") && student.getScholarships().isEmpty())))
+            .collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean studentExists(String rollNo) {
+        return studentRepository.findByRollNo(rollNo) != null;
+    }
 }

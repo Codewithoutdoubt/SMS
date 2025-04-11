@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<!--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>-->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,19 +12,21 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    
+    <!--w3school CSS-->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f8f9fa;
+            background-color: #ffffff;
         }
 
         /* Sidebar Styling */
         .sidebar {
             width: 250px;
             height: calc(100vh - 56px); /* Adjusted to start after navbar */
-            background: linear-gradient(135deg, #232526, #414345);
-            color: white;
+            background: linear-gradient(135deg, #04a2f1, #474242);
+            color: rgb(255, 255, 255);
+            font-style:initial;
             position: absolute;
             top: 56px; /* Start after navbar */
             left: 0;
@@ -78,7 +80,7 @@
 
         /* Content Area */
         .content {
-            margin-left: 260px;
+            margin-left: 400px;
             padding: 20px;
             transition: margin-left 0.3s;
         }
@@ -94,7 +96,7 @@
             top: 70px; /* Adjusted for navbar */
             font-size: 20px;
             cursor: pointer;
-            color: #333;
+            color: white;
             transition: left 0.3s;
         }
 
@@ -112,6 +114,8 @@
             opacity: 1;
             pointer-events: auto;
         }
+/*Header */
+
 
         /* Responsive Design */
         @media screen and (max-width: 768px) {
@@ -140,6 +144,7 @@
                 left: 100px;
             }
         }
+       
     </style>
 </head>
 <body>
@@ -147,7 +152,9 @@
     <!-- Bootstrap Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Student Management System</a>
+            <a class="navbar-brand" href="#"><b><i>Student Management System</i></b></a>
+            <a href="index.html"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -155,55 +162,77 @@
     </nav>
 
     <!-- Sidebar -->
-    <div class="sidebar">
-        <h4>Admin Menu</h4>
-        <a href="/adduser"><i class="fas fa-user-plus"></i> <span>Add User</span></a>
-        <a href="/addstudent"><i class="fas fa-user-graduate"></i> <span>Add Student</span></a>
-        <a href="/showstudents"><i class="fas fa-user-graduate"></i> <span>Student List</span></a>
-        <a href="/branches/list"><i class="fas fa-list"></i> <span>Branch List</span></a>
-        <a href="/scholarship"><i class="fas fa-award"></i> <span>Scholarship</span></a>
-        <a href="/"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
+     <div class="admin-sidebar">
+    <%@ include file="/static/components/sidebar.jsp" %>
+</div>
+    <div>
+        <div class="mb-3">
+            <label for="searchSeed" class="form-label">Search:</label>
+            <input type="text" class="form-control" id="searchSeed" placeholder="Search seed name...">
+        </div>
+        <!--header-->
+        <header class="w3-container" style="padding-top:22px">
+        <h5><b><i class="fa fa-dashboard"></i>my dashboard</b></h5>
+    </header>
+    <div class="w3-row-padding w3-margin-top">
+        <div class="w3-quarter">
+            <div class="w3-container w3-red w3-padding-16">
+                <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
+                <div class="w3-right">
+                    <h3>52</h3>
+                </div>
+                <div class="w3-clear"></div>
+                <h4>Message</h4>
+            </div>
+        </div>
+        <div class="w3-quarter">
+            <div class="w3-container w3-blue w3-padding-16">
+                <div class="w3-left"><i class="fa fa-eye w3-xxxlarge"></i></div>
+                <div class="w3-right">
+                    <h3>99</h3>
+                </div>
+                <div class="w3-clear"></div>
+                <h4>views</h4>
+            </div>
+        </div>
+        <div class="w3-quarter">
+            <div class="w3-container w3-teal w3-padding-16">
+                <div class="w3-left"><i class="fa fa-share-alt w3-xxxlarge"></i></div>
+                <div class="w3-right">
+                    <h3>23</h3>
+                </div>
+                <div class="w3-clear"></div>
+                <h4>shares</h4>
+            </div>
+        </div>
+        <div class="w3-quarter">
+            <div class="w3-container w3-red w3-padding-16">
+                <div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
+                <div class="w3-right">
+                    <h3>50</h3>
+                </div>
+                <div class="w3-clear"></div>
+                <h4>users</h4>
+            </div>
+        </div>
+        </div>
     </div>
-
-    <!-- Sidebar Toggle Button -->
-    <span class="toggle-btn" onclick="toggleSidebar()">
-        <i class="fas fa-bars"></i>
-    </span>
-
-    <!-- Content Area -->
-    <div class="content">
-        <div class="container">
-            <h2 class="mt-4"><i class="fas fa-users"></i> User List</h2>
-            <div class="table-responsive">
-            
-                <div class="message text-white fs-3 text-center m-1">${message}</div>
-                <table class="table table-bordered table-striped table-hover">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>Username</th>
-                            <th>Access</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach var="user" items="${users}">
-            <tr>
-                <td>${user.username}</td>
-                <td>${user.access}</td>
-            </tr>
-        </c:forEach>
-                    </tbody>
-                </table>
-                
+</div>      
             </div>
         </div>
     </div>
 
     <!-- Sidebar Toggle Script -->
+
+    
     <script>
         function toggleSidebar() {
             document.body.classList.toggle("collapsed");
         }
     </script>
+
+
+
 
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

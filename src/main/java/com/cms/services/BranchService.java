@@ -9,4 +9,5 @@ public interface BranchService {
     List<Branch> getAllBranches();
     Optional<Branch> getBranchById(Long id);
     Branch getBranchByCode(String code);
+    void deleteBranch(Long id);
 }

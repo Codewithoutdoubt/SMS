@@ -1,4 +1,5 @@
 package com.cms.entity;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,9 +21,11 @@ public class Documents {
     private Long id; // Unique identifier for the student
 
     @OneToOne
-@JoinColumn(name = "student_id", unique = true, nullable = false) // Ensures uniqueness
-private Student student;
+    @JoinColumn(name = "student_id", unique = true, nullable = false) // Ensures uniqueness
+    private Student student;
 
+    @Column(name="profile_id")
+    private String profileId;
 
     @Column(name = "aadhar_no")
     private String aadharNo;
@@ -35,6 +38,5 @@ private Student student;
 
     @Column(name = "residence_certificate_no")
     private String residenceCertificateNo;
-    
 
 }

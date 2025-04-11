@@ -41,4 +41,9 @@ public class UserServiceImp implements UserService {
     public List<AppUser> getAllUsers() {
         return userRepo.findAll();
     }
+
+    @Override
+    public void deleteUser(Integer id) {
+        userRepo.deleteById(id);
+    }
 }

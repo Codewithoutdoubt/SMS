@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,37 +34,47 @@ public class DocumentController {
         Documents createdDocument = documentsService.createDocument(document);
         return ResponseEntity.ok(createdDocument);
     }
+    
 
         @PostMapping("/add")
         public ModelAndView postMethodName(@RequestParam("studentId") Long studentId) {
             ModelAndView mav = new ModelAndView("add-documents");
-            mav.addObject("students",studentService.getStudent(studentId));
+            mav.addObject("students",studentService.getStudentById(studentId));
             return mav;
         }
 
-    @GetMapping("/update")
-    public ModelAndView updateDocument(@ModelAttribute Documents document, @RequestParam("documentId") Long documentId) {
-        documentsService.updateDocument(documentId, document);
-        ModelAndView mav = new ModelAndView("redirect:/documents");
-        return mav;
+    @PostMapping("/editdocument")
+    public ModelAndView editDocument(@RequestParam("documentId") Long documentId) {
+    // Fetch the document details using the documentId
+    ModelAndView mav = new ModelAndView("edit-document-details");
+    Documents document = documentsService.getDocumentById(documentId);
+    mav.addObject("document",document); 
+    return mav;  
     }
+    
+
+    @PostMapping("/update-document")
+    public ModelAndView updateDoc(@RequestParam("documentId") Long documentId, 
+                              @RequestParam("studentId") Long studentId, 
+                              @ModelAttribute Documents updatedDocument) {
+        documentsService.updateDocument(documentId,updatedDocument);
+    return new ModelAndView("redirect:/scholarship/" + studentId);
+}
+
 
     @PostMapping("/save")
     public ModelAndView saveDocument(Documents document, @RequestParam("studentId") Long studentId) {
-            Student student = studentService.getStudent(studentId);
+            Student student = studentService.getStudentById(studentId);
             document.setStudent(student);
-            documentsService.createDocument(document);
+            try {
+                documentsService.createDocument(document); 
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             ModelAndView mav = new ModelAndView("scholarship-details");
-            mav.addObject("student",studentService.getStudent(studentId));
+            mav.addObject("student",studentService.getStudentById(studentId));
             return mav;
         }
-
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Documents> getDocumentById(@PathVariable Long id) {
-        Documents document = documentsService.getDocumentById(id);
-        return document != null ? ResponseEntity.ok(document) : ResponseEntity.notFound().build();
-    }
 
 
     @GetMapping

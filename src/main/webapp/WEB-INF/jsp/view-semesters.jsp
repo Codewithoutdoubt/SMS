@@ -1,39 +1,191 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+
 <!DOCTYPE html>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Semester List</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Semester View</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffffff;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            width: 250px;
+            height: calc(100vh - 56px); /* Adjusted to start after navbar */
+            background: linear-gradient(135deg, #04a2f1, #474242);
+            color: rgb(255, 255, 255);
+            font-style:initial;
+            position: absolute;
+            top: 56px; /* Start after navbar */
+            left: 0;
+            transition: width 0.3s ease-in-out;
+        }
+
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: white;
+            font-size: 16px;
+            text-decoration: none;
+            transition: 0.3s;
+            border-radius: 5px;
+        }
+
+        .sidebar a i {
+            margin-right: 10px;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .sidebar a span {
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .sidebar a:hover {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .sidebar h4 {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-top: 15px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        /* Collapsed Sidebar */
+        .collapsed .sidebar {
+            width: 80px;
+        }
+
+        .collapsed .sidebar h4,
+        .collapsed .sidebar a span {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Content Area */
+        .content {
+            margin-left: 260px;
+            padding: 20px;
+            transition: margin-left 0.3s;
+        }
+
+        .collapsed .content {
+            margin-left: 150px;
+        }
+
+        /* Sidebar Toggle Button */
+        .toggle-btn {
+            position: absolute;
+            left: 260px;
+            top: 70px; /* Adjusted for navbar */
+            font-size: 20px;
+            cursor: pointer;
+            color: #333;
+            transition: left 0.3s;
+        }
+
+        .collapsed .toggle-btn {
+            left: 100px;
+        }
+
+        /* Sidebar Hover Effect */
+        .collapsed .sidebar:hover {
+            width: 250px;
+        }
+
+        .collapsed .sidebar:hover h4,
+        .collapsed .sidebar:hover a span {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            .sidebar {
+                width: 80px;
+            }
+
+            .sidebar h4 {
+                display: none;
+            }
+
+            .sidebar a {
+                text-align: center;
+                padding: 12px;
+            }
+
+            .sidebar a i {
+                margin-right: 0;
+            }
+
+            .content {
+                margin-left: 100px;
+            }
+
+            .toggle-btn {
+                left: 100px;
+            }
+        }
+       
+    </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+    <!-- Bootstrap Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Student Management System</a>
+            <a class="navbar-brand" href="#"><b><i>Student Management System</i></b></a>
+            <a href="index.html"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#">Logout</a></li>
-                </ul>
-            </div>
         </div>
     </nav>
-    <div class="container mt-5">
-        <div class="card">
-            <div class="card-header text-center">
-                <h2>Semester List</h2>
+
+    <!-- Sidebar -->
+    <%@ include file="/static/components/sidebar.jsp" %>
+    <div class="content">
+        <%-- Success/Error Messages --%>
+        <c:if test="${not empty successMessage}">
+            <div class="alert alert-success alert-dismissible fade show mb-4">
+                <i class="fas fa-check-circle me-2"></i>${successMessage}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-            <div class="card-body">
-                <table class="table table-bordered table-striped">
-                    <thead>
+        </c:if>
+        <c:if test="${not empty errorMessage}">
+            <div class="alert alert-danger alert-dismissible fade show mb-4">
+                <i class="fas fa-exclamation-circle me-2"></i>${errorMessage}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </c:if>
+        
+        <a href="${pageContext.request.contextPath}/semesters/add" class="btn btn-primary mb-4">
+            <i class="fas fa-plus me-2"></i>Add Semester
+        </a>
+
+        <h2 class="mt-4"><i class="fas fa-list"></i> Semester List</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover">
+                    <thead class="thead-dark">
                         <tr>
                             <th>ID</th>
                             <th>Semester Name</th>
-                            <th>Branch</th>
-                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,18 +194,28 @@
                             <tr>
                                 <td>${semester.id}</td>
                                 <td>${semester.name}</td>
-                                <td>${semester.branch.name}</td>
-                                <td>
-                                    <a href="edit/${semester.id}" class="btn btn-warning btn-sm">Edit</a>
-                                </td>
                             </tr>
-                        </c:forEach>
+                        </c:forEach>    
                     </tbody>
                 </table>
-                <a href="add" class="btn btn-primary">Add Semester</a>
             </div>
         </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    
+    <script>
+        function toggleSidebar() {
+            document.body.classList.toggle("collapsed");
+        }
+    </script>
+
+
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>

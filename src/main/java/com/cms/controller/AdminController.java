@@ -3,8 +3,10 @@ package com.cms.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cms.services.ScholarshipService;
 import com.cms.services.StudentService;
 import com.cms.services.UserService;
 
@@ -14,6 +16,9 @@ public class AdminController {
     @Autowired
     private UserService userService; // Add UserService dependency
 
+    @Autowired 
+    private ScholarshipService scholarshipService; // Add ScholarshipService dependency
+
     @Autowired
     StudentService studentService;
     
@@ -21,6 +26,13 @@ public class AdminController {
     public ModelAndView adminPage() {
         ModelAndView mav = new ModelAndView("admin");
         mav.addObject("users", userService.getAllUsers());
+        return mav;
+    }
+
+    @RequestMapping("/admin-scholarship")
+    public ModelAndView as(){
+        ModelAndView mav = new ModelAndView("admin-scholarship");
+        mav.addObject("scholarships", scholarshipService.getAllScholarships());
         return mav;
     }
 

@@ -17,7 +17,7 @@ public class BranchController {
     @Autowired
     private BranchService branchService;
 
-    @GetMapping("/list")
+    @RequestMapping
     public String listBranches(Model model) {
         List<Branch> branches = branchService.getAllBranches();
         model.addAttribute("branchList", branches);
@@ -33,7 +33,7 @@ public class BranchController {
     @PostMapping("/save")
     public String saveBranch(@ModelAttribute Branch branch) {
         branchService.saveBranch(branch);
-        return "redirect:/branches/list"; // Redirects to branch list
+        return "redirect:/branches"; // Redirects to branch list
     }
 
     @GetMapping("/edit/{id}")
@@ -45,4 +45,5 @@ public class BranchController {
         }
         return "redirect:/branches/list"; // Redirects if not found
     }
+
 }
