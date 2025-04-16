@@ -1,13 +1,11 @@
 package com.cms.services;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.cms.entity.Semester;
 import com.cms.repository.SemesterRepository;
+
+import java.util.List;
 
 @Service
 public class SemesterServiceImpl implements SemesterService {
@@ -21,25 +19,17 @@ public class SemesterServiceImpl implements SemesterService {
     }
 
     @Override
-    public Optional<Semester> getSemesterById(Long id) {
-        return semesterRepository.findById(id);
+    public Semester getSemesterById(Long id) {
+        return semesterRepository.findById(id).orElse(null);
     }
 
     @Override
-    public Semester saveSemester(Semester semester) {
-        return semesterRepository.save(semester);
+    public void saveSemester(Semester semester) {
+        semesterRepository.save(semester);
     }
 
     @Override
     public void deleteSemester(Long id) {
-        try {
-            if (semesterRepository.existsById(id)) {
-                semesterRepository.deleteById(id);
-            } else {
-                throw new RuntimeException("Semester not found with id: " + id);
-            }
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to delete semester: " + e.getMessage());
-        }
+        semesterRepository.deleteById(id);
     }
 }

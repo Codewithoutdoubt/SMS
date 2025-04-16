@@ -45,7 +45,7 @@
                             <div class="row mb-3">
                                 <label for="aadharNo" class="col-sm-4 col-form-label">Aadhar No.</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="aadharNo" name="aadharNo"
+                                    <input type="text" class="form-control" id="aadharNo" maxlength="12" name="aadharNo"
                                         placeholder="Enter Aadhar No." required>
                                 </div>
                             </div>

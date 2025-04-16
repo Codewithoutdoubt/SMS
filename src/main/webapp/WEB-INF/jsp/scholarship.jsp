@@ -38,37 +38,40 @@
                         <label class="form-label">Branch Code</label>
                         <select name="branchCode" class="form-control">
                             <option value="">All</option>
-                            <option value="C04">Computer Science</option>
-                            <option value="EC">Electronics</option>
-                            <option value="ME">Mechanical</option>
+                            <c:forEach var="branch" items="${branches}">
+                                <option value="${branch.code}" 
+                                    <c:if test="${branch.code == param.branchCode}">selected</c:if>
+                                >${branch.name}</option>
+                            </c:forEach>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Semester</label>
                         <select name="semester" class="form-control">
                             <option value="">All</option>
-                            <option value="1st Semester">1st Semester</option>
-                            <option value="2st Semester">2st Semester</option>
-                            <option value="3st Semester">3st Semester</option>
-                            <option value="4st Semester">4st Semester</option>
+                            <c:forEach var="semester" items="${semesters}">
+                                <option value="${semester.name}" 
+                                    <c:if test="${semester.name == param.semester}">selected</c:if>
+                                >${semester.name}</option>
+                            </c:forEach>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Caste</label>
                         <select name="cast" class="form-control">
                             <option value="">All</option>
-                            <option value="General">General</option>
-                            <option value="OBC">OBC</option>
-                            <option value="SC">SC</option>
-                            <option value="ST">ST</option>
+                            <option value="General" <c:if test="${param.cast == 'General'}">selected</c:if>>General</option>
+                            <option value="OBC" <c:if test="${param.cast == 'OBC'}">selected</c:if>>OBC</option>
+                            <option value="SC" <c:if test="${param.cast == 'SC'}">selected</c:if>>SC</option>
+                            <option value="ST" <c:if test="${param.cast == 'ST'}">selected</c:if>>ST</option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Application Status</label>
                         <select name="status" class="form-control">
                             <option value="">All</option>
-                            <option value="Applied">Applied</option>
-                            <option value="Not Applied">Not Applied</option>
+                            <option value="Applied" <c:if test="${param.status == 'Applied'}">selected</c:if>>Applied</option>
+                            <option value="Not Applied" <c:if test="${param.status == 'Not Applied'}">selected</c:if>>Not Applied</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary my-3">Apply Filters</button>
@@ -130,20 +133,6 @@
             </main>
         </div>
     </div>
-
-    <script>
-        // Preserve selected filter values when page reloads
-        document.addEventListener('DOMContentLoaded', function() {
-            const params = new URLSearchParams(window.location.search);
-            ['branchCode', 'semester', 'cast', 'status'].forEach(param => {
-                const value = params.get(param);
-                if (value) {
-                    const select = document.querySelector(`select[name="${param}"]`);
-                    if (select) select.value = value;
-                }
-            });
-        });
-    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
