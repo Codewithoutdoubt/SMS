@@ -183,7 +183,7 @@
                                                     <a href="/scholarship/update/${scholarship.scholarshipId}"
                                                         class="btn btn-primary btn-sm">Edit</a>
                                                     <form action="/scholarship/delete/${scholarship.scholarshipId}"
-                                                        method="get"
+                                                        method="post"
                                                         onsubmit="return confirm('Are you sure you want to delete this application?')">
                                                         <input type="hidden" name="${_csrf.parameterName}"
                                                             value="${_csrf.token}" />

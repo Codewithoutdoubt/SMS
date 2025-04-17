@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import com.cms.services.DocumentsService;
 import com.cms.entity.Scholarship;
 import com.cms.entity.Student;
-import com.cms.services.DocumentsService;
 import com.cms.services.BranchService;
 import com.cms.services.SemesterService;
 import com.cms.services.ScholarshipService;
@@ -55,6 +55,73 @@ public class ScholarshipController {
 
         return mav;
     }
-  
-    // ... (rest of the controller methods remain unchanged)
+
+    @GetMapping("/{id}")
+    public ModelAndView getScholarshipDetails(@PathVariable Long id) {
+        ModelAndView mav = new ModelAndView("scholarship-details");
+        mav.addObject("student", studentService.getStudentById(id));
+        mav.addObject("documents", documentsService.getDocumentByStudentId(id));
+        mav.addObject("scholarships", scholarshipService.getScholarshipsByStudentId(id)); // Fetch scholarships
+        return mav;
+    }
+
+    @GetMapping("/addapplication")
+    public ModelAndView addApplication(@RequestParam("studentId") Long studentId){
+        ModelAndView mav = new ModelAndView("add-scholarship");
+        mav.addObject("student", studentId);
+        return mav;
+    }
+
+    @PostMapping("/save")
+    public ModelAndView saveScholarship(Scholarship scholarship, @RequestParam("studentId") Long studentId){
+        Student student = studentService.getStudentById(studentId);
+        scholarship.setStudent(student);
+        scholarshipService.saveScholarship(scholarship, studentId);
+        return new ModelAndView("redirect:/scholarship/"+ studentId);
+    }
+
+    @GetMapping("update/{id}")
+    public ModelAndView updateScholarship(@PathVariable Long id){
+        ModelAndView mav = new ModelAndView("update-application-details");
+        return mav.addObject("scholarships", scholarshipService.getScholarship(id));
+    }
+
+    @PostMapping("/update-scholarship/{id}")
+    public ModelAndView updateScholarship(@PathVariable Long id, 
+                              @ModelAttribute("scholarships") Scholarship updatedScholarship) {
+        Scholarship existing = scholarshipService.getScholarship(id);
+        if (existing != null) {
+            // Preserve the student relationship
+            updatedScholarship.setStudent(existing.getStudent());
+            // Set the ID to ensure we're updating the correct record
+            updatedScholarship.setScholarshipId(id);
+            // Update all fields
+            Scholarship result = scholarshipService.updateScholarship(updatedScholarship);
+            if (result != null) {
+                return new ModelAndView("redirect:/scholarship/" + existing.getStudent().getId());
+            }
+        }
+        return new ModelAndView("redirect:/scholarship");
+    }
+
+    @GetMapping("/admin-scholarship")
+    public ModelAndView showScholarshipList(@RequestParam(required = false) String rollNo) {
+        ModelAndView mav = new ModelAndView("admin-scholarship");
+        List<Scholarship> scholarships;
+        if (rollNo != null && !rollNo.isEmpty()) {
+            scholarships = scholarshipService.getScholarshipsByRollNo(rollNo);
+        } else {
+            scholarships = scholarshipService.getAllScholarships();
+        }
+        mav.addObject("scholarships", scholarships);
+        return mav;
+    }
+
+    @PostMapping("/delete/{id}")
+    public ModelAndView deleteScholarship(@PathVariable Long id) {
+        Scholarship scholarship = scholarshipService.getScholarship(id); // Retrieve the scholarship to get student ID
+        Long studentId = scholarship.getStudent().getId(); // Get the associated student ID
+        scholarshipService.deleteScholarship(id); // Delete the scholarship
+        return new ModelAndView("redirect:/scholarship/" + studentId); // Redirect to scholarship details page
+    }
 }
