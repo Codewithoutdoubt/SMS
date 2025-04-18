@@ -1,7 +1,7 @@
 package com.cms.services;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +14,6 @@ public class ScholarshipServiceImpl implements ScholarshipService {
 
     @Autowired
     private ScholarshipRepository scholarshipRepository;
-
-
 
     @Override
     public Scholarship addScholarship(Scholarship scholarship) {
@@ -64,5 +62,13 @@ public class ScholarshipServiceImpl implements ScholarshipService {
             scholarshipRepository.deleteById(id);
         }
     }
-    
+
+    @Override
+    public List<Scholarship> filterScholarships(String criteria) {
+        List<Scholarship> scholarships = scholarshipRepository.findAll();
+        return scholarships.stream()
+            .filter(scholarship -> scholarship.getApplicationType().contains(criteria) || 
+                                  scholarship.getApplicationStatus().contains(criteria))
+            .collect(Collectors.toList());
+    }
 }

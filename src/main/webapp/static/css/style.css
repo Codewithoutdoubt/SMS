@@ -96,8 +96,32 @@ body {
     pointer-events: auto;
 }
 /*Header */
-
-
+.ftr{
+    height: 35px !important;
+}
+label{
+    display: inline-block;
+}
+select{
+    display: inline-block;
+}
+/* Filter Section Styling */
+.filter-section {
+    float: right; /* Aligns the filter section to the right */
+    margin-left: 20px; /* Adds some space between the filter and other content */
+}
+.cn-heading{
+    font-weight: 700;
+    font-size: 24px;
+}
+.scard p{
+    font-size: 18px;
+    padding-top: 10px;
+    padding-left: 5px;
+}
+.scard h4{
+    width: 22%;
+}
 /* Responsive Design */
 @media screen and (max-width: 768px) {
     .sidebar {

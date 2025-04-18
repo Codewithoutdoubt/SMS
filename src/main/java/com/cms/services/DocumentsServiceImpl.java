@@ -2,6 +2,7 @@ package com.cms.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,10 +50,19 @@ public class DocumentsServiceImpl implements DocumentsService {
     }
 
     @Override
-public Documents getDocumentByStudentId(Long id) {
-    return documentsRepository.findByStudentId(0);
-}
+    public Documents getDocumentByStudentId(Long id) {
+        return documentsRepository.findByStudentId(0);
+    }
 
-
-
+    @Override
+    public List<Documents> filterDocuments(String criteria) {
+        List<Documents> documents = documentsRepository.findAll();
+        return documents.stream()
+            .filter(document -> document.getProfileId().contains(criteria) || 
+                               document.getAadharNo().contains(criteria) || 
+                               document.getCasteCertificateNo().contains(criteria) || 
+                               document.getIncomeCertificateNo().contains(criteria) || 
+                               document.getResidenceCertificateNo().contains(criteria))
+            .collect(Collectors.toList());
+    }
 }

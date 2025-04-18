@@ -10,4 +10,5 @@ public interface DocumentsService {
     void deleteDocument(Long id);
     List<Documents> getAllDocuments();
     Object getDocumentByStudentId(Long id);
+    List<Documents> filterDocuments(String criteria); // New filtering method
 }

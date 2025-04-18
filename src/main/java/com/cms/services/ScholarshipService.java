@@ -12,6 +12,5 @@ public interface ScholarshipService {
     Scholarship updateScholarship(Scholarship scholarship);
     void deleteScholarship(Long id);
     List<Scholarship> getScholarshipsByRollNo(String rollNo);
-    
-
+    List<Scholarship> filterScholarships(String criteria); // New filtering method
 }

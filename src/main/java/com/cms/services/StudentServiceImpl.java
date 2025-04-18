@@ -51,7 +51,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<Student> getFilteredStudents(String branchCode, String semester, String cast, String status) {
+    public List<Student> getFilteredStudents(String branchCode, String semester, String academicYear, String status) {
         // First get all students with scholarships
         List<Student> students = studentRepository.findAllWithScholarships();
         
@@ -64,8 +64,8 @@ public class StudentServiceImpl implements StudentService {
                 (semester == null || semester.isEmpty() || 
                  student.getSemester().getName().equals(semester)))
             .filter(student -> 
-                (cast == null || cast.isEmpty() || 
-                 student.getCaste().equals(cast)))
+                (academicYear == null || academicYear.isEmpty() || 
+                 student.getAdmissionYear().equals(academicYear)))
             .filter(student -> 
                 (status == null || status.isEmpty() || 
                  (status.equals("Applied") && !student.getScholarships().isEmpty()) ||
