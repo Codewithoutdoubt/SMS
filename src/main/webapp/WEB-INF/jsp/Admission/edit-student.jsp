@@ -1,12 +1,13 @@
 <%@ include file="/static/components/header.jsp" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/add-student-form.css" />
 <!-- Content Area -->
-<div class="container-fluid mt-5">
+<div class="container-fluid mt-3">
     <div class="container form-container">
         <div class="card">
             <div class="card-header text-center">Edit Student Details Form</div>
             <div class="card-body">
                 <form action="updatestudent" method="post">
+                    <input type="hidden" name="id" value="${student.id}" />
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
@@ -23,7 +24,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Caste</label>
-                                <select class="form-select" name="caste" required>
+                                <select class="form-select w-100" name="caste" required>
                                     <option value="" disabled>Select Caste</option>
                                     <option value="General" ${student.caste == 'General' ? 'selected' : ''}>General</option>
                                     <option value="OBC" ${student.caste == 'OBC' ? 'selected' : ''}>OBC</option>
@@ -33,13 +34,13 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Admission Year</label>
-                                <input type="text" class="form-control" name="admissionYear" placeholder="Enter Admission Year (e.g. 2023)" value="${student.admissionYear}">
+                                <input type="text" class="form-control" maxlength="4" name="admissionYear" placeholder="Enter Admission Year (e.g. 2023)" value="${student.admissionYear}">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label">Mobile No.</label>
-                                <input type="tel" class="form-control" name="mobileNo" placeholder="Enter Mobile No" value="${student.mobileNo}" required>
+                                <input type="tel" class="form-control" maxlength="10" name="mobileNo" placeholder="Enter Mobile No" value="${student.mobileNo}" required>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Email Id</label>
@@ -51,7 +52,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Branch</label>
-                                <select class="form-select" name="branch" required>
+                                <select class="form-select w-100" name="branchId" required>
                                     <option value="" disabled>Select Branch</option>
                                     <c:forEach var="branch" items="${branches}">
                                         <option value="${branch.id}" ${branch.id == student.branch.id ? 'selected' : ''}>${branch.name}</option>
@@ -60,7 +61,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Semester</label>
-                                <select class="form-select" name="semester" required>
+                                <select class="form-select w-100" name="semesterId" required>
                                     <option value="" disabled>Select Semester</option>
                                     <c:forEach var="semester" items="${semesters}">
                                         <option value="${semester.id}" ${semester.id == student.semester.id ? 'selected' : ''}>${semester.name}</option>

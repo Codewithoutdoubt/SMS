@@ -2,9 +2,9 @@
     <!-- Sidebar -->
     <div class="row">
         <div class="col-md-2 col-lg-2  sidebar">
-            <h4 class="text-center">Admission Department</h4>
+            <h4 class="text-center">Result Department</h4>
             <hr>
-            <form id="filter-form" class="ml-3" method="get" action="/filter/Admission/student">
+            <form id="filter-form" class="ml-3" method="get" action="/filter/Result/result">
                 <h4 class="text-left pt-0">Filter Data</h4>
                 <%@ include file="/static/components/department-filter.jsp" %>
                     <button type="reset" class="btn btn-primary h-75 w-100 ftr mt-3"><a class="p-0 text-center d-block"
@@ -18,11 +18,7 @@
             <main>
                 <!-- Student Table -->
                  <div class="d-flex justify-content-between">
-                    <h2 class="text-center font-weight-bold">Student List</h2>
-                    <button type="button" class="btn btn-primary my-2" data-bs-toggle="modal"
-                    data-bs-target="#addStudentModal">
-                    <a href="/addstudent">Add Student</a>
-                    </button>
+                    <h2 class="text-center font-weight-bold">Student List</h2>                    
                  </div>
                 <div class="card">
                     <table class="students-table p-3 table table-striped student-table">
@@ -49,12 +45,8 @@
                                     <td>${student.semester.name}</td>
                                     <td>${student.admissionYear}</td>
                                     <td class="d-flex mb-1">
-                                        <form action="editstudent?id=${student.id}" method="get">
-                                            <input type="hidden" name="studentId" value="${student.id}">
-                                            <button type="submit" class="btn btn-primary btn-sm me-2">Edit</button>
-                                        </form>
-                                        <a href="deletestudent?id=${student.id}"
-                                        onclick="return confirm('Are you sure you want to delete this student?');" class="btn btn-danger mt-0  h-50 ml-2 btn-sm">Delete</a>
+                                    <a href="viewresult?id=${student.id}"
+                                        onclick="return confirm('Are you sure you want to delete this student?');" class="btn btn-primary mt-0  h-50 ml-2 btn-sm">View Reult</a>
                                     </td>
                                 </tr>
                             </c:forEach>

@@ -46,13 +46,12 @@ public class ScholarshipController {
         
         ModelAndView mav = new ModelAndView("Scholarship/scholarship");
         mav.addObject("students", 
-            studentService.getFilteredStudents(branchCode, semester, cast, status));
+            studentService.getFilteredStudentsForSc(branchCode, semester, cast, status));
         
         // Fetch filter options
         mav.addObject("branches", branchService.getAllBranches());
         mav.addObject("semesters", semesterService.getAllSemesters());
         mav.addObject("castes", List.of("General", "OBC", "SC", "ST")); // Static list for castes
-
         return mav;
     }
 

@@ -2,6 +2,7 @@
     <div class="mb-3 w-25 mx-1">
         <select name="branchCode" class="form-control">
             <option value="" disabled selected>Select Branch</option>
+            <option value="">All</option>
             <c:forEach var="branch" items="${branches}">
                 <option value="${branch.code}" <c:if test="${branch.code == param.branchCode}">selected</c:if>>${branch.name}</option>
             </c:forEach>
@@ -9,7 +10,9 @@
     </div>
     <div class="mb-3 w-25 mx-1">
         <select name="semester" class="form-control">
+
             <option value="" disabled selected>Select Semester</option>
+            <option value="">All</option>
             <c:forEach var="semester" items="${semesters}">
                 <option value="${semester.name}" <c:if test="${semester.name == param.semester}">selected</c:if>>${semester.name}</option>
             </c:forEach>
@@ -18,6 +21,7 @@
     <div class="mb-3 w-25 mx-1">
         <select name="academicYear" class="form-control">
             <option value="" disabled selected>Select Academic Year</option>
+            <option value="">All</option>
             <c:forEach var="student" items="${students}">
                 <option value="${student.admissionYear}" <c:if test="${student.admissionYear == param.academicYear}">selected</c:if>>${student.admissionYear}</option>
             </c:forEach>

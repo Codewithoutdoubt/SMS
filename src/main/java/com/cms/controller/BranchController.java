@@ -34,7 +34,7 @@ public class BranchController {
     @PostMapping("/save")
     public String saveBranch(@ModelAttribute Branch branch) {
         branchService.saveBranch(branch);
-        return "redirect:/branches"; // Redirects to branch list
+        return "redirect:/branch-data"; // Redirects to branch list
     }
 
     @GetMapping("/edit/{id}")

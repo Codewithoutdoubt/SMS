@@ -51,6 +51,29 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public List<Student> getFilteredStudentsForSc(String branchCode, String semester, String caste, String status) {
+        // First get all students with scholarships
+        List<Student> students = studentRepository.findAllWithScholarships();
+        
+        // Apply filters
+        return students.stream()
+            .filter(student -> 
+                (branchCode == null || branchCode.isEmpty() || 
+                 student.getBranch().getCode().equals(branchCode)))
+            .filter(student -> 
+                (semester == null || semester.isEmpty() || 
+                 student.getSemester().getName().equals(semester)))
+            .filter(student -> 
+                (caste == null || caste.isEmpty() || 
+                 student.getCaste().equals(caste)))
+            .filter(student -> 
+                (status == null || status.isEmpty() || 
+                 (status.equals("Applied") && !student.getScholarships().isEmpty()) ||
+                 (status.equals("Not Applied") && student.getScholarships().isEmpty())))
+            .collect(Collectors.toList());
+    }
+
+    @Override
     public List<Student> getFilteredStudents(String branchCode, String semester, String academicYear, String status) {
         // First get all students with scholarships
         List<Student> students = studentRepository.findAllWithScholarships();

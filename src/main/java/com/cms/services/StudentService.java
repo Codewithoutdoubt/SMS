@@ -13,6 +13,7 @@ public interface StudentService {
 	List<Student> getAllStudents();
     List<Student> getAllStudentsWithScholarships();
     List<Student> getFilteredStudents(String branchCode, String semester, String cast, String status);
+	List<Student> getFilteredStudentsForSc(String branchCode, String semester, String caste, String status);
 	void deleteStudent(Long id);
 	Student updateStudent(Student student);
 	boolean studentExists(String rollNo);

@@ -1,43 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="jakarta.tags.core" prefix="c" %>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Management System</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-
-<body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Student Management System</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="/scholarship">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/">Logout</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+<%@ include file="/static/components/header-scholarship.jsp" %>
 
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
-            <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar p-3">
-                <h4>Filters</h4>
+            <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar pt-0" id="sidebar">
+                <h5 class="font-weight-bold text-center">Scholarship Department</h5>
+                <hr>
+                <h4 class="pt-0">Filters</h4>
                 <form id="filter-form" method="get" action="/scholarship">
                     <div class="mb-3">
-                        <label class="form-label">Branch Code</label>
-                        <select name="branchCode" class="form-control">
+                        <label class="form-label">Branch</label>
+                        <select name="branchCode" class="form-control h-50">
                             <option value="">All</option>
                             <c:forEach var="branch" items="${branches}">
                                 <option value="${branch.code}" 
@@ -48,7 +21,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Semester</label>
-                        <select name="semester" class="form-control">
+                        <select name="semester" class="form-control h-50">
                             <option value="">All</option>
                             <c:forEach var="semester" items="${semesters}">
                                 <option value="${semester.name}" 
@@ -59,7 +32,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Caste</label>
-                        <select name="cast" class="form-control">
+                        <select name="cast" class="form-control h-50">
                             <option value="">All</option>
                             <option value="General" <c:if test="${param.cast == 'General'}">selected</c:if>>General</option>
                             <option value="OBC" <c:if test="${param.cast == 'OBC'}">selected</c:if>>OBC</option>
@@ -69,24 +42,24 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Application Status</label>
-                        <select name="status" class="form-control">
+                        <select name="status" class="form-control h-50">
                             <option value="">All</option>
                             <option value="Applied" <c:if test="${param.status == 'Applied'}">selected</c:if>>Applied</option>
                             <option value="Not Applied" <c:if test="${param.status == 'Not Applied'}">selected</c:if>>Not Applied</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary my-3">Apply Filters</button>
+                    <button type="submit" class="btn btn-primary my-3 w-100">Apply Filters</button>
 
-                    <a href="/scholarship" class="btn btn-secondary">Reset Filters</a>
                 </form>
+                <a href="/scholarship" class="d-block pt-1 btn .bg-success.bg-gradient mb-3" style="height: 35px !important;">Reset Filters</a>
             </nav>
 
             <!-- Main Content -->
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <h2 class="text-center mt-4">Student Details</h2>
+                <h4 class="text-left mt-4">Student Details</h4>
 
                 <!-- Student Table -->
-                <div class="card p-4">
+                <div class="card">
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -117,7 +90,7 @@
                                                 <span class="badge bg-success">Applied</span>
                                             </c:when>
                                             <c:otherwise>
-                                                <span class="badge bg-secondary">Not Applied</span>
+                                                <span class="badge .bg-info .bg-gradient">Not Applied</span>
                                             </c:otherwise>
                                         </c:choose>
                                     </td>

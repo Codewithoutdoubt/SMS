@@ -50,6 +50,9 @@ public class StudentController {
         if (studentServcie.studentExists(student.getRollNo())) {
             mav = new ModelAndView("Admission/student");
             mav.addObject("students", studentServcie.getAllStudents());
+            mav.addObject("branches", branchService.getAllBranches()); // Add branches for filter
+            mav.addObject("semesters", semesterService.getAllSemesters());
+            mav.addObject("error", "Student with the same roll number already exists.");
             return mav;
         }
         studentServcie.addStudent(student);
@@ -58,10 +61,23 @@ public class StudentController {
         return mav;
     }
 
-    @GetMapping("/editstudent/{id}")
-    public ModelAndView editStudent() {
-        ModelAndView mav = new ModelAndView("");
-        mav.addObject("student", studentServcie.getStudentById(id));
+    @GetMapping("/editstudent")
+    public ModelAndView editStudent(@RequestParam("studentId") Long studentId) {
+        ModelAndView mav = new ModelAndView("Admission/edit-student");
+        mav.addObject("student", studentServcie.getStudentById(studentId));
+        mav.addObject("branches", branchService.getAllBranches());
+        mav.addObject("semesters", semesterService.getAllSemesters());
+        return mav;
+    }
+
+    @PostMapping("/updatestudent")
+    public ModelAndView updateStudent(Student student, @RequestParam("branchId") Long branchId,
+            @RequestParam("semesterId") Long semesterId) {
+        ModelAndView mav = new ModelAndView("Admission/student");
+        student.setBranch(branchService.getBranchById(branchId).orElse(null));
+        student.setSemester(semesterService.getSemesterById(semesterId));
+        studentServcie.updateStudent(student);
+        mav.addObject("students", studentServcie.getAllStudents());
         mav.addObject("branches", branchService.getAllBranches());
         mav.addObject("semesters", semesterService.getAllSemesters());
         return mav;
@@ -70,23 +86,23 @@ public class StudentController {
     @GetMapping("/deletestudent")
     public String deleteStudent(@RequestParam Long id) {
         studentServcie.deleteStudent(id);
-        return "redirect:/student";
+        return "redirect:/admission";
     }
 
     @GetMapping("/filter/{folder}/{viewname}")
-        public String filterStudentsWithFolder(
+    public String filterStudentsWithFolder(
             @RequestParam(required = false) String branchCode,
             @RequestParam(required = false) String semester,
             @RequestParam(required = false) String academicYear,
             @PathVariable String folder,
             @PathVariable String viewname,
             Model model) {
-            List<Student> filteredStudents = studentServcie.getFilteredStudents(branchCode, semester, academicYear, null);
-            model.addAttribute("students", filteredStudents);
-            model.addAttribute("branches", branchService.getAllBranches());
-            model.addAttribute("semesters", semesterService.getAllSemesters());
-            model.addAttribute("mode", "FILTERED_STUDENTS");
-            return folder + "/" + viewname;
-        }
+        List<Student> filteredStudents = studentServcie.getFilteredStudents(branchCode, semester, academicYear, null);
+        model.addAttribute("students", filteredStudents);
+        model.addAttribute("branches", branchService.getAllBranches());
+        model.addAttribute("semesters", semesterService.getAllSemesters());
+        model.addAttribute("mode", "FILTERED_STUDENTS");
+        return folder + "/" + viewname;
+    }
     // Removed the conflicting getAllSemesters method
 }
