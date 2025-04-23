@@ -23,12 +23,12 @@ public class UserController {
 	public String getUsers(Model model) {
 		List<AppUser> users = userService.getAllUsers();
 		model.addAttribute("users", users);
-		return "user-list";
+		return "Admin/user-list";
 	}
 
     @RequestMapping("/addUser")
 	public String addUser() {
-		return "add-user";
+		return "Admin/add-user";
 	}
 
 	@PostMapping("/saveuser")

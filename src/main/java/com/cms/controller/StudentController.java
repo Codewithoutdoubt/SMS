@@ -4,12 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.cms.entity.Student;
-import com.cms.entity.Branch;
 import com.cms.services.BranchService;
 import com.cms.services.SemesterService;
 import com.cms.services.StudentService;
@@ -28,42 +27,44 @@ public class StudentController {
     @Autowired
     SemesterService semesterService;
 
-    @GetMapping("/student")
-    public String showAllCourses(HttpServletRequest request) {
-        request.setAttribute("students", studentServcie.getAllStudents());
-        request.setAttribute("mode", "ALL_STUDENTS");
-        return "student";
+    @GetMapping("/admission")
+    public ModelAndView adminPage() {
+        ModelAndView mav = new ModelAndView("Admission/student");
+        mav.addObject("students", studentServcie.getAllStudents()); // Add student data
+        mav.addObject("branches", branchService.getAllBranches()); // Add branches for filter
+        mav.addObject("semesters", semesterService.getAllSemesters()); // Add semesters for filter
+        return mav;
     }
 
     @GetMapping("/addstudent")
     public String showStudentForm(Model model) {
         model.addAttribute("branches", branchService.getAllBranches());
         model.addAttribute("semesters", semesterService.getAllSemesters());
-        return "add-student"; // Updated JSP file name
+        return "Admission/add-student"; // Updated JSP file name
     }
 
     @PostMapping("/savestudent")
     public ModelAndView addStudent(Student student) {
-        ModelAndView mav = new ModelAndView("add-student");
+        ModelAndView mav = new ModelAndView("Admission/add-student");
         // Check if student with same roll number already exists
         if (studentServcie.studentExists(student.getRollNo())) {
-            mav = new ModelAndView("student");
+            mav = new ModelAndView("Admission/student");
             mav.addObject("students", studentServcie.getAllStudents());
             return mav;
         }
         studentServcie.addStudent(student);
-        mav = new ModelAndView("student");
+        mav = new ModelAndView("Admission/student");
         mav.addObject("students", studentServcie.getAllStudents());
         return mav;
     }
 
-    @GetMapping("/editstudent")
-    public String editStudent(@RequestParam Long id, HttpServletRequest request) {
-        request.setAttribute("student", studentServcie.getStudentById(id));
-        request.setAttribute("branches", branchService.getAllBranches());
-        request.setAttribute("semesters", semesterService.getAllSemesters());
-        request.setAttribute("mode", "MODE_UPDATE");
-        return "add-student";
+    @GetMapping("/editstudent/{id}")
+    public ModelAndView editStudent() {
+        ModelAndView mav = new ModelAndView("");
+        mav.addObject("student", studentServcie.getStudentById(id));
+        mav.addObject("branches", branchService.getAllBranches());
+        mav.addObject("semesters", semesterService.getAllSemesters());
+        return mav;
     }
 
     @GetMapping("/deletestudent")
@@ -72,25 +73,20 @@ public class StudentController {
         return "redirect:/student";
     }
 
-    @GetMapping("/filter")
-    public String filterStudents(
-        @RequestParam(required = false) String branchCode,
-        @RequestParam(required = false) String semester,
-        @RequestParam(required = false) String academicYear,
-        Model model) {
-        List<Student> filteredStudents = studentServcie.getFilteredStudents(branchCode, semester, academicYear, null);
-        model.addAttribute("students", filteredStudents);
-        model.addAttribute("branches", branchService.getAllBranches()); // Add branches for filter
-        model.addAttribute("semesters", semesterService.getAllSemesters()); // Add semesters for filter
-        model.addAttribute("mode", "FILTERED_STUDENTS");
-        return "admin"; // Redirect to admin.jsp or the appropriate view
-    }
-
-    @GetMapping("/branches")
-    @ResponseBody
-    public List<Branch> getAllBranches() {
-        return branchService.getAllBranches();
-    }
-
+    @GetMapping("/filter/{folder}/{viewname}")
+        public String filterStudentsWithFolder(
+            @RequestParam(required = false) String branchCode,
+            @RequestParam(required = false) String semester,
+            @RequestParam(required = false) String academicYear,
+            @PathVariable String folder,
+            @PathVariable String viewname,
+            Model model) {
+            List<Student> filteredStudents = studentServcie.getFilteredStudents(branchCode, semester, academicYear, null);
+            model.addAttribute("students", filteredStudents);
+            model.addAttribute("branches", branchService.getAllBranches());
+            model.addAttribute("semesters", semesterService.getAllSemesters());
+            model.addAttribute("mode", "FILTERED_STUDENTS");
+            return folder + "/" + viewname;
+        }
     // Removed the conflicting getAllSemesters method
 }

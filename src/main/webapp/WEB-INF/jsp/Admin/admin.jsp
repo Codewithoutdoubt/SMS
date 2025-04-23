@@ -11,6 +11,7 @@
                     <h2>Student Dashboard</h2>
                 </div>
                 <div class="col-lg-9 pt-3">
+                    <form id="filter-form" class="d-flex filter-section" method="get" action="/filter/Admin/admin">
                     <%@ include file="/static/components/filter.jsp" %>
                 </div>
 

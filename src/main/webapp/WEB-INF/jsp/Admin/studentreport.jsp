@@ -10,23 +10,23 @@
       <!-- Profile and Fees Section -->
       <div class="row mb-4">
         <!-- Profile -->
-        <div class="col-md-4">
+        <div class="col-md-4 col-lg-5">
           <h5 class="fw-bold cn-heading">Student Profile</h5>
           <div class="card profile-card">
             <div class="card-body">
-              <div class="details scard d-flex">
+              <div class="details scard ">
                 <h4>Name : </h4>
                 <p>
                   <c:out value="${student.studentName}" />
                 </p>
               </div>
-              <div class="deatails scard d-flex">
+              <div class="deatails scard">
                 <h4>Roll No. :</h4>
                 <p>
                   <c:out value="${student.rollNo}" />
                 </p>
               </div>
-              <div class="deatails scard d-flex">
+              <div class="deatails scard">
                 <h4>Branch :</h4>
                 <p>
                   <c:out value="${student.branch.name}" />
@@ -37,9 +37,9 @@
         </div>
 
         <!-- Fees Table -->
-        <div class="col-md-8">
-          <h5 class="fw-bold cn-heading">Fees Details</h5>
-          <table class="table table-bordered">
+        <div class="col-md-8 col-lg-6">
+          <h6 class="fw-bold cn-heading">Fees Details</h6>
+          <table class="table fees-table table-bordered">
             <thead class="table-primary">
               <tr>
                 <th>Sr. No.</th>

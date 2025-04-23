@@ -1,4 +1,4 @@
-<form id="filter-form" class="d-flex filter-section" method="get" action="/filter">
+
     <div class="mb-3 w-25 mx-1">
         <select name="branchCode" class="form-control">
             <option value="" disabled selected>Select Branch</option>

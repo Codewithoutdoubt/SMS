@@ -38,7 +38,7 @@ public class DocumentController {
 
         @PostMapping("/add")
         public ModelAndView postMethodName(@RequestParam("studentId") Long studentId) {
-            ModelAndView mav = new ModelAndView("add-documents");
+            ModelAndView mav = new ModelAndView("Documents/add-documents");
             mav.addObject("students",studentService.getStudentById(studentId));
             return mav;
         }
@@ -46,7 +46,7 @@ public class DocumentController {
     @PostMapping("/editdocument")
     public ModelAndView editDocument(@RequestParam("documentId") Long documentId) {
     // Fetch the document details using the documentId
-    ModelAndView mav = new ModelAndView("edit-document-details");
+    ModelAndView mav = new ModelAndView("Documents/edit-document-details");
     Documents document = documentsService.getDocumentById(documentId);
     mav.addObject("document",document); 
     return mav;  
@@ -71,7 +71,7 @@ public class DocumentController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            ModelAndView mav = new ModelAndView("scholarship-details");
+            ModelAndView mav = new ModelAndView("Scholarship/scholarship-details");
             mav.addObject("student",studentService.getStudentById(studentId));
             return mav;
         }

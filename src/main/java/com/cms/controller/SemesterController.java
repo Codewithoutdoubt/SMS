@@ -27,20 +27,20 @@ public class SemesterController {
     public String listSemesters(Model model) {
         List<Semester> semesters = semesterService.getAllSemesters();
         model.addAttribute("semesters", semesters);
-        return "view-semesters";
+        return "Admin/view-semesters";
     }
 
     @GetMapping("/add")
     public String showSemesterForm(Model model) {
         model.addAttribute("semester", new Semester());
-        return "add-semester";
+        return "Admin/add-semester";
     }
 
     @GetMapping("/edit/{id}")
     public String showSemesterForm(@PathVariable Long id, Model model) {
-        Optional<Semester> semester = semesterService.getSemesterById(id);
-        semester.ifPresent(s -> model.addAttribute("semester", s));
-        return "add-semester";
+        Semester semester = semesterService.getSemesterById(id);
+        model.addAttribute("semester", semester);
+        return "Admin/add-semester";
     }
 
     @PostMapping("/save")

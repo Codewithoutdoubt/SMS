@@ -32,4 +32,10 @@ public class BranchServiceImpl implements BranchService {
             .filter(branch -> branch.getName().contains(criteria) || branch.getCode().contains(criteria))
             .collect(Collectors.toList());
     }
+
+    @Override
+    public void saveBranch(Branch branch) {
+            if (branch != null) {
+                branchRepository.save(branch);
+            }    }
 }

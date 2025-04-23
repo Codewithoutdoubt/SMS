@@ -44,7 +44,7 @@ public class ScholarshipController {
             @RequestParam(required = false) String cast,
             @RequestParam(required = false) String status) {
         
-        ModelAndView mav = new ModelAndView("scholarship");
+        ModelAndView mav = new ModelAndView("Scholarship/scholarship");
         mav.addObject("students", 
             studentService.getFilteredStudents(branchCode, semester, cast, status));
         
@@ -58,7 +58,7 @@ public class ScholarshipController {
 
     @GetMapping("/{id}")
     public ModelAndView getScholarshipDetails(@PathVariable Long id) {
-        ModelAndView mav = new ModelAndView("scholarship-details");
+        ModelAndView mav = new ModelAndView("Scholarship/scholarship-details");
         mav.addObject("student", studentService.getStudentById(id));
         mav.addObject("documents", documentsService.getDocumentByStudentId(id));
         mav.addObject("scholarships", scholarshipService.getScholarshipsByStudentId(id)); // Fetch scholarships
@@ -67,7 +67,7 @@ public class ScholarshipController {
 
     @GetMapping("/addapplication")
     public ModelAndView addApplication(@RequestParam("studentId") Long studentId){
-        ModelAndView mav = new ModelAndView("add-scholarship");
+        ModelAndView mav = new ModelAndView("Scholarship/add-scholarship");
         mav.addObject("student", studentId);
         return mav;
     }
@@ -82,7 +82,7 @@ public class ScholarshipController {
 
     @GetMapping("update/{id}")
     public ModelAndView updateScholarship(@PathVariable Long id){
-        ModelAndView mav = new ModelAndView("update-application-details");
+        ModelAndView mav = new ModelAndView("Scholarship/update-application-details");
         return mav.addObject("scholarships", scholarshipService.getScholarship(id));
     }
 
@@ -106,7 +106,7 @@ public class ScholarshipController {
 
     @GetMapping("/admin-scholarship")
     public ModelAndView showScholarshipList(@RequestParam(required = false) String rollNo) {
-        ModelAndView mav = new ModelAndView("admin-scholarship");
+        ModelAndView mav = new ModelAndView("Scholarship/admin-scholarship");
         List<Scholarship> scholarships;
         if (rollNo != null && !rollNo.isEmpty()) {
             scholarships = scholarshipService.getScholarshipsByRollNo(rollNo);
