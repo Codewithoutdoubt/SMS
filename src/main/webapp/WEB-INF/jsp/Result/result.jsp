@@ -1,4 +1,4 @@
-<%@ include file="/static/components/header.jsp" %>
+<%@ include file="/static/components/header-result.jsp" %>
     <!-- Sidebar -->
     <div class="row">
         <div class="col-md-2 col-lg-2  sidebar">
@@ -8,7 +8,7 @@
                 <h4 class="text-left pt-0">Filter Data</h4>
                 <%@ include file="/static/components/department-filter.jsp" %>
                     <button type="reset" class="btn btn-primary h-75 w-100 ftr mt-3"><a class="p-0 text-center d-block"
-                            href="/admission">Reset</a></button>
+                            href="/result">Reset</a></button>
         </div>
         </form>
     </div>
@@ -45,8 +45,8 @@
                                     <td>${student.semester.name}</td>
                                     <td>${student.admissionYear}</td>
                                     <td class="d-flex mb-1">
-                                    <a href="viewresult?id=${student.id}"
-                                        onclick="return confirm('Are you sure you want to delete this student?');" class="btn btn-primary mt-0  h-50 ml-2 btn-sm">View Reult</a>
+                                    <a href="/result/${student.id}"
+                                        class="btn btn-primary mt-0  h-50 ml-2 btn-sm">View Reult</a>
                                     </td>
                                 </tr>
                             </c:forEach>

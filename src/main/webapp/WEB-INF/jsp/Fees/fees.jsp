@@ -1,32 +1,28 @@
-<%@ include file="/static/components/header.jsp" %>
+<%@ include file="/static/components/header-fees.jsp" %>
     <!-- Sidebar -->
     <div class="row">
         <div class="col-md-2 col-lg-2  sidebar">
-            <h4 class="text-center">Admission Department</h4>
+            <h4 class="text-center">${department.name}</h4>
             <hr>
-            <form id="filter-form" class="ml-3" method="get" action="/filter/Admission/student">
+            <form id="filter-form" class="ml-3" method="get" action="/filter/Fees/fees">
                 <h4 class="text-left pt-0">Filter Data</h4>
                 <%@ include file="/static/components/department-filter.jsp" %>
                     <button type="reset" class="btn btn-primary h-75 w-100 ftr mt-3"><a class="p-0 text-center d-block"
-                            href="/admission">Reset</a></button>
+                            href="/fees">Reset</a></button>
+            </form>
         </div>
-        </form>
     </div>
     <div class="col-md-10 col-lg-10">
         <div class="container-fluid">
             <!-- Main Content -->
             <main>
                 <!-- Student Table -->
-                 <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between">
                     <h2 class="text-center font-weight-bold">Student List</h2>
-                    <button type="button" class="btn btn-primary my-2" data-bs-toggle="modal"
-                    data-bs-target="#addStudentModal">
-                    <a href="/addstudent">Add Student</a>
-                    </button>
-                 </div>
+                </div>
                 <div class="card">
                     <table class="students-table p-3 table table-striped student-table">
-                        <thead> 
+                        <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Roll Number</th>
@@ -49,12 +45,9 @@
                                     <td>${student.semester.name}</td>
                                     <td>${student.admissionYear}</td>
                                     <td class="d-flex mb-1">
-                                        <form action="editstudent?id=${student.id}" method="get">
-                                            <input type="hidden" name="studentId" value="${student.id}">
-                                            <button type="submit" class="btn btn-primary btn-sm me-2">Edit</button>
-                                        </form>
-                                        <a href="deletestudent?id=${student.id}"
-                                        onclick="return confirm('Are you sure you want to delete this student?');" class="btn btn-danger mt-0  h-50 ml-2 btn-sm">Delete</a>
+
+                                        <a href="fees/${student.id}"
+                                            class="btn btn-primary mt-0  h-50 ml-2 btn-sm">View</a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -131,13 +124,13 @@
 
         // Call populateDropdowns on page load
         window.onload = populateDropdowns;
-        
-                // Check for error message from controller
-                const errorMessage = '${error}'; // Assuming error is passed from controller
-                if (errorMessage && errorMessage.trim() !== '') {
-                    alert(errorMessage);
-                }
-        
+
+        // Check for error message from controller
+        const errorMessage = '${error}'; // Assuming error is passed from controller
+        if (errorMessage && errorMessage.trim() !== '') {
+            alert(errorMessage);
+        }
+
     </script>
     </body>
 

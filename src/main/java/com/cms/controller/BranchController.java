@@ -1,6 +1,7 @@
 package com.cms.controller;
 
 import com.cms.entity.Branch;
+import com.cms.entity.Department;
 import com.cms.services.BranchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,13 @@ public class BranchController {
 
     @Autowired
     private BranchService branchService;
+
+    @ModelAttribute("department")
+    public Department populatedCommonObject() {
+        Department obj = new Department();
+        obj.setName("Admin Panel");
+        return obj;
+    }
 
     @RequestMapping
     public ModelAndView listBranches() {

@@ -24,9 +24,9 @@
         <div class="container-fluid">
             <a class="navbar-brand" href="#"><b><i>Student Management System</i></b></a>
             <div>
-            <a href="/scholarship" onmouseover="return false;" style="color: rgb(255, 255, 255); font-weight: 800;font-size: 16px;"><span>Home</span></a>
+            <a href="/fees" onmouseover="return false;" style="color: rgb(255, 255, 255); font-weight: 800;font-size: 16px;"><span>Home</span></a>
             <a href="/" style="color: rgb(255, 255, 255); font-weight: 800;font-size: 16px;margin-left: 15px;"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
-q           </div>
+           </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

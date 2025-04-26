@@ -4,10 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.cms.entity.Department;
 import com.cms.entity.Student;
 import com.cms.services.BranchService;
 import com.cms.services.SemesterService;
@@ -26,6 +29,13 @@ public class StudentController {
     BranchService branchService;
     @Autowired
     SemesterService semesterService;
+
+    @ModelAttribute("department")
+    public Department populatedCommonObject(){
+        Department obj = new Department();
+        obj.setName("Admission Department");
+        return obj;
+    }
 
     @GetMapping("/admission")
     public ModelAndView adminPage() {

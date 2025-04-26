@@ -1,6 +1,7 @@
 package com.cms.services;
 
 import com.cms.entity.Result;
+import com.cms.entity.Student;
 import com.cms.repository.ResultRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,4 +37,21 @@ public class ResultServiceImpl implements ResultService {
     public void deleteResult(Long id) {
         resultRepository.deleteById(id);
     }
+
+    @Override
+    public List<Result> getResultsByStudentId(Long studentId) {
+        return resultRepository.findByStudentId(studentId);
+    }
+
+    @Override
+    public List<Result> getResultsByStudentIdOrderBySemesterIdAsc(Long studentId) {
+        return resultRepository.findByStudentIdOrderBySemesterIdAsc(studentId);
+    }
+
+    @Override
+    public Student getStudentByResultId(Long id) {
+        return resultRepository.findStudentByResultId(id);
+    }
+
+
 }

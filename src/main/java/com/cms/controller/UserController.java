@@ -8,6 +8,7 @@ import com.cms.services.UserService;
 import java.util.List;
 
 import com.cms.entity.AppUser;
+import com.cms.entity.Department;
 import com.cms.services.StudentService;
 
 @Controller
@@ -18,6 +19,13 @@ public class UserController {
 
     @Autowired
     StudentService studentService;
+
+	@ModelAttribute("department")
+    public Department populatedCommonObject(){
+        Department obj = new Department();
+        obj.setName("Admin Panel");
+        return obj;
+    }
 
 	@GetMapping("/users")
 	public String getUsers(Model model) {

@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import com.cms.services.DocumentsService;
+import com.cms.entity.Department;
 import com.cms.entity.Scholarship;
 import com.cms.entity.Student;
 import com.cms.services.BranchService;
@@ -36,6 +37,13 @@ public class ScholarshipController {
     private BranchService branchService; // New service for branches
     @Autowired
     private SemesterService semesterService; // New service for semesters
+
+    @ModelAttribute("department")
+    public Department populatedCommonObject(){
+        Department obj = new Department();
+        obj.setName("Scholarship Department");
+        return obj;
+    }
 
     @GetMapping
     public ModelAndView getAllStudents(

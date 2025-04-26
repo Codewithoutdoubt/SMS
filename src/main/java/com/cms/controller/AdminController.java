@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.cms.services.ScholarshipService;
 import com.cms.services.StudentService;
 import com.cms.services.UserService;
+import com.cms.entity.Department;
 import com.cms.entity.Student;
 import com.cms.services.BranchService;
 import com.cms.services.SemesterService;
@@ -35,6 +37,13 @@ public class AdminController {
 
     @Autowired
     private SemesterService semesterService; // Add SemesterService dependency
+
+    @ModelAttribute("department")
+    public Department populatedCommonObject(){
+        Department obj = new Department();
+        obj.setName("Admin Panel");
+        return obj;
+    }
 
     @GetMapping("/admin")
     public ModelAndView adminPage() {

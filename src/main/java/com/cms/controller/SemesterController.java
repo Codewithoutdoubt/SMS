@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.cms.entity.Department;
 import com.cms.entity.Semester;
 import com.cms.services.SemesterService;
 
@@ -23,6 +24,13 @@ public class SemesterController {
     @Autowired
     private SemesterService semesterService;
 
+    @ModelAttribute("department")
+    public Department populatedCommonObject(){
+        Department obj = new Department();
+        obj.setName("Admin Panel");
+        return obj;
+    }
+    
     @GetMapping
     public String listSemesters(Model model) {
         List<Semester> semesters = semesterService.getAllSemesters();

@@ -4,6 +4,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Table;
 import jakarta.persistence.GeneratedValue;
@@ -25,6 +28,12 @@ public class Result {
     @Column(nullable = false)
     private Double sgpa;
 
+    @Column(name = "result_status", nullable = false)
+    private String resultStatus;
+
+    @Column(name = "result", nullable = false)
+    private String resultValue;
+
     @ManyToOne
     @JoinColumn(name = "semester_id", nullable = false)
     private Semester semester;
@@ -36,9 +45,11 @@ public class Result {
     public Result() {
     }
 
-    public Result(Double cgpa, Double sgpa, Semester semester, Student student) {
+    public Result(Double cgpa, Double sgpa, String resultStatus, String resultValue, Semester semester, Student student) {
         this.cgpa = cgpa;
         this.sgpa = sgpa;
+        this.resultStatus = resultStatus;
+        this.resultValue = resultValue;
         this.semester = semester;
         this.student = student;
     }

@@ -164,3 +164,7 @@ select{
     border: solid 1px #ddd;
     align-items: center;
 }
+.sdetails h4{
+    margin: 0px;
+    font-size: 18px;
+}
