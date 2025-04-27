@@ -50,8 +50,8 @@ public class DocumentsServiceImpl implements DocumentsService {
     }
 
     @Override
-    public Documents getDocumentByStudentId(Long id) {
-        return documentsRepository.findByStudentId(0);
+    public List<Documents> getDocumentsByStudentId(Long id) {
+        return documentsRepository.findByStudentId(id);
     }
 
     @Override

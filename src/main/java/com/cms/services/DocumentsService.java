@@ -9,6 +9,6 @@ public interface DocumentsService {
     Documents updateDocument(Long id, Documents document);
     void deleteDocument(Long id);
     List<Documents> getAllDocuments();
-    Object getDocumentByStudentId(Long id);
+    List<Documents> getDocumentsByStudentId(Long id);
     List<Documents> filterDocuments(String criteria); // New filtering method
 }
