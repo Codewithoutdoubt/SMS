@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<%
+    if (session.getAttribute("department") == null || ((com.cms.entity.Department)session.getAttribute("department")).getUsername() == null) {
+        response.sendRedirect("/loginpage");
+        return;
+    }
+%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,10 +29,15 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#"><b><i>Student Management System</i></b></a>
-            <a href="/" style="color: rgb(255, 255, 255); font-weight: 800;font-size: 18px;"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
+            <div>
+            <a href="/logout" style="color: rgb(255, 255, 255); font-weight: 800;font-size: 18px;"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
+            <span style="color: white; font-weight: 600; margin-left: 20px;">
+                Logged in as: <c:out value="${sessionScope.department.username}" default="Guest"/>
+            </span>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
-    </nav>
+        </div>
+    </nav> 

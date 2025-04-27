@@ -21,6 +21,12 @@ public class SecurityConfig {
                 .anyRequest().permitAll() // Allow all requests without authentication
             )
             .formLogin(form -> form.disable()) // Disable default login page
+            .logout(logout -> logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/loginpage")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+            )
             .httpBasic(httpBasic -> httpBasic.disable()); // Disable basic authentication
 
         return http.build();
