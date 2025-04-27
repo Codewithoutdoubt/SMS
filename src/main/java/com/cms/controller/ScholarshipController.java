@@ -66,8 +66,9 @@ public class ScholarshipController {
     @GetMapping("/{id}")
     public ModelAndView getScholarshipDetails(@PathVariable Long id) {
         ModelAndView mav = new ModelAndView("Scholarship/scholarship-details");
-        mav.addObject("student", studentService.getStudentById(id));
-        mav.addObject("documents", documentsService.getDocumentByStudentId(id));
+        Student student = studentService.getStudentById(id);
+        student.setDocuments(documentsService.getDocumentsByStudentId(id));
+        mav.addObject("student", student);
         mav.addObject("scholarships", scholarshipService.getScholarshipsByStudentId(id)); // Fetch scholarships
         return mav;
     }

@@ -8,7 +8,7 @@
                     <div class="d-flex">
                         <form action="/documents/add" method="post">
                             <input type="hidden" name="studentId" value="${student.id}" />
-                            <button type="submit" class="text-left mb-2 mt-3 mx-1 btn btn-primary">
+                            <button type="submit" class="text-left mb-2 mt-3 mx-1 btn btn-primary" ${empty student.documents ? '' : 'disabled'}>
                                 <i class="fas fa-upload mx-2" style="color: #ffffff;"></i>Upload Document
                                 Details
                             </button>

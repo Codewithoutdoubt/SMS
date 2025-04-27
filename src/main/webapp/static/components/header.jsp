@@ -31,7 +31,7 @@
             <a class="navbar-brand" href="#"><b><i>Student Management System</i></b></a>
             <div>
             <a href="/logout" style="color: rgb(255, 255, 255); font-weight: 800;font-size: 18px;"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
-            <span style="color: white; font-weight: 600; margin-left: 20px;">
+            <span style="color: white; font-weight: 600; margin-left: 20px;" class="log-id">
                 Logged in as: <c:out value="${sessionScope.department.username}" default="Guest"/>
             </span>
 

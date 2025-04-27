@@ -33,7 +33,7 @@
             <div>
             <a href="/scholarship" onmouseover="return false;" style="color: rgb(255, 255, 255); font-weight: 800;font-size: 16px;"><span>Home</span></a>
 <a href="/logout" style="color: rgb(255, 255, 255); font-weight: 800;font-size: 16px;margin-left: 15px;"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
-            <span style="color: white; font-weight: 600; margin-left: 20px;">
+            <span style="color: white; font-weight: 600; margin-left: 20px;" class="log-id">
                 Logged in as: <c:out value="${sessionScope.department.username}" default="Guest"/>
             </span>
             </div>

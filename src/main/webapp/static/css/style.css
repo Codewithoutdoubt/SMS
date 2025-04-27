@@ -168,3 +168,7 @@ select{
     margin: 0px;
     font-size: 18px;
 }
+.log-id{
+    padding: 4px 8px;
+    background-color: rgba(0, 145, 255, 0.62);
+}
