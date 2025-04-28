@@ -172,3 +172,10 @@ select{
     padding: 4px 8px;
     background-color: rgba(0, 145, 255, 0.62);
 }
+.placement-form label{
+    display: none !important;
+}
+.placement-form button{
+    margin-top: -34px;
+    
+}

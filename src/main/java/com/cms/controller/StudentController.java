@@ -98,21 +98,5 @@ public class StudentController {
         studentServcie.deleteStudent(id);
         return "redirect:/admission";
     }
-
-    @GetMapping("/filter/{folder}/{viewname}")
-    public String filterStudentsWithFolder(
-            @RequestParam(required = false) String branchCode,
-            @RequestParam(required = false) String semester,
-            @RequestParam(required = false) String academicYear,
-            @PathVariable String folder,
-            @PathVariable String viewname,
-            Model model) {
-        List<Student> filteredStudents = studentServcie.getFilteredStudents(branchCode, semester, academicYear, null);
-        model.addAttribute("students", filteredStudents);
-        model.addAttribute("branches", branchService.getAllBranches());
-        model.addAttribute("semesters", semesterService.getAllSemesters());
-        model.addAttribute("mode", "FILTERED_STUDENTS");
-        return folder + "/" + viewname;
-    }
     // Removed the conflicting getAllSemesters method
 }

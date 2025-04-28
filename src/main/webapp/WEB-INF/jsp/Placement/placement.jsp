@@ -30,20 +30,20 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="student" items="${students}">
+                            <c:forEach var="sp" items="${studentPlacements}">
                                 <tr>
-                                    <td>${student.id}</td>
-                                    <td>${student.rollNo}</td>
-                                    <td>${student.studentName}</td>
-                                    <td>${student.mobileNo}</td>
-                                    <td>${student.branch.name}</td>
-                                    <td>${student.semester.name}</td>
-                                    <td>${student.admissionYear}</td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>${sp.student.id}</td>
+                                    <td>${sp.student.rollNo}</td>
+                                    <td>${sp.student.studentName}</td>
+                                    <td>${sp.student.mobileNo}</td>
+                                    <td>${sp.student.branch.name}</td>
+                                    <td>${sp.student.semester.name}</td>
+                                    <td>${sp.student.admissionYear}</td>
+                                    <td>${sp.companyName}</td>
+                                    <td>${sp.packageAmount}</td>
 
                                     <td>
-                                        <a href="/report/${student.id}" class="btn btn-danger btn-sm">View Report</a>
+                                        <a href="/report/${sp.student.id}" class="btn btn-danger btn-sm">View Report</a>
                                     </td>
                                 </tr>
                             </c:forEach>

@@ -1,24 +1,30 @@
 package com.cms.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
 import com.cms.entity.Department;
 import com.cms.entity.Placement;
 import com.cms.entity.Student;
 import com.cms.services.BranchService;
 import com.cms.services.PlacementService;
 import com.cms.services.StudentService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 @Controller
 @RequestMapping("/placement")
@@ -43,12 +49,55 @@ public class PlacementController {
         return obj;
     }
 
+    public static class StudentPlacementDTO {
+        private Student student;
+        private String companyName;
+        private double packageAmount;
+
+        public StudentPlacementDTO(Student student, String companyName, double packageAmount) {
+            this.student = student;
+            this.companyName = companyName;
+            this.packageAmount = packageAmount;
+        }
+
+        public Student getStudent() {
+            return student;
+        }
+
+        public String getCompanyName() {
+            return companyName;
+        }
+
+        public double getPackageAmount() {
+            return packageAmount;
+        }
+    }
+
     @GetMapping
     public ModelAndView getAllStudents() {
         ModelAndView mav = new ModelAndView("Placement/placement");
-        mav.addObject("students", studentService.getAllStudents());
+        List<Student> students = studentService.getAllStudents();
+        List<Placement> placements = placementService.getAllPlacements();
+
+        // Map student id to placement for quick lookup
+        Map<Long, Placement> placementMap = new HashMap<>();
+        for (Placement placement : placements) {
+            placementMap.put(placement.getStudent().getId(), placement);
+        }
+
+        // Create list of DTOs combining student and placement info
+        List<StudentPlacementDTO> studentPlacementDTOs = new ArrayList<>();
+        for (Student student : students) {
+            Placement placement = placementMap.get(student.getId());
+            if (placement != null) {
+                studentPlacementDTOs.add(new StudentPlacementDTO(student, placement.getCompanyName(), placement.getPackageAmount()));
+            } else {
+                studentPlacementDTOs.add(new StudentPlacementDTO(student, "", 0.0));
+            }
+        }
+
+        mav.addObject("studentPlacements", studentPlacementDTOs);
         mav.addObject("branches", branchService.getAllBranches());
-        mav.addObject("placements",placementService.getAllPlacements());
         return mav;
     }
 
