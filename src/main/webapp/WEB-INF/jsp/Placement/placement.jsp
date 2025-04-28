@@ -5,8 +5,8 @@
             <div class="col-lg-3">
                 <h2 class="text-center font-weight-bold mx-2" style="text-align: left !important;">Student List</h2>
             </div>
-            <div class="col-lg-9 pt-3">
-                <form id="filter-form" class="d-flex filter-section" method="get" action="/filter/Admin/admin">
+            <div class="col-lg-9 pt-3 filter">
+                <form id="filter-form" class="d-flex filter-section" method="get" action="/filter/Placement/placement">
                     <%@ include file="/static/components/filter.jsp" %>
             </div>
 
@@ -42,8 +42,9 @@
                                     <td>${sp.companyName}</td>
                                     <td>${sp.packageAmount}</td>
 
-                                    <td>
-                                        <a href="/report/${sp.student.id}" class="btn btn-danger btn-sm">View Report</a>
+                                    <td class="d-flex mb-1">
+                                        <a href="/placement/${sp.student.id}"
+                                            class="btn btn-primary mt-0  h-50 ml-2 btn-sm">View</a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -56,6 +57,20 @@
 
 
     <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const dropdown = document.querySelector('select[name="academicYear"]');
+        if (!dropdown) return;
+        const seen = new Set();
+        for (let i = dropdown.options.length - 1; i >= 0; i--) {
+            const option = dropdown.options[i];
+            if (option.value !== "" && seen.has(option.value)) {
+                dropdown.remove(i);
+            } else {
+                seen.add(option.value);
+            }
+        }
+    });
+
         function toggleSidebar() {
             document.body.classList.toggle("collapsed");
         }

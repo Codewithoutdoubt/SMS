@@ -24,6 +24,7 @@ import com.cms.entity.Placement;
 import com.cms.entity.Student;
 import com.cms.services.BranchService;
 import com.cms.services.PlacementService;
+import com.cms.services.SemesterService;
 import com.cms.services.StudentService;
 
 @Controller
@@ -37,6 +38,8 @@ public class PlacementController {
     private StudentService studentService;
     @Autowired
     private BranchService branchService;
+    @Autowired
+    private SemesterService semesterService;
 
     public PlacementController(PlacementService placementService) {
         this.placementService = placementService;
@@ -96,8 +99,10 @@ public class PlacementController {
             }
         }
 
+        mav.addObject("students", studentService.getAllStudents());
         mav.addObject("studentPlacements", studentPlacementDTOs);
         mav.addObject("branches", branchService.getAllBranches());
+        mav.addObject("semesters", semesterService.getAllSemesters()); 
         return mav;
     }
 

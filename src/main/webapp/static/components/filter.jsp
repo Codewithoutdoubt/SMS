@@ -1,6 +1,5 @@
-
     <div class="mb-3 w-25 mx-1">
-        <select name="branchCode" class="form-control">
+        <select name="branchCode" class="form-control ">
             <option value="" disabled selected>Select Branch</option>
             <option value="">All</option>
             <c:forEach var="branch" items="${branches}">
@@ -9,7 +8,7 @@
         </select>
     </div>
     <div class="mb-3 w-25 mx-1">
-        <select name="semester" class="form-control">
+        <select name="semester" class="form-control select2">
 
             <option value="" disabled selected>Select Semester</option>
             <option value="">All</option>
@@ -30,4 +29,6 @@
     <button type="submit" class="btn btn-primary mx-2 h-75 ftr">Apply Filters</button>
     <button type="reset" class="btn btn-primary mx-2 h-75 ftr"><a href="/admin">Reset</a></button>
 </form>
+
+
 
