@@ -41,3 +41,10 @@
             </button>
         </div>
     </nav> 
+
+    <!-- Add Placement Department Link -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mt-2">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/placement"><b><i>Placement Department</i></b></a>
+        </div>
+    </nav>

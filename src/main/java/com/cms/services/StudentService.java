@@ -9,7 +9,7 @@ import com.cms.entity.Student;
 @Service
 public interface StudentService {
 	Student addStudent(Student student);
-	Student getStudentById(Long id);
+	Student getStudentById(Long studentId);
 	List<Student> getAllStudents();
     List<Student> getAllStudentsWithScholarships();
     List<Student> getFilteredStudents(String branchCode, String semester, String cast, String status);
