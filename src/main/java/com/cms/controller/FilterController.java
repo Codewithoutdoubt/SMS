@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.cms.entity.Department;
+import com.cms.controller.PlacementController.StudentPlacementDTO;
 import com.cms.entity.Student;
 import com.cms.services.BranchService;
 import com.cms.services.SemesterService;
@@ -28,29 +28,6 @@ public class FilterController {
     @Autowired
     private com.cms.services.PlacementService placementService;
 
-    public static class StudentPlacementDTO {
-        private Student student;
-        private String companyName;
-        private double packageAmount;
-
-        public StudentPlacementDTO(Student student, String companyName, double packageAmount) {
-            this.student = student;
-            this.companyName = companyName;
-            this.packageAmount = packageAmount;
-        }
-
-        public Student getStudent() {
-            return student;
-        }
-
-        public String getCompanyName() {
-            return companyName;
-        }
-
-        public double getPackageAmount() {
-            return packageAmount;
-        }
-    }
 
     @GetMapping("/filter/{folder}/{viewname}")
     public String filterStudentsWithFolder(

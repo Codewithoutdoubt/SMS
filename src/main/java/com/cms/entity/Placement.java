@@ -2,12 +2,16 @@ package com.cms.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import com.cms.entity.Student;
 
 @Entity
 @Table(name = "placement")
 @Data
+@Getter
+@Setter
 public class Placement {
 
     @Id

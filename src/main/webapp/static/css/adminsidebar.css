@@ -5,12 +5,12 @@ body {
 
 /* Sidebar Styling */
 .sidebar {
+    position: fixed;
     width: 250px;
     height: calc(100vh - 56px); /* Adjusted to start after navbar */
     background: linear-gradient(135deg, #04a2f1, #474242);
     color: rgb(255, 255, 255);
     font-style:initial;
-    position: absolute;
     top: 56px; /* Start after navbar */
     transition: width 0.3s ease-in-out;
 }

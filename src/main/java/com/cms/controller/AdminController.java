@@ -15,6 +15,7 @@ import com.cms.entity.Department;
 import com.cms.services.BranchService;
 import com.cms.services.DocumentsService;
 import com.cms.services.FeeService;
+import com.cms.services.PlacementService;
 import com.cms.services.ResultService;
 import com.cms.services.SemesterService;
 
@@ -45,6 +46,8 @@ public class AdminController {
 
     @Autowired
     private DocumentsService documentsService; // Add DocumentsService dependency
+    @Autowired
+    private PlacementService placementService;
 
     @ModelAttribute("department")
     public Department populatedCommonObject(){
@@ -78,21 +81,9 @@ public class AdminController {
         mav.addObject("results", resultService.getResultsByStudentId(id));
         mav.addObject("scholarships", scholarshipService.getScholarshipsByStudentId(id));
         mav.addObject("documents", documentsService.getDocumentsByStudentId(id));
+        mav.addObject("placements", placementService.getPlacementsByStudentId(id));
         return mav;
     }
-    // @GetMapping("/filter")
-    // public String filterStudents(
-    //     @RequestParam(required = false) String branchCode,
-    //     @RequestParam(required = false) String semester,
-    //     @RequestParam(required = false) String academicYear,
-    //     Model model) {
-    //     List<Student> filteredStudents = studentServcie.getFilteredStudents(branchCode, semester, academicYear, null);
-    //     model.addAttribute("students", filteredStudents);
-    //     model.addAttribute("branches", branchService.getAllBranches()); // Add branches for filter
-    //     model.addAttribute("semesters", semesterService.getAllSemesters()); // Add semesters for filter
-    //     model.addAttribute("mode", "FILTERED_STUDENTS");
-    //     return "Admin/admin"; // Redirect to admin.jsp or the appropriate view
-    // }
 
 
 }

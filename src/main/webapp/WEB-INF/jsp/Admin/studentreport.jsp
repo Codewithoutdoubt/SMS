@@ -1,15 +1,18 @@
+<div style="position: fixed;width: 100%;z-index: 1000;">
 <%@ include file="/static/components/header.jsp" %>
+</div>
   <!-- Sidebar -->
   <div class="row">
-    <div class="col-md-2 sidebar">
+    <div class="col-md-2 sidebar" style="position: fixed;margin-top: 56px;">
       <%@ include file="/static/components/sidebar.jsp" %>
     </div>
 
     <!-- Main Content -->
-    <main class="col-md-10 p-4">
+    <main class="col-md-10 p-4"style="margin-left:270px;margin-top:45px !important;">
+
     <div class="row mb-4">
       <!-- Profile -->
-      <div class="col-md-4 col-lg-5">
+      <div class="col-md-4 col-lg-6">
         <h5 class="fw-bold cn-heading">Student Profile</h5>
         <div class="card profile-card">
           <div class="card-body">
@@ -70,7 +73,7 @@
     <table class="table table-bordered">
       <thead class="table-primary">
         <tr>
-          <th>Sr. No.</th>
+          <th class="report-sr">Sr. No.</th>
           <th>Semester Name</th>
           <th>SGPA</th>
           <th>CGPA</th>
@@ -97,11 +100,11 @@
     </table>
 
     <!-- Scholarship Table -->
-    <h5 class="cn-heading">Scholarship Details</h5>
+    <h5 class="cn-heading pt-2">Scholarship Details</h5>
     <table class="table table-bordered">
       <thead class="table-primary">
         <tr>
-          <th>Sr. No.</th>
+          <th class="report-sr">Sr. No.</th>
           <th>Scholarship Name</th>
           <th>Amount</th>
           <th>Status</th>
@@ -126,13 +129,34 @@
         </c:forEach>
       </tbody>
     </table>
-
-    <!-- Documents Table -->
-    <h5 class="cn-heading">Document Details</h5>
+    <h5 class="cn-heading pt-2">Placement Details</h5>
     <table class="table table-bordered">
       <thead class="table-primary">
         <tr>
-          <th>Sr. No.</th>
+          <th class="report-sr">Sr. No.</th>
+          <th>Selection Year</th>
+          <th>Company Name</th>
+          <th>Package</th>
+        </tr>
+      </thead>
+      <tbody>
+        <c:forEach var="placement" items="${placements}" varStatus="status" >
+          <tr>
+            <td><c:out value="${status.index + 1}" /></td>
+            <td><c:out value="${placement.selectedYear}" /></td>
+            <td><c:out value="${placement.companyName}" /> </td>
+            <td><c:out value="${placement.packageAmount}" /> </td>
+          </tr>
+        </c:forEach>
+      </tbody>
+    </table>
+
+    <!-- Documents Table -->
+    <h5 class="cn-heading pt-2">Document Details</h5>
+    <table class="table table-bordered">
+      <thead class="table-primary">
+        <tr>
+          <th class="report-sr">Sr. No.</th>
           <th>Document Name</th>
           <th>Document Number</th>
         </tr>
@@ -171,6 +195,7 @@
         </c:forEach>
       </tbody>
     </table>
+
     </main>
   </div>
 
