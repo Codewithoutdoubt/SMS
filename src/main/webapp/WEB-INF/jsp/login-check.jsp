@@ -68,6 +68,7 @@
                 </c:if>
                 
                 <button type="submit" class="btn btn-primary btn-login">Login</button>
+                <a href="/forgot-password" class="btn btn-primary btn-login mt-2">Forget Password</a>
             </form>
         </div>
     </div>

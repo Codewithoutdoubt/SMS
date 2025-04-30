@@ -6,5 +6,9 @@ import com.cms.entity.AppUser;
 
 public interface UserRepository extends JpaRepository<AppUser, Integer> {
 
-	Optional<AppUser> findByUsername(String username);
+    Optional<AppUser> findByUsername(String username);
+
+    Optional<AppUser> findByEmail(String email);
+
+    Optional<AppUser> findByResetToken(String resetToken);
 }
