@@ -1,8 +1,8 @@
-<%@ include file="/static/components/header-scholarship.jsp" %>
+<%@ include file="/static/components/header.jsp" %>
     <div class="container-fluid">
         <div class="row">
             <!-- Main Content -->
-            <main class="col-md-12 px-md-4">
+            <div class="col-md-12 px-md-4" style="margin-top: 50px;">
                 <div class="d-flex justify-content-between">
                     <h4 class="text-left mt-4">Student Details</h4>
                     <div class="d-flex">

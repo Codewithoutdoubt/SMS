@@ -1,6 +1,6 @@
-<%@ include file="/static/components/header-fees.jsp" %>
+<%@ include file="/static/components/header.jsp" %>
 
-    <div class="container">
+    <div class="container mt-5 pt-2">
         <div class="d-flex justify-content-between">
             <h2><i class="fas fa-list"></i> Student Fees Record :</h2>
             <a href="add/${student.id}"> <button class="w3-button w3-green mt-2 w3-large w3-left">Add Fees</button></a>

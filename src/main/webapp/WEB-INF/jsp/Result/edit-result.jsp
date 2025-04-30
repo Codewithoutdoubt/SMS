@@ -1,8 +1,8 @@
-<%@ include file="/static/components/header-result.jsp" %>
+<%@ include file="/static/components/header.jsp" %>
 
 <body>
     <div class="container mt-5 d-flex justify-content-center">
-        <div class="card shadow p-4" style="max-width: 700px; width: 100%;">
+        <div class="card shadow p-4" style="max-width: 700px; width: 100%;margin-top: 50px;">
             <h2 class="mb-4 text-center">Edit Result</h2>
             <form action="/result/update/${result.id}" method="post">
                 <div class="row">

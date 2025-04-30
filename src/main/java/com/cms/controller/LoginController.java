@@ -41,6 +41,7 @@ public class LoginController {
         if (!access.equals("Invalid credentials")) {
             Department department = new Department();
             department.setUsername(username);
+            department.setAccess(access);
             session.setAttribute("department", department);
 
             if (access.equals("scholarship-home")) {

@@ -4,8 +4,8 @@
         <div class="col-md-2 sidebar">
             <%@ include file="/static/components/sidebar.jsp" %>
         </div>
-        <div class="col-md-10">
-            <div class="container-fluid">
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-1">
+            <div class="container">
                 <div class="d-flex justify-content-between">
                     <h2 class="mt-4"><i class="fas fa-list"></i> Branch List</h2>
                     <a href="${pageContext.request.contextPath}/branch-data/add">

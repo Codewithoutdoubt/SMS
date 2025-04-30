@@ -1,6 +1,6 @@
-<%@ include file="/static/components/header-placement.jsp" %>
+<%@ include file="/static/components/header.jsp" %>
     <!-- Sidebar -->
-    <div class="container-fluid">
+    <div class="container-fluid mt-5">
         <div class="row justify-content-between">
             <div class="col-lg-3">
                 <h2 class="text-center font-weight-bold mx-2" style="text-align: left !important;">Student List</h2>
@@ -9,67 +9,66 @@
                 <form id="filter-form" class="d-flex filter-section" method="get" action="/filter/Placement/placement">
                     <%@ include file="/static/components/filter.jsp" %>
             </div>
-
-            <!-- Main Content -->
-            <main class="col-md-9 ms-sm-auto col-lg-12 px-md-4">
-                <!-- Student Table -->
-                <div class="card">
-                    <table class="table table-striped student-table">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Roll Number</th>
-                                <th>Name</th>
-                                <th>Mobile No</th>
-                                <th>Branch Name</th>
-                                <th>Semester</th>
-                                <th>Admission Year</th>
-                                <th>Company Name</th>
-                                <th>Package</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach var="sp" items="${studentPlacements}">
-                                <tr>
-                                    <td>${sp.student.id}</td>
-                                    <td>${sp.student.rollNo}</td>
-                                    <td>${sp.student.studentName}</td>
-                                    <td>${sp.student.mobileNo}</td>
-                                    <td>${sp.student.branch.name}</td>
-                                    <td>${sp.student.semester.name}</td>
-                                    <td>${sp.student.admissionYear}</td>
-                                    <td>${sp.companyName}</td>
-                                    <td>${sp.packageAmount}</td>
-
-                                    <td class="d-flex mb-1">
-                                        <a href="/placement/${sp.student.id}"
-                                            class="btn btn-primary mt-0  h-50 ml-2 btn-sm">View</a>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
-                </div>
-            </main>
         </div>
+        <!-- Main Content -->
+            <!-- Student Table -->
+            <div class="card">
+                <table class="table table-striped student-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Roll Number</th>
+                            <th>Name</th>
+                            <th>Mobile No</th>
+                            <th>Branch Name</th>
+                            <th>Semester</th>
+                            <th>Admission Year</th>
+                            <th>Company Name</th>
+                            <th>Package</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="sp" items="${studentPlacements}">
+                            <tr>
+                                <td>${sp.student.id}</td>
+                                <td>${sp.student.rollNo}</td>
+                                <td>${sp.student.studentName}</td>
+                                <td>${sp.student.mobileNo}</td>
+                                <td>${sp.student.branch.name}</td>
+                                <td>${sp.student.semester.name}</td>
+                                <td>${sp.student.admissionYear}</td>
+                                <td>${sp.companyName}</td>
+                                <td>${sp.packageAmount}</td>
+
+                                <td class="d-flex mb-1">
+                                    <a href="/placement/${sp.student.id}"
+                                        class="btn btn-primary mt-0  h-50 ml-2 btn-sm">View</a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
     </div>
 
 
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const dropdown = document.querySelector('select[name="academicYear"]');
-        if (!dropdown) return;
-        const seen = new Set();
-        for (let i = dropdown.options.length - 1; i >= 0; i--) {
-            const option = dropdown.options[i];
-            if (option.value !== "" && seen.has(option.value)) {
-                dropdown.remove(i);
-            } else {
-                seen.add(option.value);
+        document.addEventListener('DOMContentLoaded', function () {
+            const dropdown = document.querySelector('select[name="academicYear"]');
+            if (!dropdown) return;
+            const seen = new Set();
+            for (let i = dropdown.options.length - 1; i >= 0; i--) {
+                const option = dropdown.options[i];
+                if (option.value !== "" && seen.has(option.value)) {
+                    dropdown.remove(i);
+                } else {
+                    seen.add(option.value);
+                }
             }
-        }
-    });
+        });
 
         function toggleSidebar() {
             document.body.classList.toggle("collapsed");

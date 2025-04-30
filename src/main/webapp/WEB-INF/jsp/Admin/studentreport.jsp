@@ -1,9 +1,8 @@
-<div style="position: fixed;width: 100%;z-index: 1000;">
 <%@ include file="/static/components/header.jsp" %>
-</div>
+
   <!-- Sidebar -->
   <div class="row">
-    <div class="col-md-2 sidebar" style="position: fixed;margin-top: 56px;">
+    <div class="col-md-2 sidebar">
       <%@ include file="/static/components/sidebar.jsp" %>
     </div>
 

@@ -27,7 +27,7 @@
         </select>
     </div>
     <button type="submit" class="btn btn-primary mx-2 h-75 ftr">Apply Filters</button>
-    <button type="reset" class="btn btn-primary mx-2 h-75 ftr"><a href="${department.username}">Reset</a></button>
+    <button type="reset" class="btn btn-primary mx-2 h-75 ftr"><a href="${department.access}">Reset</a></button>
 </form>
 
 

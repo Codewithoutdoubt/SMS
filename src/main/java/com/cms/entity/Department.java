@@ -6,4 +6,5 @@ import lombok.Data;
 public class Department {
     String name;
     String username;
+    String access;
 }

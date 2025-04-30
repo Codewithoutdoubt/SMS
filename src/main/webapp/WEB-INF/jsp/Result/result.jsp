@@ -1,4 +1,4 @@
-<%@ include file="/static/components/header-result.jsp" %>
+<%@ include file="/static/components/header.jsp" %>
     <!-- Sidebar -->
     <div class="row">
         <div class="col-md-2 col-lg-2  sidebar">
@@ -12,10 +12,7 @@
         </div>
         </form>
     </div>
-    <div class="col-md-10 col-lg-10">
-        <div class="container-fluid">
-            <!-- Main Content -->
-            <main>
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-2">
                 <!-- Student Table -->
                  <div class="d-flex justify-content-between">
                     <h2 class="text-center font-weight-bold">Student List</h2>                    

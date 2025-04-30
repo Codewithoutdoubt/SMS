@@ -3,13 +3,21 @@ body {
     background-color: #ffffff;
 }
 
+main {
+    margin-left: 270px;
+    margin-top: 45px !important;
+}
+
 /* Sidebar Styling */
 .sidebar {
-    width: 250px;
-    height: calc(100vh - 56px); /* Adjusted to start after navbar */
+    top: 56px;
+    position: fixed;
+    max-width: 250px;
+    height: calc(100vh - 56px);
+    /* Adjusted to start after navbar */
     background: linear-gradient(135deg, #04a2f1, #474242);
     color: rgb(255, 255, 255);
-    font-style:initial;
+    font-style: initial;
     left: 0;
     transition: width 0.3s ease-in-out;
 }
@@ -74,7 +82,8 @@ body {
 .toggle-btn {
     position: absolute;
     left: 260px;
-    top: 70px; /* Adjusted for navbar */
+    top: 70px;
+    /* Adjusted for navbar */
     font-size: 20px;
     cursor: pointer;
     color: white;
@@ -95,43 +104,52 @@ body {
     opacity: 1;
     pointer-events: auto;
 }
+
 /*Header */
-.ftr{
+.ftr {
     height: 35px !important;
 }
-label{
+
+label {
     display: inline-block;
 }
-select{
+
+select {
     display: inline-block;
 }
+
 /* Filter Section Styling */
 .filter-section {
-    float: right; /* Aligns the filter section to the right */
-    margin-left: 20px; /* Adds some space between the filter and other content */
+    float: right;
+    /* Aligns the filter section to the right */
+    margin-left: 20px;
+    /* Adds some space between the filter and other content */
 }
-.cn-heading{
+
+.cn-heading {
     font-weight: 700;
     font-size: 24px;
 }
-.scard p{
+
+.scard p {
     font-size: 17px;
     padding: 10px 4px 0px 0px;
     display: inline;
 }
-.scard h4{
+
+.scard h4 {
     width: 80px !important;
     display: inline-block;
-    font-size: 17px ;
+    font-size: 17px;
     font-weight: 600;
 }
-.fees-table tr,.fees-table td{
+
+.fees-table tr,
+.fees-table td {
     height: 20px !important;
     padding: 5px;
 }
-.table{
-    font-size: 18px !important;
-}
+
 /* Responsive Design */
 @media screen and (max-width: 768px) {
     .sidebar {
@@ -159,7 +177,9 @@ select{
         left: 100px;
     }
 }
-.students-table th, .students-table td {
+
+.students-table th,
+.students-table td {
     padding: 8px 5px 0px 10px !important;
     text-align: left;
     border-bottom: 1px solid #ddd;
@@ -167,21 +187,32 @@ select{
     border: solid 1px #ddd;
     align-items: center;
 }
-.sdetails h4{
+
+.sdetails h4 {
     margin: 0px;
     font-size: 18px;
 }
-.log-id{
+
+.log-id {
     padding: 4px 8px;
     background-color: rgba(0, 145, 255, 0.62);
 }
-.placement-form label{
+
+.placement-form label {
     display: none !important;
 }
-.placement-form button{
+
+.placement-form button {
     margin-top: -34px;
-    
+
 }
-.report-sr{
+
+.report-sr {
     width: 35px !important;
+}
+.fix-header{
+    position: fixed;
+    top: 0;
+    width:100%;
+    z-index: 1000;
 }

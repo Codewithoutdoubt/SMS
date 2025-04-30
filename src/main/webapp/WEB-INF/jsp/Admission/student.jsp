@@ -12,21 +12,20 @@
         </div>
         </form>
     </div>
-    <div class="col-md-10 col-lg-10">
-        <div class="container-fluid">
-            <!-- Main Content -->
-            <main>
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-1 pt-2 ">
+        <div class="container-fluid">   
                 <!-- Student Table -->
-                 <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between">
                     <h2 class="text-center font-weight-bold">Student List</h2>
-                    <button type="button" class="btn btn-primary my-2" data-bs-toggle="modal"
-                    data-bs-target="#addStudentModal">
-                    <a href="/addstudent">Add Student</a>
-                    </button>
-                 </div>
+                    <a href="/addstudent">
+                    <button type="button" class="btn btn-primary my-2 mr-4" data-bs-toggle="modal"
+                        data-bs-target="#addStudentModal">
+                        Add Student
+                    </button></a>
+                </div>
                 <div class="card">
                     <table class="students-table p-3 table table-striped student-table">
-                        <thead> 
+                        <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Roll Number</th>
@@ -54,7 +53,8 @@
                                             <button type="submit" class="btn btn-primary btn-sm me-2">Edit</button>
                                         </form>
                                         <a href="deletestudent?id=${student.id}"
-                                        onclick="return confirm('Are you sure you want to delete this student?');" class="btn btn-danger mt-0  h-50 ml-2 btn-sm">Delete</a>
+                                            onclick="return confirm('Are you sure you want to delete this student?');"
+                                            class="btn btn-danger mt-0  h-50 ml-2 btn-sm">Delete</a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -62,26 +62,23 @@
                     </table>
                 </div>
             </main>
-        </div>
-    </div>
-    </div>
-    </div>
+        
 
-    <script>
-        function toggleSidebar() {
-            document.body.classList.toggle("collapsed");
-        }
+        <script>
+            function toggleSidebar() {
+                document.body.classList.toggle("collapsed");
+            }
 
-        function fetchFilteredStudents() {
-            const branch = document.querySelector('select[name="branchCode"]').value;
-            const semester = document.querySelector('select[name="semester"]').value;
-            fetch(`/students?branchCode=${branch}&semester=${semester}`)
-                .then(response => response.json())
-                .then(data => {
-                    const tableBody = document.querySelector('.student-table tbody');
-                    tableBody.innerHTML = ''; // Clear existing rows
-                    data.forEach((student, index) => {
-                        const row = `<tr>
+            function fetchFilteredStudents() {
+                const branch = document.querySelector('select[name="branchCode"]').value;
+                const semester = document.querySelector('select[name="semester"]').value;
+                fetch(`/students?branchCode=${branch}&semester=${semester}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const tableBody = document.querySelector('.student-table tbody');
+                        tableBody.innerHTML = ''; // Clear existing rows
+                        data.forEach((student, index) => {
+                            const row = `<tr>
                                 <td>${index + 1}</td>
                                 <td>${student.rollNo}</td>
                                 <td>${student.studentName}</td>
@@ -93,52 +90,52 @@
                                     <a href="deletestudent?id=${student.id}" class="btn btn-danger btn-sm">Delete</a>
                                 </td>
                             </tr>`;
-                        tableBody.innerHTML += row;
-                    });
-                })
-                .catch(error => console.error('Error fetching filtered students:', error));
-        }
+                            tableBody.innerHTML += row;
+                        });
+                    })
+                    .catch(error => console.error('Error fetching filtered students:', error));
+            }
 
-        function populateDropdowns() {
-            // Fetch branches
-            fetch('/branches')
-                .then(response => response.json())
-                .then(branches => {
-                    const branchSelect = document.querySelector('select[name="branchCode"]');
-                    branches.forEach(branch => {
-                        const option = document.createElement('option');
-                        option.value = branch.code; // Assuming branch has a 'code' property
-                        option.textContent = branch.name; // Assuming branch has a 'name' property
-                        branchSelect.appendChild(option);
-                    });
-                })
-                .catch(error => console.error('Error fetching branches:', error));
+            function populateDropdowns() {
+                // Fetch branches
+                fetch('/branches')
+                    .then(response => response.json())
+                    .then(branches => {
+                        const branchSelect = document.querySelector('select[name="branchCode"]');
+                        branches.forEach(branch => {
+                            const option = document.createElement('option');
+                            option.value = branch.code; // Assuming branch has a 'code' property
+                            option.textContent = branch.name; // Assuming branch has a 'name' property
+                            branchSelect.appendChild(option);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching branches:', error));
 
-            // Fetch semesters
-            fetch('/semesters')
-                .then(response => response.json())
-                .then(semesters => {
-                    const semesterSelect = document.querySelector('select[name="semester"]');
-                    semesters.forEach(semester => {
-                        const option = document.createElement('option');
-                        option.value = semester.name; // Assuming semester has a 'name' property
-                        option.textContent = semester.name; // Assuming semester has a 'name' property
-                        semesterSelect.appendChild(option);
-                    });
-                })
-                .catch(error => console.error('Error fetching semesters:', error));
-        }
+                // Fetch semesters
+                fetch('/semesters')
+                    .then(response => response.json())
+                    .then(semesters => {
+                        const semesterSelect = document.querySelector('select[name="semester"]');
+                        semesters.forEach(semester => {
+                            const option = document.createElement('option');
+                            option.value = semester.name; // Assuming semester has a 'name' property
+                            option.textContent = semester.name; // Assuming semester has a 'name' property
+                            semesterSelect.appendChild(option);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching semesters:', error));
+            }
 
-        // Call populateDropdowns on page load
-        window.onload = populateDropdowns;
-        
-                // Check for error message from controller
-                const errorMessage = '${error}'; // Assuming error is passed from controller
-                if (errorMessage && errorMessage.trim() !== '') {
-                    alert(errorMessage);
-                }
-        
-    </script>
-    </body>
+            // Call populateDropdowns on page load
+            window.onload = populateDropdowns;
 
-    </html>
+            // Check for error message from controller
+            const errorMessage = '${error}'; // Assuming error is passed from controller
+            if (errorMessage && errorMessage.trim() !== '') {
+                alert(errorMessage);
+            }
+
+        </script>
+        </body>
+
+        </html>

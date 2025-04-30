@@ -1,4 +1,4 @@
-<%@ include file="/static/components/header-fees.jsp" %>
+<%@ include file="/static/components/header.jsp" %>
 
 <!-- Content Area -->
 <div class="container d-flex justify-content-center mt-5">

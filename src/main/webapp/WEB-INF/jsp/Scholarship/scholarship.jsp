@@ -1,4 +1,4 @@
-<%@ include file="/static/components/header-scholarship.jsp" %>
+<%@ include file="/static/components/header.jsp" %>
 
     <div class="container-fluid">
         <div class="row">

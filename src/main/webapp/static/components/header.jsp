@@ -26,11 +26,11 @@
 <body>
 
     <!-- Bootstrap Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fix-header">
         <div class="container-fluid">
             <a class="navbar-brand" href="#"><b><i>Student Management System</i></b></a>
             <div>
-            <a href="/admin" style="color: rgb(255, 255, 255); font-weight: 800;font-size: 16px;"> <span>Home</span></a>
+            <a href="/${sessionScope.department.access}" style="color: rgb(255, 255, 255); font-weight: 800;font-size: 16px;"> <span>Home</span></a>
             <a href="/logout" style="color: rgb(255, 255, 255); font-weight: 800;font-size: 16px;"><i class="fas fa-sign-out-alt ml-3"></i> <span>Logout</span></a>
             <span style="color: white; font-weight: 600; margin-left: 20px;" class="log-id">
                 Logged in as: <c:out value="${sessionScope.department.username}" default="Guest"/>

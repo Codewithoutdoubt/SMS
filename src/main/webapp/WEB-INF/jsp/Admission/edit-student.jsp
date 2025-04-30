@@ -1,7 +1,7 @@
 <%@ include file="/static/components/header.jsp" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/add-student-form.css" />
 <!-- Content Area -->
-<div class="container-fluid mt-3">
+<div class="container-fluid mt-4">
     <div class="container form-container">
         <div class="card">
             <div class="card-header text-center">Edit Student Details Form</div>

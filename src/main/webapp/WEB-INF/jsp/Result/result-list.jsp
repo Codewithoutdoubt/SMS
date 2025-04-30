@@ -1,6 +1,6 @@
-<%@ include file="/static/components/header-result.jsp" %>
+<%@ include file="/static/components/header.jsp" %>
 
-    <div class="container">
+    <div class="container mt-5 pt-2">
         <div class="d-flex justify-content-between align-items-center">
             <h2 style="font-weight: 600;"><i class="fas fa-list"></i> Student Academic History :</h2>
             <a href="/result/add/${studentId}"> <button class="w3-button w3-green  w3-large w3-left">Add

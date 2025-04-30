@@ -4,8 +4,8 @@
     <div class="col-md-2 sidebar">
         <%@ include file="/static/components/sidebar.jsp" %>
     </div>
-    <div class="col-md-10">
-        <div class="container-fluid mt-3">
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-1">
+        <div class="container mt-3">
             <div class="row justify-content-between mx-1 my-2">
                 <h2 class="mb-0 ">
                     <i class="fas fa-users mr-2 "></i>User Management

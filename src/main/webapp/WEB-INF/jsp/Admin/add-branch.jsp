@@ -4,7 +4,7 @@
         <div class="col-md-2 sidebar">
             <%@ include file="/static/components/sidebar.jsp" %>
         </div>
-        <div class="col-md-10">
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-1">
 <div class="container w-50" style="margin-top: 6%;">
     <div class="container">
         <div class="form-container card p-4 mt-4">
