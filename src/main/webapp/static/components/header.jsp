@@ -20,8 +20,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <!--w3school CSS-->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/style.css">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">    
 </head>
 <body>
 
@@ -42,3 +41,4 @@
         </div>
         </div>
     </nav> 
+

@@ -36,6 +36,7 @@
                                 <option value="result">Result Department</option>
                                 <option value="placement">Placement Department</option>
                                 <option value="academic">Academic Department</option>
+                                <option value="faculty">Faculty Department</option>
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save User</button>

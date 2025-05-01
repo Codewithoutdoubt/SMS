@@ -3,6 +3,7 @@
     <div class="row">
         <div class="col-md-2 col-lg-2 sidebar">
             <%@ include file="/static/components/sidebar.jsp" %>
+            
         </div>
                 <!-- Main Content -->
                 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-2">

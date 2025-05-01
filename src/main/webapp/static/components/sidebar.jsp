@@ -1,4 +1,5 @@
 <h4>Admin Menu</h4>
+<hr>
 <a href="/admin"><i class="fas fa-dashboard"></i> <span>Dashboard</span></a>
 
 <a href="/users"><i class="fas fa-user"></i><span>User</span></a>
