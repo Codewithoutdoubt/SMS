@@ -23,7 +23,7 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="academicYear" class="col-sm-4 col-form-label">Academic Year</label>
+                            <label for="academicYear" class="col-sm-4 col-form-label">Application Year</label>
                             <div class="col-sm-8">
                                 <input type="text" name="AcademicYear" class="form-control" id="academicYear" required>
                             </div>

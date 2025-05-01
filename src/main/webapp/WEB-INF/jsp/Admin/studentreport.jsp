@@ -73,8 +73,8 @@
       <thead class="table-primary">
         <tr>
           <th class="report-sr">Sr. No.</th>
-          <th>Semester Name</th>
-          <th>SGPA</th>
+          <th class="w-50">Semester Name</th>
+          <th class="third-col">SGPA</th>
           <th>CGPA</th>
         </tr>
       </thead>
@@ -104,9 +104,9 @@
       <thead class="table-primary">
         <tr>
           <th class="report-sr">Sr. No.</th>
-          <th>Scholarship Name</th>
-          <th>Amount</th>
-          <th>Status</th>
+          <th class="w-50">Amount</th>
+          <th class="third-col">Status</th>
+          <th>Scholarship Year</th>
         </tr>
       </thead>
       <tbody>
@@ -116,13 +116,13 @@
               <c:out value="${status.index + 1}" />
             </td>
             <td>
-              <c:out value="${scholarship.academicYear}" />
-            </td>
-            <td>
               <c:out value="${scholarship.entitlementAmount}" />
             </td>
             <td>
               <c:out value="${scholarship.applicationStatus}" />
+            </td>
+            <td>
+              <c:out value="${scholarship.academicYear}" />
             </td>
           </tr>
         </c:forEach>
@@ -133,18 +133,18 @@
       <thead class="table-primary">
         <tr>
           <th class="report-sr">Sr. No.</th>
+          <th class="w-50">Company Name</th>
+          <th class="third-col">Package</th>
           <th>Selection Year</th>
-          <th>Company Name</th>
-          <th>Package</th>
         </tr>
       </thead>
       <tbody>
         <c:forEach var="placement" items="${placements}" varStatus="status" >
           <tr>
             <td><c:out value="${status.index + 1}" /></td>
-            <td><c:out value="${placement.selectedYear}" /></td>
             <td><c:out value="${placement.companyName}" /> </td>
             <td><c:out value="${placement.packageAmount}" /> </td>
+            <td><c:out value="${placement.selectedYear}" /></td>
           </tr>
         </c:forEach>
       </tbody>
@@ -156,7 +156,7 @@
       <thead class="table-primary">
         <tr>
           <th class="report-sr">Sr. No.</th>
-          <th>Document Name</th>
+          <th class="w-50">Document Name</th>
           <th>Document Number</th>
         </tr>
       </thead>

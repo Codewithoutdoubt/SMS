@@ -41,19 +41,27 @@
 
 <div class="form-container">
     <h2>Submit TC Document Details</h2>
+    <hr>
     <form action="/academic/tc/submit" method="post">
-        <input type="hidden" name="student.id" value="${param.studentId}" />
+        <input type="hidden" name="student.id" value="${student.id}" />
+        <c:if test="${not empty tc.id}">
+            <input type="hidden" name="id" value="${tc.id}" />
+        </c:if>
+        <div class="mb-3">
+            <label for="StudentRollNo" class="form-label">Roll Number</label>
+            <input type="text" class="form-control" id="tcCertificateNo" name="rollNo" placeholder="Enter TC Certificate Number" readonly value="${student.rollNo}" required>
+        </div>
         <div class="mb-3">
             <label for="tcCertificateNo" class="form-label">TC Certificate Number</label>
-            <input type="text" class="form-control" id="tcCertificateNo" name="tcCertificateNo" placeholder="Enter TC Certificate Number" required>
+            <input type="text" class="form-control" id="tcCertificateNo" name="tcCertificateNo" placeholder="Enter TC Certificate Number" value="${tc.tcCertificateNo}" required>
         </div>
         <div class="mb-3">
             <label for="migrationCertificateNo" class="form-label">Migration Certificate Number</label>
-            <input type="text" class="form-control" id="migrationCertificateNo" name="migrationCertificateNo" placeholder="Enter Migration Certificate Number" required>
+            <input type="text" class="form-control" id="migrationCertificateNo" name="migrationCertificateNo" placeholder="Enter Migration Certificate Number" value="${tc.migrationCertificateNo}" required>
         </div>
         <div class="mb-3">
             <label for="diplomaCertificateNo" class="form-label">Diploma Certificate Number</label>
-            <input type="text" class="form-control" id="diplomaCertificateNo" name="diplomaCertificateNo" placeholder="Enter Diploma Certificate Number" required>
+            <input type="text" class="form-control" id="diplomaCertificateNo" name="diplomaCertificateNo" placeholder="Enter Diploma Certificate Number" value="${tc.diplomaCertificateNo}" required>
         </div>
         <button type="submit" class="btn btn-primary">Submit TC Details</button>
     </form>

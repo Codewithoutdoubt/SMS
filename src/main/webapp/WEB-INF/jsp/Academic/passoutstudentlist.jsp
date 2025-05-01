@@ -4,8 +4,23 @@
         <div class="col-md-2 sidebar">
             <%@ include file="/static/components/sidebar-academic.jsp" %>
         </div>
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-2">
-            <h2 class="mb-4">Passout Students with TC Documents Submitted</h2>
+        <main class="col-md-10 ms-sm-auto col-lg-10 px-md-2">
+            <div class="row justify-content-between">
+                <div class="col-lg-3">
+                    <h2>Academic Dashboard</h2>
+                </div>
+                <div class="col-lg-6 pt-3 px-5 d-flex">
+                    <h4 class="mt-2 ml-5" style="font-weight: 600;">Filter by Roll Number</h4>
+                    <form action="/academic/passoutstudents" method="get" class="mb-3">
+                        <div class="input-group">
+                            <input type="text" name="rollNo" class="form-control mx-3" placeholder="Enter Roll Number"
+                                value="${rollNo != null ? rollNo : ''}">
+                            <button class="btn btn-primary" type="submit">Filter</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- <h2 class="mb-4">Passout Students with TC Documents Submitted</h2> -->
             <table class="table table-striped table-bordered">
                 <thead class="table-primary">
                     <tr>
@@ -28,12 +43,16 @@
                             <td>${tc.migrationCertificateNo}</td>
                             <td>${tc.diplomaCertificateNo}</td>
                             <td>
-                                <a href="/academicreport/${tc.student.id}" class="btn btn-info btn-sm">View Report</a>
+                                <form action="/academic/tc/edit" method="get">
+                                    <input type="hidden" name="studentId" value="${tc.student.id}" />
+                                    <button type="submit" class="btn btn-primary">Edit Details</button>
+                                </form>
                             </td>
                         </tr>
                     </c:forEach>
                 </tbody>
             </table>
+        </main>
     </div>
     </div>
 

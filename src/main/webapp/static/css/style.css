@@ -216,3 +216,9 @@ select {
     width:100%;
     z-index: 1000;
 }
+.third-col{
+    width: 180px;
+}
+hr{
+    border: solid 2px black !important;
+}

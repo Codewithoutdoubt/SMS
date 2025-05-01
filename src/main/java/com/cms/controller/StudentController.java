@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,10 +14,6 @@ import com.cms.entity.Student;
 import com.cms.services.BranchService;
 import com.cms.services.SemesterService;
 import com.cms.services.StudentService;
-
-import jakarta.servlet.http.HttpServletRequest;
-
-import java.util.List;
 
 @Controller
 public class StudentController {
@@ -66,8 +61,7 @@ public class StudentController {
             return mav;
         }
         studentServcie.addStudent(student);
-        mav = new ModelAndView("Admission/student");
-        mav.addObject("students", studentServcie.getAllStudents());
+        mav = new ModelAndView("redirect:/admission");
         return mav;
     }
 

@@ -36,9 +36,9 @@
                             </thead>
                             <tbody>
                                 <!-- Dynamic semester data will be populated here -->
-                                <c:forEach var="semester" items="${semesters}">
+                                <c:forEach var="semester" items="${semesters}" varStatus="status">
                                     <tr>
-                                        <td>${semester.id}</td>
+                                        <td>${status.index + 1}</td>
                                         <td>${semester.name}</td>
                                     </tr>
                                 </c:forEach>

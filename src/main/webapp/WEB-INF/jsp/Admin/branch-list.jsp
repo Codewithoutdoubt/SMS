@@ -22,9 +22,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="branch" items="${branchList}">
+                            <c:forEach var="branch" items="${branchList}" varStatus="status">
                                 <tr>
-                                    <td>${branch.id}</td>
+                                    <td>${status.index + 1}</td>
                                     <td>${branch.name}</td>
                                     <td>${branch.code}</td>
                                 </tr>

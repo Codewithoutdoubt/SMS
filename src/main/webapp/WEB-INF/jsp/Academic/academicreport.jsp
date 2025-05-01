@@ -152,11 +152,11 @@
     </table>
 
     <div >
-      <form action="/academic/tc/form" method="get">
-        <input type="hidden" name="studentId" value="${student.id}" />
-        <button type="submit" class="btn btn-primary">Fill Pass Out Details</button>
-      </form>
-    </div>
+        <form action="/academic/tc/form" method="get">
+          <input type="hidden" name="studentId" value="${student.id}" />
+          <button type="submit" class="btn btn-primary" <c:if test="${tcDocumentSubmitted}">disabled</c:if>>Fill Pass Out Details</button>
+        </form>
+    </div> 
 
   </main>
 </div>

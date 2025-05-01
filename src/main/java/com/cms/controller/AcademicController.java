@@ -70,6 +70,8 @@ public class AcademicController {
         mav.addObject("scholarships", scholarshipService.getScholarshipsByStudentId(id));
         mav.addObject("documents", documentsService.getDocumentsByStudentId(id));
         mav.addObject("placements", placementService.getPlacementsByStudentId(id));
+        boolean tcDocumentSubmitted = tcService.getTcByStudentId(id).isPresent();
+        mav.addObject("tcDocumentSubmitted", tcDocumentSubmitted);
         return mav;
     }
 
@@ -88,14 +90,28 @@ public class AcademicController {
     @GetMapping("/academic/tc/form")
     public ModelAndView showTcForm(@org.springframework.web.bind.annotation.RequestParam Long studentId) {
         ModelAndView mav = new ModelAndView("Academic/tcdocumentform");
+        mav.addObject("student", studentService.getStudentById(studentId));
+        return mav;
+    }
+
+    @GetMapping("/academic/tc/edit")
+    public ModelAndView editTcForm(@org.springframework.web.bind.annotation.RequestParam Long studentId) {
+        ModelAndView mav = new ModelAndView("Academic/tcdocumentform");
+        com.cms.entity.Tc tc = tcService.getTcByStudentId(studentId).orElse(new com.cms.entity.Tc());
+        mav.addObject("tc", tc);
         mav.addObject("studentId", studentId);
         return mav;
     }
 
     @GetMapping("/academic/passoutstudents")
-    public ModelAndView passoutStudentList() {
+    public ModelAndView passoutStudentList(@org.springframework.web.bind.annotation.RequestParam(required = false) String rollNo) {
         ModelAndView mav = new ModelAndView("Academic/passoutstudentlist");
-        mav.addObject("tcList", tcService.getAllTcRecords());
+        if (rollNo != null && !rollNo.isEmpty()) {
+            mav.addObject("tcList", tcService.getTcByStudentRollNo(rollNo));
+        } else {
+            mav.addObject("tcList", tcService.getAllTcRecords());
+        }
+        mav.addObject("rollNo", rollNo);
         return mav;
     }
 }
