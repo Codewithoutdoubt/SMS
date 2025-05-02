@@ -17,4 +17,6 @@ public interface StudentService {
 	void deleteStudent(Long id);
 	Student updateStudent(Student student);
 	boolean studentExists(String rollNo);
+
+	boolean studentExistsForUpdate(String rollNo, Long id);
 }

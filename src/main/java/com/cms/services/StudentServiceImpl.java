@@ -100,4 +100,9 @@ public class StudentServiceImpl implements StudentService {
     public boolean studentExists(String rollNo) {
         return studentRepository.findByRollNo(rollNo) != null;
     }
+
+    @Override
+    public boolean studentExistsForUpdate(String rollNo, Long id) {
+        return studentRepository.findByRollNoAndIdNot(rollNo, id) != null;
+    }
 }

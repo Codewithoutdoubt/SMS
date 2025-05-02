@@ -18,4 +18,6 @@ public interface StudentRepository extends CrudRepository<Student, Long> {
     List<Student> findAllWithScholarships();
     
     Student findByRollNo(String rollNo);
+
+    Student findByRollNoAndIdNot(String rollNo, Long id);
 }

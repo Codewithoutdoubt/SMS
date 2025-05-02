@@ -77,7 +77,16 @@ public class StudentController {
     @PostMapping("/updatestudent")
     public ModelAndView updateStudent(Student student, @RequestParam("branchId") Long branchId,
             @RequestParam("semesterId") Long semesterId) {
-        ModelAndView mav = new ModelAndView("Admission/student");
+        ModelAndView mav;
+        if (studentServcie.studentExistsForUpdate(student.getRollNo(), student.getId())) {
+            mav = new ModelAndView("Admission/edit-student");
+            mav.addObject("student", student);
+            mav.addObject("branches", branchService.getAllBranches());
+            mav.addObject("semesters", semesterService.getAllSemesters());
+            mav.addObject("error", "Student with the same roll number already exists.");
+            return mav;
+        }
+        mav = new ModelAndView("Admission/student");
         student.setBranch(branchService.getBranchById(branchId).orElse(null));
         student.setSemester(semesterService.getSemesterById(semesterId));
         studentServcie.updateStudent(student);

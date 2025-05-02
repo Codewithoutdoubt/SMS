@@ -6,6 +6,11 @@
         <div class="card">
             <div class="card-header text-center">Edit Student Details Form</div>
             <div class="card-body">
+                <c:if test="${not empty error}">
+                    <div class="alert alert-danger" role="alert">
+                        ${error}
+                    </div>
+                </c:if>
                 <form action="updatestudent" method="post">
                     <input type="hidden" name="id" value="${student.id}" />
                     <div class="row">
