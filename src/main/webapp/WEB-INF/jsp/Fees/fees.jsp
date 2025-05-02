@@ -2,7 +2,7 @@
     <!-- Sidebar -->
     <div class="row">
         <div class="col-md-2 col-lg-2  sidebar">
-            <h4 class="text-center">${department.name}</h4>
+            <h4 class="text-center">Fees Department</h4>
             <hr>
             <form id="filter-form" class="ml-3" method="get" action="/filter/Fees/fees">
                 <h4 class="text-left pt-0">Filter Data</h4>
@@ -41,7 +41,7 @@
                                     <td>${student.admissionYear}</td>
                                     <td class="d-flex mb-1">
 
-                                        <a href="fees/${student.id}"
+                                        <a href="/fees/${student.id}"
                                             class="btn btn-primary mt-0  h-50 ml-2 btn-sm">View</a>
                                     </td>
                                 </tr>

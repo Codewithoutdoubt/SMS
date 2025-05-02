@@ -49,7 +49,7 @@
         </c:if>
         <div class="mb-3">
             <label for="StudentRollNo" class="form-label">Roll Number</label>
-            <input type="text" class="form-control" id="tcCertificateNo" name="rollNo" placeholder="Enter TC Certificate Number" readonly value="${student.rollNo}" required>
+            <input type="text" class="form-control" id="tcCertificateNo" name="rollNo" placeholder="Student Roll No." readonly value="${student.rollNo}" required>
         </div>
         <div class="mb-3">
             <label for="tcCertificateNo" class="form-label">TC Certificate Number</label>

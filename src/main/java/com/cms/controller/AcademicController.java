@@ -90,7 +90,7 @@ public class AcademicController {
     @GetMapping("/academic/tc/form")
     public ModelAndView showTcForm(@org.springframework.web.bind.annotation.RequestParam Long studentId) {
         ModelAndView mav = new ModelAndView("Academic/tcdocumentform");
-        mav.addObject("studentId", studentId);
+        mav.addObject("student", studentService.getStudentById(studentId));
         return mav;
     }
 

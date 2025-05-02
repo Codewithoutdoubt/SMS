@@ -12,6 +12,7 @@
                         <th>Sr. No.</th>
                         <th>Roll No.</th>
                         <th>Year</th>
+                        <th>Fees Type</th>
                         <th>Date</th>
                         <th>Receipt No.</th>
                         <th>Amount</th>
@@ -24,7 +25,8 @@
                             <td>${status.index + 1}</td>
                             <td>${fee.student.rollNo}</td>
                             <td>${fee.year}</td>
-                            <td>${fee.date}</td>
+                            <td>${fee.feeType}</td>
+                            <td>${fee.date}</td>    
                             <td>${fee.feeReceiptNo}</td>
                             <td>${fee.amount}</td>
                             <td><a href="/fees/edit/${fee.id}" class="btn btn-warning">Edit</a></td>

@@ -52,9 +52,6 @@
                                             <input type="hidden" name="studentId" value="${student.id}">
                                             <button type="submit" class="btn btn-primary btn-sm me-2">Edit</button>
                                         </form>
-                                        <a href="deletestudent?id=${student.id}"
-                                            onclick="return confirm('Are you sure you want to delete this student?');"
-                                            class="btn btn-danger mt-0  h-50 ml-2 btn-sm">Delete</a>
                                     </td>
                                 </tr>
                             </c:forEach>
