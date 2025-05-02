@@ -99,7 +99,7 @@ public class AcademicController {
         ModelAndView mav = new ModelAndView("Academic/tcdocumentform");
         com.cms.entity.Tc tc = tcService.getTcByStudentId(studentId).orElse(new com.cms.entity.Tc());
         mav.addObject("tc", tc);
-        mav.addObject("studentId", studentId);
+        mav.addObject("student", studentService.getStudentById(studentId));
         return mav;
     }
 
