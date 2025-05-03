@@ -1,10 +1,10 @@
 <%@ include file="/static/components/header.jsp" %>
 
-    <div class="container-fluid">
+
         <div class="row">
             <!-- Sidebar -->
             <div class="col-md-2 col-lg-2  sidebar">
-                <h4 class="text-center">${sessionScope.department.name}</h4>
+                <h4 class="text-center">Scholarship Department</h4>
                 <hr>
                 <form id="filter-form" class="ml-1" method="get" action="/filter/Scholarship/scholarship">
                     <h4 class="text-left pt-0">Filter Data</h4>
@@ -13,7 +13,7 @@
                                 href="/admission">Reset</a></button>
                 </form>
             </div>
-
+        </div>
             <!-- Main Content -->
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <h4 class="text-left mt-4">Student Details</h4>

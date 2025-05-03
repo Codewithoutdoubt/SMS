@@ -1,55 +1,21 @@
 <%@ include file="/static/components/header.jsp" %>
 
-    <div class="row">
-        <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar pt-0" id="sidebar">
-            <h4 class="font-weight-bold text-center">Faculty Department</h4>
-            <hr>
-            <h4 class="pt-0">Filters</h4>
-            <form id="filter-form" method="get" action="/filter/Faculty/student-list">
-                <div class="mb-3">
-                    <label class="form-label">Branch</label>
-                    <select name="branchCode" class="form-control h-50">
-                        <option value="">All</option>
-                        <c:forEach var="branch" items="${branches}">
-                            <option value="${branch.code}" <c:if test="${branch.code == param.branchCode}">selected
-                                </c:if>
-                                >${branch.name}</option>
-                        </c:forEach>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Semester</label>
-                    <select name="semester" class="form-control h-50">
-                        <option value="">All</option>
-                        <c:forEach var="semester" items="${semesters}">
-                            <option value="${semester.name}" <c:if test="${semester.name == param.semester}">selected
-                                </c:if>
-                                >${semester.name}</option>
-                        </c:forEach>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Admission Year</label>
-                    <select id="academicYear" name="academicYear" class="form-control">
-                        <option value="" selected>All</option>
-                        <c:forEach var="student" items="${students}">
-                            <option value="${student.admissionYear}" <c:if
-                                test="${student.admissionYear == param.academicYear}">selected</c:if>
-                                >${student.admissionYear}</option>
-                        </c:forEach>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary my-3 w-100">Apply Filters</button>
-
-            </form>
-            <a href="/${sessionScope.department.access}" class="d-block pt-1 btn .bg-success.bg-gradient mb-3"
-                style="height: 35px !important;">Reset Filters</a>
-        </nav>
+<div class="row">
+    <div class="col-md-2 col-lg-2  sidebar">
+        <h4 class="text-center">Admission Department</h4>
+        <hr>
+        <form id="filter-form" class="ml-1" method="get" action="/filter/Faculty/student-list">
+            <h4 class="text-left pt-0">Filter Data</h4>
+            <%@ include file="/static/components/department-filter.jsp" %>
+                <button type="reset" class="btn btn-primary h-75 w-100 ftr mt-3"><a class="p-0 text-center d-block"
+                        href="/faculty">Reset</a></button>
+        </form>
+    </div>
+</div>
 
         <main class="col-md-10 p-4" style="margin-left:270px;margin-top:45px !important;">
             <div class="d-flex justify-content-between mb-3">
                 <h2 class="font-weight-bold w-25 my-1">Student List</h2>
-                <input type="text" id="rollNoSearch" class="form-control w-25 mt-1 mx-3" placeholder="Type roll number to search...">
 
             </div>
             <table class="table table-bordered" id="studentTable">
