@@ -3,56 +3,16 @@
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
-            <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar pt-0" id="sidebar">
-                <h5 class="font-weight-bold text-center">Scholarship Department</h5>
+            <div class="col-md-2 col-lg-2  sidebar">
+                <h4 class="text-center">${sessionScope.department.name}</h4>
                 <hr>
-                <h4 class="pt-0">Filters</h4>
-                <form id="filter-form" method="get" action="/scholarship">
-                    <div class="mb-3">
-                        <label class="form-label">Branch</label>
-                        <select name="branchCode" class="form-control h-50">
-                            <option value="">All</option>
-                            <c:forEach var="branch" items="${branches}">
-                                <option value="${branch.code}" 
-                                    <c:if test="${branch.code == param.branchCode}">selected</c:if>
-                                >${branch.name}</option>
-                            </c:forEach>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Semester</label>
-                        <select name="semester" class="form-control h-50">
-                            <option value="">All</option>
-                            <c:forEach var="semester" items="${semesters}">
-                                <option value="${semester.name}" 
-                                    <c:if test="${semester.name == param.semester}">selected</c:if>
-                                >${semester.name}</option>
-                            </c:forEach>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Caste</label>
-                        <select name="cast" class="form-control h-50">
-                            <option value="">All</option>
-                            <option value="General" <c:if test="${param.cast == 'General'}">selected</c:if>>General</option>
-                            <option value="OBC" <c:if test="${param.cast == 'OBC'}">selected</c:if>>OBC</option>
-                            <option value="SC" <c:if test="${param.cast == 'SC'}">selected</c:if>>SC</option>
-                            <option value="ST" <c:if test="${param.cast == 'ST'}">selected</c:if>>ST</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Application Status</label>
-                        <select name="status" class="form-control h-50">
-                            <option value="">All</option>
-                            <option value="Applied" <c:if test="${param.status == 'Applied'}">selected</c:if>>Applied</option>
-                            <option value="Not Applied" <c:if test="${param.status == 'Not Applied'}">selected</c:if>>Not Applied</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary my-3 w-100">Apply Filters</button>
-
+                <form id="filter-form" class="ml-1" method="get" action="/filter/Scholarship/scholarship">
+                    <h4 class="text-left pt-0">Filter Data</h4>
+                    <%@ include file="/static/components/department-filter.jsp" %>
+                        <button type="reset" class="btn btn-primary h-75 w-100 ftr mt-3"><a class="p-0 text-center d-block"
+                                href="/admission">Reset</a></button>
                 </form>
-                <a href="/scholarship" class="d-block pt-1 btn .bg-success.bg-gradient mb-3" style="height: 35px !important;">Reset Filters</a>
-            </nav>
+            </div>
 
             <!-- Main Content -->
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">

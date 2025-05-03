@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.cms.entity.AppUser;
+import com.cms.exception.DuplicateEmailException;
 import com.cms.repository.UserRepository;
 import com.cms.services.util.EmailService;
 
@@ -27,6 +28,9 @@ public class UserServiceImp implements UserService {
 
     @Override
     public void save(AppUser user) {
+        if (userRepo.findByEmail(user.getEmail()).isPresent()) {
+            throw new DuplicateEmailException("Email " + user.getEmail() + " is already in use.");
+        }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepo.save(user);
     }

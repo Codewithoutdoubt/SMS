@@ -51,6 +51,11 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+    <c:if test="${not empty error}">
+        <script type="text/javascript">
+            alert('${error}');
+        </script>
+    </c:if>
     </body>
 
     </html>

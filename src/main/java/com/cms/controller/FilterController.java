@@ -34,10 +34,11 @@ public class FilterController {
             @RequestParam(required = false) String branchCode,
             @RequestParam(required = false) String semester,
             @RequestParam(required = false) String academicYear,
+            @RequestParam(required = false) String rollNo,
             @PathVariable String folder,
             @PathVariable String viewname,
             Model model) {
-        List<Student> filteredStudents = studentService.getFilteredStudents(branchCode, semester, academicYear, null);
+        List<Student> filteredStudents = studentService.getFilteredStudents(branchCode, semester, academicYear, null, rollNo);
 
         // Map student id to placement for quick lookup
         List<com.cms.entity.Placement> placements = placementService.getAllPlacements();

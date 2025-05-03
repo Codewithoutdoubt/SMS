@@ -3,6 +3,7 @@ package com.cms.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.cms.entity.Branch;
+import com.cms.exception.DuplicateBranchCodeException;
 import com.cms.repository.BranchRepository;
 
 import java.util.List;
@@ -35,7 +36,11 @@ public class BranchServiceImpl implements BranchService {
 
     @Override
     public void saveBranch(Branch branch) {
-            if (branch != null) {
-                branchRepository.save(branch);
-            }    }
+        if (branch != null) {
+            if (branchRepository.findByCode(branch.getCode()).isPresent()) {
+                throw new DuplicateBranchCodeException("Branch code " + branch.getCode() + " is already in use.");
+            }
+            branchRepository.save(branch);
+        }
+    }
 }

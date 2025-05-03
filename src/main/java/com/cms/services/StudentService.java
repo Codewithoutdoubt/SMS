@@ -12,7 +12,8 @@ public interface StudentService {
 	Student getStudentById(Long studentId);
 	List<Student> getAllStudents();
     List<Student> getAllStudentsWithScholarships();
-    List<Student> getFilteredStudents(String branchCode, String semester, String cast, String status);
+    List<Student> getFilteredStudents(String branchCode, String semester, String academicYear, String status);
+    List<Student> getFilteredStudents(String branchCode, String semester, String academicYear, String status, String rollNo);
 	List<Student> getFilteredStudentsForSc(String branchCode, String semester, String caste, String status);
 	void deleteStudent(Long id);
 	Student updateStudent(Student student);

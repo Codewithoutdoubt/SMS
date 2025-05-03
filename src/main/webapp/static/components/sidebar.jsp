@@ -7,3 +7,4 @@
 <a href="/branch-data"><i class="fas fa-list"></i> <span>Branch</span></a>
 
 <a href="/semesters"><i class="fas fa-list"></i><span>Semester</span></a>
+

@@ -1,8 +1,10 @@
+
 package com.cms.controller;
 
 import com.cms.entity.Branch;
 import com.cms.entity.Department;
 import com.cms.services.BranchService;
+import com.cms.exception.DuplicateBranchCodeException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,8 +42,13 @@ public class BranchController {
     }
 
     @PostMapping("/save")
-    public String saveBranch(@ModelAttribute Branch branch) {
-        branchService.saveBranch(branch);
+    public String saveBranch(@ModelAttribute Branch branch, Model model) {
+        try {
+            branchService.saveBranch(branch);
+        } catch (DuplicateBranchCodeException e) {
+            model.addAttribute("error", e.getMessage());
+            return "Admin/add-branch";
+        }
         return "redirect:/branch-data"; // Redirects to branch list
     }
 

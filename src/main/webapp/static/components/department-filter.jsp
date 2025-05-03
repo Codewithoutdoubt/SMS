@@ -1,4 +1,8 @@
 <div class="mb-3 mx-1">
+    <label for="rollNo" class="form-label">Roll Number</label>
+    <input type="text" name="rollNo" class="form-control" placeholder="Enter Roll Number">
+</div>
+<div class="mb-3 mx-1">
     <label for="branchSelect" class="form-label">Branch</label>
     <select id="branchSelect" name="branchCode" class="form-control">
         <option value="" disabled selected>Select Branch</option>

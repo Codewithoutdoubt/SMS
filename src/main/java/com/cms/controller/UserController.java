@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.cms.services.UserService;
+import com.cms.exception.DuplicateEmailException;
 
 import java.util.List;
 
@@ -51,8 +52,13 @@ public class UserController {
         user.setPassword(hashedPassword);
         user.setAccess(access);
 
-        // Save user
-        userService.save(user);
+        try {
+            // Save user
+            userService.save(user);
+        } catch (DuplicateEmailException e) {
+            model.addAttribute("error", e.getMessage());
+            return "Admin/add-user";
+        }
         return "redirect:/users";
     }
 

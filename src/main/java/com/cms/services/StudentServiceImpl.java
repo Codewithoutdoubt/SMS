@@ -74,7 +74,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<Student> getFilteredStudents(String branchCode, String semester, String academicYear, String status) {
+    public List<Student> getFilteredStudents(String branchCode, String semester, String academicYear, String status, String rollNo) {
         // First get all students with scholarships
         List<Student> students = studentRepository.findAllWithScholarships();
         
@@ -93,6 +93,9 @@ public class StudentServiceImpl implements StudentService {
                 (status == null || status.isEmpty() || 
                  (status.equals("Applied") && !student.getScholarships().isEmpty()) ||
                  (status.equals("Not Applied") && student.getScholarships().isEmpty())))
+            .filter(student ->
+                (rollNo == null || rollNo.isEmpty() ||
+                 student.getRollNo().equalsIgnoreCase(rollNo)))
             .collect(Collectors.toList());
     }
 
@@ -104,5 +107,28 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public boolean studentExistsForUpdate(String rollNo, Long id) {
         return studentRepository.findByRollNoAndIdNot(rollNo, id) != null;
+    }
+
+    @Override
+    public List<Student> getFilteredStudents(String branchCode, String semester, String academicYear, String status) {
+        List<Student> students = studentRepository.findAllWithScholarships();
+        
+        // Apply filters
+        return students.stream()
+            .filter(student -> 
+                (branchCode == null || branchCode.isEmpty() || 
+                 student.getBranch().getCode().equals(branchCode)))
+            .filter(student -> 
+                (semester == null || semester.isEmpty() || 
+                 student.getSemester().getName().equals(semester)))
+            .filter(student -> 
+                (academicYear == null || academicYear.isEmpty() || 
+                 student.getAdmissionYear().equals(academicYear)))
+            .filter(student -> 
+                (status == null || status.isEmpty() || 
+                 (status.equals("Applied") && !student.getScholarships().isEmpty()) ||
+                 (status.equals("Not Applied") && student.getScholarships().isEmpty())))
+            .collect(Collectors.toList());
+    
     }
 }

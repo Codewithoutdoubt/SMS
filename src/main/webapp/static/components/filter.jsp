@@ -1,4 +1,7 @@
     <div class="mb-3 w-25 mx-1">
+        <input type="text" name="rollNo" class="form-control" placeholder="Enter Roll Number">
+    </div>
+    <div class="mb-3 w-25 mx-1">
         <select name="branchCode" class="form-control ">
             <option value="" disabled selected>Select Branch</option>
             <option value="">All</option>
