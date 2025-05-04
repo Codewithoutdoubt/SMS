@@ -53,13 +53,54 @@ public class ScholarshipController {
             @RequestParam(required = false) String status) {
         
         ModelAndView mav = new ModelAndView("Scholarship/scholarship");
-        mav.addObject("students", 
-            studentService.getFilteredStudentsForSc(branchCode, semester, cast, status));
+        List<Student> allStudents = studentService.getFilteredStudentsForSc(branchCode, semester, cast, status);
         
+        // Get current year as string
+        String currentYear = java.time.Year.now().toString();
+        mav.addObject("currentYear", currentYear);
+
+        // Prepare map of studentId to application status for current year
+        java.util.Map<Long, Boolean> applicationStatusMap = new java.util.HashMap<>();
+        for (Student student : allStudents) {
+            boolean applied = false;
+            if (student.getScholarships() != null) {
+                for (com.cms.entity.Scholarship scholarship : student.getScholarships()) {
+                    if (currentYear.equals(scholarship.getAcademicYear())) {
+                        applied = true;
+                        break;
+                    }
+                }
+            }
+            applicationStatusMap.put(student.getId(), applied);
+        }
+        mav.addObject("applicationStatusMap", applicationStatusMap);
+
+        // Filter students based on status parameter and current year application
+        List<Student> filteredStudents = new java.util.ArrayList<>();
+        if (status == null || status.isEmpty()) {
+            filteredStudents = allStudents;
+        } else if ("Applied".equalsIgnoreCase(status)) {
+            for (Student student : allStudents) {
+                if (applicationStatusMap.getOrDefault(student.getId(), false)) {
+                    filteredStudents.add(student);
+                }
+            }
+        } else if ("Not Applied".equalsIgnoreCase(status)) {
+            for (Student student : allStudents) {
+                if (!applicationStatusMap.getOrDefault(student.getId(), false)) {
+                    filteredStudents.add(student);
+                }
+            }
+        } else {
+            filteredStudents = allStudents;
+        }
+        mav.addObject("students", filteredStudents);
+
         // Fetch filter options
         mav.addObject("branches", branchService.getAllBranches());
         mav.addObject("semesters", semesterService.getAllSemesters());
         mav.addObject("castes", List.of("General", "OBC", "SC", "ST")); // Static list for castes
+
         return mav;
     }
 
@@ -67,16 +108,17 @@ public class ScholarshipController {
     public ModelAndView getScholarshipDetails(@PathVariable Long id) {
         ModelAndView mav = new ModelAndView("Scholarship/scholarship-details");
         Student student = studentService.getStudentById(id);
-        student.setDocuments(documentsService.getDocumentsByStudentId(id));
+        mav.addObject("document",documentsService.getDocumentsByStudentId(id));
         mav.addObject("student", student);
         mav.addObject("scholarships", scholarshipService.getScholarshipsByStudentId(id)); // Fetch scholarships
         return mav;
     }
 
+
     @GetMapping("/addapplication")
     public ModelAndView addApplication(@RequestParam("studentId") Long studentId){
         ModelAndView mav = new ModelAndView("Scholarship/add-scholarship");
-        mav.addObject("student", studentId);
+        mav.addObject("studentId", studentId);
         return mav;
     }
 
@@ -84,6 +126,16 @@ public class ScholarshipController {
     public ModelAndView saveScholarship(Scholarship scholarship, @RequestParam("studentId") Long studentId){
         Student student = studentService.getStudentById(studentId);
         scholarship.setStudent(student);
+
+        // Check for duplicate applicationNo
+        List<Scholarship> existingApplications = scholarshipService.getScholarshipsByApplicationNo(scholarship.getApplicationNo());
+        if (existingApplications != null && !existingApplications.isEmpty()) {
+            ModelAndView mav = new ModelAndView("Scholarship/add-scholarship");
+            mav.addObject("studentId", studentId);
+            mav.addObject("errorMessage", "Application No. " + scholarship.getApplicationNo() + "has already been submitted.");
+            return mav;
+        }
+
         scholarshipService.saveScholarship(scholarship, studentId);
         return new ModelAndView("redirect:/scholarship/"+ studentId);
     }
@@ -131,5 +183,16 @@ public class ScholarshipController {
         Long studentId = scholarship.getStudent().getId(); // Get the associated student ID
         scholarshipService.deleteScholarship(id); // Delete the scholarship
         return new ModelAndView("redirect:/scholarship/" + studentId); // Redirect to scholarship details page
+    }
+
+    @PostMapping("/updateProfileId")
+    public ModelAndView updateProfileId(@RequestParam("studentId") Long studentId,
+                                        @RequestParam("profileId") String profileId) {
+        Student student = studentService.getStudentById(studentId);
+        if (student != null) {
+            student.setProfileId(profileId);
+            studentService.updateStudent(student);
+        }
+        return new ModelAndView("redirect:/scholarship/" + studentId);
     }
 }

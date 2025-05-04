@@ -1,4 +1,7 @@
 package com.cms.entity;
+
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -6,8 +9,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "tc")
 public class Tc {
@@ -29,6 +37,15 @@ public class Tc {
 
     @Column(name = "diploma_certificate_no")
     private String diplomaCertificateNo;
+
+    @Column(name = "tc_document_submission_date")
+    @Temporal(TemporalType.DATE) // Important: Only date part (not time)
+    private Date tcDocumentSubmissionDate;
+
+    @PrePersist
+    public void prePersist() {
+        this.tcDocumentSubmissionDate = new Date(); // Set current system date
+    }
 
     // Getters and Setters
 
@@ -71,4 +88,6 @@ public class Tc {
     public void setDiplomaCertificateNo(String diplomaCertificateNo) {
         this.diplomaCertificateNo = diplomaCertificateNo;
     }
+
+    
 }

@@ -5,25 +5,6 @@
             <div class="col-md-12 px-md-4" style="margin-top: 50px;">
                 <div class="d-flex justify-content-between">
                     <h4 class="text-left mt-4">Student Details</h4>
-                    <div class="d-flex">
-                        <form action="/documents/add" method="post">
-                            <input type="hidden" name="studentId" value="${student.id}" />
-                            <button type="submit" class="text-left mb-2 mt-3 mx-1 btn btn-primary" ${empty student.documents ? '' : 'disabled'}>
-                                <i class="fas fa-upload mx-2" style="color: #ffffff;"></i>Upload Document
-                                Details
-                            </button>
-                        </form>
-
-                        <form action="/documents/editdocument" method="post">
-                            <c:forEach var="document" items="${student.documents}">
-                                <input type="hidden" name="documentId" value="${document.id}" />
-                            </c:forEach>
-                            <button type="submit" class="text-left mb-2 mt-3 btn btn-primary" ${empty student.documents
-                                ? 'disabled' : '' }>
-                                <i class="fas fa-edit mx-2" style="color: #ffffff;"></i>Edit Documents</button>
-                        </form>
-
-                    </div>
                 </div>
 
                 <!-- Student Details -->
@@ -31,9 +12,18 @@
                     <div class="row mb-2">
                         <div class="col-md-3"><strong>Profile Id:</strong></div>
                         <div class="col-md-3">
-                            <c:forEach var="document" items="${student.documents}">
-                                <c:out value="${document.profileId}" />
-                            </c:forEach>
+                            <c:choose>
+                                <c:when test="${not empty student.profileId}">
+                                    <c:out value="${student.profileId}" />
+                                </c:when>
+                                <c:otherwise>
+                                    <form action="/scholarship/updateProfileId" method="post" class="d-flex">
+                                        <input type="hidden" name="studentId" value="${student.id}" />
+                                        <input type="text" name="profileId" class="form-control form-control-sm me-2" placeholder="Enter Profile Id" required />
+                                        <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                                    </form>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                         <div class="col-md-3"><strong>Roll No.:</strong></div>
                         <div class="col-md-3">
@@ -163,11 +153,11 @@
                         </tbody>
                     </table>
                 </div>
-            </main>
+                </main>
+            </div>
         </div>
-    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        </body>
 
-    </html>
+        </html>

@@ -8,8 +8,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -64,12 +62,4 @@ class DocumentsServiceImplTest {
         verify(documentsRepository, times(1)).deleteById(1L);
     }
 
-    @Test
-    void testGetAllDocuments() {
-        List<Documents> documentsList = new ArrayList<>();
-        when(documentsRepository.findAll()).thenReturn(documentsList);
-        List<Documents> foundDocuments = documentsService.getAllDocuments();
-        assertEquals(documentsList, foundDocuments);
-        verify(documentsRepository, times(1)).findAll();
-    }
 }

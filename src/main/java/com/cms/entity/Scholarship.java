@@ -22,7 +22,7 @@ public class Scholarship implements Serializable {
     @JoinColumn(name = "student_id", nullable = false)
     private Student student;
 
-    @Column(name = "application_no", nullable = false, unique = false)
+    @Column(name = "application_no", nullable = false, unique = true)
     private String applicationNo;
 
     @Column(name = "application_type", length = 255, nullable = false)

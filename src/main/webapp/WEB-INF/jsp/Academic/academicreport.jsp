@@ -151,10 +151,37 @@
       </tbody>
     </table>
 
+    <div>
+        <h5 class="cn-heading pt-2">Passout Details</h5>
+        <table class="table table-bordered">
+            <thead class="table-primary">
+                <tr>
+                    <th class="report-sr">Sr. No.</th>
+                    <th>TC Certificate No.</th>
+                    <th>Migration Certificate No.</th>
+                    <th>Diploma Certificate No.</th>
+                    <th>Submission Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach var="tc" items="${tcList}" varStatus="status">
+                    <tr>
+                        <td><c:out value="${status.index + 1}" /></td>
+                        <td><c:out value="${tc.tcCertificateNo}" /></td>
+                        <td><c:out value="${tc.migrationCertificateNo}" /></td>
+                        <td><c:out value="${tc.diplomaCertificateNo}" /></td>
+                        <td>
+                          <fmt:formatDate value="${tc.tcDocumentSubmissionDate}" pattern="dd/MM/yyyy" />
+                      </td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+    </div>
     <div >
         <form action="/academic/tc/form" method="get">
           <input type="hidden" name="studentId" value="${student.id}" />
-          <button type="submit" class="btn btn-primary" <c:if test="${tcDocumentSubmitted}">disabled</c:if>>Fill Pass Out Details</button>
+          <button type="submit" class="btn btn-primary">Fill Pass Out Details</button>
         </form>
     </div> 
 

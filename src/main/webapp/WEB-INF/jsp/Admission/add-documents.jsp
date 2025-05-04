@@ -1,8 +1,8 @@
-<%@ include file="/static/components/header-scholarship.jsp" %>
+<%@ include file="/static/components/header.jsp" %>
 
         <div class="container mt-5">
             <div class="row justify-content-center">
-                <div class="col-md-8">
+                <div class="col-md-8 mt-5">
                     <div class="card p-4 shadow">
                         <h2 class="text-center mb-4">Document Upload Details</h2>
 
@@ -48,9 +48,6 @@
                                         required>
                                 </div>
                             </div>
-
-                            <!-- Hidden Field for Student ID -->
-                            <input type="hidden" name="studentId" id="studentId" value="${param.studentId}" />
 
                             <button type="submit" class="btn btn-primary w-100">Submit</button>
                         </form>

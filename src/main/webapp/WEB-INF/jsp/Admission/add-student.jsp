@@ -6,6 +6,13 @@
         <div class="card">
             <div class="card-header text-center">Student Details Form</div>
             <div class="card-body">
+
+                <c:if test="${not empty param.message}">
+                    <script>
+                        alert("${param.message}");
+                    </script>
+                </c:if>
+
                 <form action="savestudent" method="post">
                     <div class="row">
                         <div class="col-md-6">

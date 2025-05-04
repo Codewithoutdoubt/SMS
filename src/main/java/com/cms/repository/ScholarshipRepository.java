@@ -16,4 +16,6 @@ public interface ScholarshipRepository extends JpaRepository<Scholarship, Long> 
 
     @Query("SELECT s FROM Scholarship s JOIN s.student st WHERE st.rollNo = :rollNo")
     List<Scholarship> findByStudentRollNo(@Param("rollNo") String rollNo);
+
+    List<Scholarship> findByApplicationNo(String applicationNo);
 }

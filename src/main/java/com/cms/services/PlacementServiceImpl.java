@@ -1,19 +1,19 @@
 package com.cms.services;
 
-import com.cms.entity.Placement;
-import com.cms.repository.PlacementRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
+import com.cms.entity.Placement;
+import com.cms.repository.PlacementRepository;
 
 @Service
 public class PlacementServiceImpl implements PlacementService {
 
     private final PlacementRepository placementRepository;
 
-    @Autowired
+
     public PlacementServiceImpl(PlacementRepository placementRepository) {
         this.placementRepository = placementRepository;
     }
@@ -41,5 +41,10 @@ public class PlacementServiceImpl implements PlacementService {
     @Override
     public List<Placement> getPlacementsByStudentId(Long studentId) {
         return placementRepository.findByStudentId(studentId);
+    }
+
+    @Override
+    public List<Placement> getPlacementsByStudentIdAndCompanyName(Long studentId, String companyName) {
+        return placementRepository.findByStudentIdAndCompanyName(studentId, companyName);
     }
 }

@@ -1,7 +1,7 @@
-<%@ include file="/static/components/header-scholarship.jsp" %>
+<%@ include file="/static/components/header.jsp" %>
     <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
+        <div class="row justify-content-center \">
+            <div class="col-md-8 mt-5">
                 <div class="card p-4 shadow">
                     <h2 class="text-center mb-4">Edit Document Details</h2>
                     <form id="documentForm" method="post" action="/documents/update-document">

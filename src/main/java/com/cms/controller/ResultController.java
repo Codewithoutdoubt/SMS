@@ -1,24 +1,27 @@
 package com.cms.controller;
 
+import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
 import com.cms.entity.Department;
 import com.cms.entity.Result;
-import com.cms.entity.Semester;
+import com.cms.entity.Student;
 import com.cms.services.BranchService;
 import com.cms.services.ResultService;
 import com.cms.services.SemesterService;
 import com.cms.services.StudentService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.List;
-import java.util.Optional;
-import com.cms.entity.Student;
 
 @Controller
 @RequestMapping("/result")
@@ -80,7 +83,7 @@ public class ResultController {
     }
 
     @PostMapping
-    public String addResult(@ModelAttribute Result result) {
+    public String addResult(@ModelAttribute Result result, Model model) {
         Long studentId = null;
         if (result.getStudent() != null) {
             studentId = result.getStudent().getId();
@@ -88,6 +91,18 @@ public class ResultController {
         if (studentId != null) {
             Student managedStudent = studentService.getStudentById(studentId);
             result.setStudent(managedStudent);
+
+            // Check for duplicate result for same student and semester
+            Long semesterId = result.getSemester() != null ? result.getSemester().getId() : null;
+            if (semesterId != null) {
+                var existingResults = resultService.getResultsByStudentIdAndSemesterId(studentId, semesterId);
+                if (existingResults != null && !existingResults.isEmpty()) {
+                    model.addAttribute("errorMessage", "Result for this student and semester already exists.");
+                    model.addAttribute("semesters", semesterService.getAllSemesters());
+                    model.addAttribute("result", result);
+                    return "Result/add-result";
+                }
+            }
         }
         Result savedResult = resultService.saveResult(result);
         return "redirect:/result/" + savedResult.getStudent().getId();
@@ -106,10 +121,26 @@ public class ResultController {
     }
 
     @PostMapping("/update/{id}")
-    public String updateResult(@PathVariable Long id, @ModelAttribute Result result,@RequestParam("studentId") Long studentId) {
+    public String updateResult(@PathVariable Long id, @ModelAttribute Result result, @RequestParam("studentId") Long studentId, Model model) {
         result.setId(id);
         Student managedStudent = studentService.getStudentById(studentId);
         result.setStudent(managedStudent);
+
+        // Check for duplicate result for same student and semester excluding current result
+        Long semesterId = result.getSemester() != null ? result.getSemester().getId() : null;
+        if (semesterId != null) {
+            var existingResults = resultService.getResultsByStudentIdAndSemesterId(studentId, semesterId);
+            if (existingResults != null && !existingResults.isEmpty()) {
+                boolean hasOther = existingResults.stream().anyMatch(r -> !r.getId().equals(id));
+                if (hasOther) {
+                    model.addAttribute("errorMessage", "Result for this student and semester already exists.");
+                    model.addAttribute("semesters", semesterService.getAllSemesters());
+                    model.addAttribute("result", result);
+                    return "Result/edit-result";
+                }
+            }
+        }
+
         resultService.saveResult(result);
         return "redirect:/result/" + studentId ;
     }

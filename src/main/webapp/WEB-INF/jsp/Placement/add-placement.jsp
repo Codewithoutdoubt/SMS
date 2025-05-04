@@ -4,6 +4,11 @@
     <div class="container mt-5 d-flex justify-content-center">
         <div class="card shadow p-4" style="max-width: 700px; width: 100%; margin-top: 50px;">
             <h2 class="mb-4 text-center">Placement Form</h2>
+            <c:if test="${not empty errorMessage}">
+                        <div class="alert alert-danger" role="alert">
+                            ${errorMessage}
+                        </div>
+                    </c:if>
             <hr>
             <form action="/placement" method="post">
                 <input type="hidden" class="form-control" name="studentId" value="${students.id}" readonly>

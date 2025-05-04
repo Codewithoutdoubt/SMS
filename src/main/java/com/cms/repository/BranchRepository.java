@@ -8,6 +8,7 @@ import java.util.List;
 
 @Repository
 public interface BranchRepository extends JpaRepository<Branch, Long> {
+    @SuppressWarnings("null")
     List<Branch> findAll();
     java.util.Optional<Branch> findByCode(String code);
 }

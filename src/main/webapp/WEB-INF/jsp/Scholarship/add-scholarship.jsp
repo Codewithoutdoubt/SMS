@@ -4,8 +4,13 @@
             <div class="col-md-8">
                 <div class="card p-4 shadow">
                     <h2 class="text-center mb-4">Submit Application Details</h2>
+                    <c:if test="${not empty errorMessage}">
+                        <div class="alert alert-danger" role="alert">
+                            ${errorMessage}
+                        </div>
+                    </c:if>
                     <form id="applicationForm" action="save" method="post">
-                        <input type="hidden" name="studentId"  value="${student}">
+                        <input type="hidden" name="studentId"  value="${studentId}">
                         <div class="row mb-3">
                             <label for="appNo" class="col-sm-4 col-form-label">Application No.</label>
                             <div class="col-sm-8">

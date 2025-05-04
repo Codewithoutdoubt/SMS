@@ -24,9 +24,6 @@ public class Documents {
     @JoinColumn(name = "student_id", unique = true, nullable = false) // Ensures uniqueness
     private Student student;
 
-    @Column(name="profile_id")
-    private String profileId;
-
     @Column(name = "aadhar_no")
     private String aadharNo;
 

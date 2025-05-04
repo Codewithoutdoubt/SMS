@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cms.entity.Department;
+import com.cms.entity.Documents;
 import com.cms.entity.Student;
 import com.cms.services.BranchService;
+import com.cms.services.DocumentsService;
 import com.cms.services.SemesterService;
 import com.cms.services.StudentService;
 
@@ -24,6 +26,8 @@ public class StudentController {
     BranchService branchService;
     @Autowired
     SemesterService semesterService;
+    @Autowired
+    DocumentsService documentsService;
 
     @ModelAttribute("department")
     public Department populatedCommonObject(){
@@ -50,10 +54,10 @@ public class StudentController {
 
     @PostMapping("/savestudent")
     public ModelAndView addStudent(Student student) {
-        ModelAndView mav = new ModelAndView("Admission/add-student");
+
         // Check if student with same roll number already exists
         if (studentServcie.studentExists(student.getRollNo())) {
-            mav = new ModelAndView("Admission/student");
+            ModelAndView mav = new ModelAndView("Admission/student");
             mav.addObject("students", studentServcie.getAllStudents());
             mav.addObject("branches", branchService.getAllBranches()); // Add branches for filter
             mav.addObject("semesters", semesterService.getAllSemesters());
@@ -61,7 +65,7 @@ public class StudentController {
             return mav;
         }
         studentServcie.addStudent(student);
-        mav = new ModelAndView("redirect:/admission");
+        ModelAndView mav = new ModelAndView("redirect:/documents/add/"+student.getId());
         return mav;
     }
 
@@ -86,19 +90,30 @@ public class StudentController {
             mav.addObject("error", "Student with the same roll number already exists.");
             return mav;
         }
-        mav = new ModelAndView("Admission/student");
         student.setBranch(branchService.getBranchById(branchId).orElse(null));
         student.setSemester(semesterService.getSemesterById(semesterId));
+
+        // Fetch existing student to preserve documents
+        Student existingStudent = studentServcie.getStudentById(student.getId());
+        if (existingStudent != null) {
+            student.setDocuments(existingStudent.getDocuments());
+        }
+
         studentServcie.updateStudent(student);
-        mav.addObject("students", studentServcie.getAllStudents());
-        mav.addObject("branches", branchService.getAllBranches());
-        mav.addObject("semesters", semesterService.getAllSemesters());
+        Documents document = documentsService.getDocumentsByStudentId(student.getId());
+
+        if (document != null) {
+            mav = new ModelAndView("redirect:/documents/editdocument?documentId=" + document.getId());
+        } else {
+            mav = new ModelAndView("redirect:/documents/add/" + student.getId());
+        }
         return mav;
     }
 
+
     @GetMapping("/deletestudent")
     public String deleteStudent(@RequestParam Long id) {
-        studentServcie.deleteStudent(id);
+        studentServcie.deleteStudent(id);   
         return "redirect:/admission";
     }
     // Removed the conflicting getAllSemesters method

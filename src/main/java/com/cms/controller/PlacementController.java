@@ -123,9 +123,22 @@ public class PlacementController {
     }
 
     @PostMapping
-    public String addPlacement(@ModelAttribute Placement placement, @RequestParam("studentId") Long studentId) {
+    public String addPlacement(@ModelAttribute Placement placement, @RequestParam("studentId") Long studentId, Model model) {
         Student student = studentService.getStudentById(studentId);
         placement.setStudent(student);
+
+        // Check for duplicate placement for same student and company
+        String companyName = placement.getCompanyName();
+        if (companyName != null && !companyName.isEmpty()) {
+            var existingPlacements = placementService.getPlacementsByStudentIdAndCompanyName(studentId, companyName);
+            if (existingPlacements != null && !existingPlacements.isEmpty()) {
+                model.addAttribute("errorMessage", "Placement for this student and company already exists.");
+                model.addAttribute("students", student);
+                model.addAttribute("placement", placement);
+                return "Placement/add-placement";
+            }
+        }
+
         placementService.savePlacement(placement);
         return "redirect:/placement/" + studentId;
     }
@@ -142,10 +155,25 @@ public class PlacementController {
     }
 
     @PostMapping("/update/{id}")
-    public String updatePlacement(@PathVariable Long id, @ModelAttribute Placement placement, @RequestParam("studentId") Long studentId) {
+    public String updatePlacement(@PathVariable Long id, @ModelAttribute Placement placement, @RequestParam("studentId") Long studentId, Model model) {
         placement.setId(id);
         Student student = studentService.getStudentById(studentId);
         placement.setStudent(student);
+
+        // Check for duplicate placement for same student and company excluding current placement
+        String companyName = placement.getCompanyName();
+        if (companyName != null && !companyName.isEmpty()) {
+            var existingPlacements = placementService.getPlacementsByStudentIdAndCompanyName(studentId, companyName);
+            if (existingPlacements != null && !existingPlacements.isEmpty()) {
+                boolean hasOther = existingPlacements.stream().anyMatch(p -> !p.getId().equals(id));
+                if (hasOther) {
+                    model.addAttribute("errorMessage", "Placement for this student and company already exists.");
+                    model.addAttribute("placement", placement);
+                    return "Placement/edit-placement";
+                }
+            }
+        }
+
         placementService.savePlacement(placement);
         return "redirect:/placement/" + studentId;
     }

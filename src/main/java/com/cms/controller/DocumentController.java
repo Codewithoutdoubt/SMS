@@ -1,11 +1,10 @@
 package com.cms.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +16,6 @@ import com.cms.entity.Documents;
 import com.cms.entity.Student; // Import Student entity
 import com.cms.services.DocumentsService;
 import com.cms.services.StudentService; // Import StudentService
-
 
 @RestController
 @RequestMapping("/documents")
@@ -34,53 +32,54 @@ public class DocumentController {
         Documents createdDocument = documentsService.createDocument(document);
         return ResponseEntity.ok(createdDocument);
     }
-    
 
-        @PostMapping("/add")
-        public ModelAndView postMethodName(@RequestParam("studentId") Long studentId) {
-            ModelAndView mav = new ModelAndView("Scholarship/add-documents");
-            mav.addObject("students",studentService.getStudentById(studentId));
-            return mav;
-        }
-
-    @PostMapping("/editdocument")
-    public ModelAndView editDocument(@RequestParam("documentId") Long documentId) {
-    // Fetch the document details using the documentId
-    ModelAndView mav = new ModelAndView("Scholarship/edit-document-details");
-    Documents document = documentsService.getDocumentById(documentId);
-    mav.addObject("document",document); 
-    return mav;  
+    @GetMapping("/add/{studentId}")
+    public ModelAndView showAddDocumentForm(@PathVariable Long studentId) {
+        ModelAndView mav = new ModelAndView("Admission/add-documents");
+        mav.addObject("students", studentService.getStudentById(studentId));
+        return mav;
     }
-    
 
+    
     @PostMapping("/update-document")
-    public ModelAndView updateDoc(@RequestParam("documentId") Long documentId, 
-                              @RequestParam("studentId") Long studentId, 
-                              @ModelAttribute Documents updatedDocument) {
-        documentsService.updateDocument(documentId,updatedDocument);
-    return new ModelAndView("redirect:/scholarship/" + studentId);
-}
+    public ModelAndView updateDoc(@RequestParam("documentId") Long documentId,
+            @RequestParam("studentId") Long studentId,
+            @ModelAttribute Documents updatedDocument) {
+        documentsService.updateDocument(documentId, updatedDocument);
+        return new ModelAndView("redirect:/Admission/");
+    }
+
+    @GetMapping("/editdocument")
+    public ModelAndView editDocument(@RequestParam("documentId") Long documentId) {
+        Documents document = documentsService.getDocumentById(documentId);
+        ModelAndView mav = new ModelAndView("Admission/edit-document-details");
+        mav.addObject("document", document);
+        return mav;
+    }
 
 
     @PostMapping("/save")
     public ModelAndView saveDocument(Documents document, @RequestParam("studentId") Long studentId) {
-            Student student = studentService.getStudentById(studentId);
-            document.setStudent(student);
-            try {
-                documentsService.createDocument(document); 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            ModelAndView mav = new ModelAndView("Scholarship/scholarship-details");
-            mav.addObject("student",studentService.getStudentById(studentId));
-            return mav;
+        Student student = studentService.getStudentById(studentId);
+        document.setStudent(student);
+        try {
+            documentsService.createDocument(document);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        // Redirect back to add documents page for the same student after saving document
+        ModelAndView mav = new ModelAndView("redirect:/addstudent");
+        mav.addObject("message", "Student details saved successfully");
+        return mav;
+    }
 
-
-    @GetMapping
-    public ResponseEntity<List<Documents>> getAllDocuments() {
-        List<Documents> documents = documentsService.getAllDocuments();
-        return ResponseEntity.ok(documents);
+    @GetMapping("/student/{studentId}")
+    public ModelAndView getDocumentsByStudent(@PathVariable Long studentId) {
+        ModelAndView mav = new ModelAndView("Admission/student-documents");
+        Documents documents = documentsService.getDocumentsByStudentId(studentId);
+        mav.addObject("documents", documents);
+        mav.addObject("studentId", studentId);
+        return mav;
     }
 
 }

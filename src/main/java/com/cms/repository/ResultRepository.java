@@ -18,4 +18,6 @@ public interface ResultRepository extends JpaRepository<Result, Long> {
 
     @Query("SELECT r FROM Result r WHERE r.student.id = :studentId ORDER BY r.semester.id ASC")
     List<Result> findByStudentIdOrderBySemesterIdAsc(@Param("studentId") Long studentId);
+
+    List<Result> findByStudentIdAndSemesterId(Long studentId, Long semesterId);
 }

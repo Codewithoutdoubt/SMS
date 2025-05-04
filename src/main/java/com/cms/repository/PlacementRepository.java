@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface PlacementRepository extends JpaRepository<Placement, Long> {
     List<Placement> findByStudentId(Long studentId);
+
+    List<Placement> findByStudentIdAndCompanyName(Long studentId, String companyName);
 }

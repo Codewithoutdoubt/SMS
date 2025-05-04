@@ -1,5 +1,6 @@
 package com.cms.controller;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,10 +10,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cms.entity.Department;
+import com.cms.entity.Student;
+import com.cms.entity.Tc;
 import com.cms.services.BranchService;
+import com.cms.services.SemesterService;
 import com.cms.services.StudentService;
 import com.cms.services.UserService;
-import com.cms.services.SemesterService;
 
 @Controller
 public class AcademicController {
@@ -45,7 +48,7 @@ public class AcademicController {
     private com.cms.services.PlacementService placementService;
 
     @ModelAttribute("department")
-    public Department populatedCommonObject(){
+    public Department populatedCommonObject() {
         Department obj = new Department();
         obj.setName("Academic Panel");
         return obj;
@@ -64,14 +67,16 @@ public class AcademicController {
     @GetMapping("/academicreport/{id}")
     public ModelAndView getAcademicReport(@PathVariable Long id) {
         ModelAndView mav = new ModelAndView("Academic/academicreport");
-        mav.addObject("student", studentService.getStudentById(id));
+        com.cms.entity.Student student = studentService.getStudentById(id);
+        mav.addObject("student", student);
         mav.addObject("fees", feeService.getFeesByStudentId(id));
         mav.addObject("results", resultService.getResultsByStudentId(id));
         mav.addObject("scholarships", scholarshipService.getScholarshipsByStudentId(id));
         mav.addObject("documents", documentsService.getDocumentsByStudentId(id));
         mav.addObject("placements", placementService.getPlacementsByStudentId(id));
-        boolean tcDocumentSubmitted = tcService.getTcByStudentId(id).isPresent();
+        boolean tcDocumentSubmitted = !tcService.getTcByStudentId(id).isEmpty();
         mav.addObject("tcDocumentSubmitted", tcDocumentSubmitted);
+        mav.addObject("tcList", tcService.getTcByStudentRollNo(student.getRollNo()));
         return mav;
     }
 
@@ -79,10 +84,11 @@ public class AcademicController {
     private com.cms.services.TcService tcService;
 
     @PostMapping("/academic/tc/submit")
-    public ModelAndView submitTcDetails(@org.springframework.web.bind.annotation.ModelAttribute com.cms.entity.Tc tc) {
+    public ModelAndView submitTcDetails(@ModelAttribute Tc tc) {
         Long studentId = tc.getStudent().getId();
-        com.cms.entity.Student student = studentService.getStudentById(studentId);
+        Student student = studentService.getStudentById(studentId);
         tc.setStudent(student);
+        // If tcDocumentSubmissionDate is null, set it to current date
         tcService.saveTc(tc);
         return new ModelAndView("redirect:/academic");
     }
@@ -96,15 +102,17 @@ public class AcademicController {
 
     @GetMapping("/academic/tc/edit")
     public ModelAndView editTcForm(@org.springframework.web.bind.annotation.RequestParam Long studentId) {
-        ModelAndView mav = new ModelAndView("Academic/tcdocumentform");
-        com.cms.entity.Tc tc = tcService.getTcByStudentId(studentId).orElse(new com.cms.entity.Tc());
+        ModelAndView mav = new ModelAndView("Academic/edit-tcdocumentform");
+        List<Tc> tcList = tcService.getTcByStudentId(studentId);
+        com.cms.entity.Tc tc = tcList.isEmpty() ? new com.cms.entity.Tc() : tcList.get(0);
         mav.addObject("tc", tc);
         mav.addObject("student", studentService.getStudentById(studentId));
         return mav;
     }
 
     @GetMapping("/academic/passoutstudents")
-    public ModelAndView passoutStudentList(@org.springframework.web.bind.annotation.RequestParam(required = false) String rollNo) {
+    public ModelAndView passoutStudentList(
+            @org.springframework.web.bind.annotation.RequestParam(required = false) String rollNo) {
         ModelAndView mav = new ModelAndView("Academic/passoutstudentlist");
         if (rollNo != null && !rollNo.isEmpty()) {
             mav.addObject("tcList", tcService.getTcByStudentRollNo(rollNo));

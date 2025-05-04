@@ -161,19 +161,18 @@
         </tr>
       </thead>
       <tbody>
-        <c:forEach var="document" items="${documents}">
           <tr>
             <td>1</td>
             <td>Aadhar Number</td>
             <td>
-              <c:out value="${document.aadharNo}" />
+              <c:out value="${documents.aadharNo}" />
             </td>
           </tr>
           <tr>
             <td>2</td>
             <td>Caste Certificate No.</td>
             <td>
-              <c:out value="${document.casteCertificateNo}" />
+              <c:out value="${documents.casteCertificateNo}" />
             </td>
           </tr>
 
@@ -181,17 +180,16 @@
             <td>3</td>
             <td>Income Certificate Number</td>
             <td>
-              <c:out value="${document.incomeCertificateNo}" />
+              <c:out value="${documents.incomeCertificateNo}" />
             </td>
           </tr>
           <tr>
             <td>4</td>
             <td>Residence Certificate Number</td>
             <td>
-              <c:out value="${document.residenceCertificateNo}" />
+              <c:out value="${documents.residenceCertificateNo}" />
             </td>
           </tr>
-        </c:forEach>
       </tbody>
     </table>
 

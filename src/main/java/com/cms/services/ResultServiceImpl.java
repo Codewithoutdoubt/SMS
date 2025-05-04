@@ -53,5 +53,8 @@ public class ResultServiceImpl implements ResultService {
         return resultRepository.findStudentByResultId(id);
     }
 
-
+    @Override
+    public List<Result> getResultsByStudentIdAndSemesterId(Long studentId, Long semesterId) {
+        return resultRepository.findByStudentIdAndSemesterId(studentId, semesterId);
+    }
 }

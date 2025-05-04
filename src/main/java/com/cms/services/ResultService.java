@@ -15,4 +15,6 @@ public interface ResultService {
 
     List<Result> getResultsByStudentIdOrderBySemesterIdAsc(Long studentId);
     Student getStudentByResultId(Long id);
+
+    List<Result> getResultsByStudentIdAndSemesterId(Long studentId, Long semesterId);
 }

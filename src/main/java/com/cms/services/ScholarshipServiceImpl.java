@@ -46,6 +46,11 @@ public class ScholarshipServiceImpl implements ScholarshipService {
     }
 
     @Override
+    public List<Scholarship> getScholarshipsByApplicationNo(String applicationNo) {
+        return scholarshipRepository.findByApplicationNo(applicationNo);
+    }
+
+    @Override
     public Scholarship updateScholarship(Scholarship scholarship) {
         if (scholarship == null || scholarship.getScholarshipId() == null) {
             return null;
