@@ -18,7 +18,6 @@ import com.cms.services.FeeService;
 import com.cms.services.PlacementService;
 import com.cms.services.ResultService;
 import com.cms.services.SemesterService;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
