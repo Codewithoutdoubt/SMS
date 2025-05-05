@@ -69,11 +69,16 @@ public class ScholarshipServiceImpl implements ScholarshipService {
     }
 
     @Override
+    public void deleteScholarshipsByStudentId(Long studentId) {
+        List<Scholarship> scholarships = scholarshipRepository.findByStudentId(studentId);
+        if (scholarships != null && !scholarships.isEmpty()) {
+            scholarshipRepository.deleteAll(scholarships);
+        }
+    }
+
+    @Override
     public List<Scholarship> filterScholarships(String criteria) {
-        List<Scholarship> scholarships = scholarshipRepository.findAll();
-        return scholarships.stream()
-            .filter(scholarship -> scholarship.getApplicationType().contains(criteria) || 
-                                  scholarship.getApplicationStatus().contains(criteria))
-            .collect(Collectors.toList());
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'filterScholarships'");
     }
 }

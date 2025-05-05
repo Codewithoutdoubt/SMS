@@ -47,4 +47,12 @@ public class PlacementServiceImpl implements PlacementService {
     public List<Placement> getPlacementsByStudentIdAndCompanyName(Long studentId, String companyName) {
         return placementRepository.findByStudentIdAndCompanyName(studentId, companyName);
     }
+
+    @Override
+    public void deletePlacementsByStudentId(Long studentId) {
+        List<Placement> placements = placementRepository.findByStudentId(studentId);
+        if (placements != null && !placements.isEmpty()) {
+            placementRepository.deleteAll(placements);
+        }
+    }
 }

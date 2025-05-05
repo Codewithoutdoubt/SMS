@@ -11,4 +11,6 @@ public interface FeeService {
     List<Fee> getAllFees();
     void deleteFee(Long id);
     List<Fee> getFeesByStudentId(Long studentId);
+
+    void deleteFeesByStudentId(Long studentId);
 }

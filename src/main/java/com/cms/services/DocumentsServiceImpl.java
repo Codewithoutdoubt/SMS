@@ -44,5 +44,13 @@ public class DocumentsServiceImpl implements DocumentsService {
     public Documents getDocumentsByStudentId(Long id) {
         return documentsRepository.findByStudentId(id);
     }
+
+    @Override
+    public void deleteDocumentsByStudentId(Long studentId) {
+        Documents document = documentsRepository.findByStudentId(studentId);
+        if (document != null) {
+            documentsRepository.delete(document);
+        }
+    }
 }
    

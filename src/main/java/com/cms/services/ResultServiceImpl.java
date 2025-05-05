@@ -57,4 +57,12 @@ public class ResultServiceImpl implements ResultService {
     public List<Result> getResultsByStudentIdAndSemesterId(Long studentId, Long semesterId) {
         return resultRepository.findByStudentIdAndSemesterId(studentId, semesterId);
     }
+
+    @Override
+    public void deleteResultsByStudentId(Long studentId) {
+        List<Result> results = resultRepository.findByStudentId(studentId);
+        if (results != null && !results.isEmpty()) {
+            resultRepository.deleteAll(results);
+        }
+    }
 }

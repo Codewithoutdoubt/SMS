@@ -32,4 +32,12 @@ public class TcServiceImpl implements TcService {
     public List<Tc> getTcByStudentRollNo(String rollNo) {
         return tcRepository.findByStudentRollNo(rollNo);
     }
+
+    @Override
+    public void deleteTcByStudentId(Long studentId) {
+        List<Tc> tcList = tcRepository.findByStudentId(studentId);
+        if (tcList != null && !tcList.isEmpty()) {
+            tcRepository.deleteAll(tcList);
+        }
+    }
 }

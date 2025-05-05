@@ -8,4 +8,6 @@ public interface DocumentsService {
     Documents updateDocument(Long id, Documents document);
     void deleteDocument(Long id);
     Documents getDocumentsByStudentId(Long id);
+
+    void deleteDocumentsByStudentId(Long studentId);
 }

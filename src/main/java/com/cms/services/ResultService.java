@@ -17,4 +17,6 @@ public interface ResultService {
     Student getStudentByResultId(Long id);
 
     List<Result> getResultsByStudentIdAndSemesterId(Long studentId, Long semesterId);
+
+    void deleteResultsByStudentId(Long studentId);
 }

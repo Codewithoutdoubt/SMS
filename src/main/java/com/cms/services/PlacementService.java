@@ -13,4 +13,6 @@ public interface PlacementService {
     List<Placement> getPlacementsByStudentId(Long studentId);
 
     List<Placement> getPlacementsByStudentIdAndCompanyName(Long studentId, String companyName);
+
+    void deletePlacementsByStudentId(Long studentId);
 }

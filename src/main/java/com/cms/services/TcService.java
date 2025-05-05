@@ -8,4 +8,6 @@ public interface TcService {
     Tc saveTc(Tc tc);
     List<Tc> getTcByStudentId(Long studentId);
     List<Tc> getTcByStudentRollNo(String rollNo);
+
+    void deleteTcByStudentId(Long studentId);
 }

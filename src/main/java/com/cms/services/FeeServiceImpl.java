@@ -42,4 +42,12 @@ public class FeeServiceImpl implements FeeService {
     public List<Fee> getFeesByStudentId(Long studentId) {
         return feeRepository.findByStudentId(studentId);
     }
+
+    @Override
+    public void deleteFeesByStudentId(Long studentId) {
+        List<Fee> fees = feeRepository.findByStudentId(studentId);
+        if (fees != null && !fees.isEmpty()) {
+            feeRepository.deleteAll(fees);
+        }
+    }
 }

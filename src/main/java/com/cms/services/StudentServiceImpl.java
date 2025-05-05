@@ -17,6 +17,25 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudentRepository studentRepository;
 
+    @Autowired
+    private TcService tcService;
+
+    @Autowired
+    private DocumentsService documentsService;
+
+    @Autowired
+    private ScholarshipService scholarshipService;
+
+    @Autowired
+    private FeeService feeService;
+
+    @Autowired
+    private ResultService resultService;
+
+    @Autowired
+    private PlacementService placementService;
+
+
     @Override
     public Student addStudent(Student student) {
         return studentRepository.save(student);
@@ -37,6 +56,21 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public void deleteStudent(Long id) {
+        // Delete dependent Tc records first
+        tcService.deleteTcByStudentId(id);
+        // Delete dependent Documents
+        documentsService.deleteDocumentsByStudentId(id);
+        // Delete dependent Scholarships
+        scholarshipService.deleteScholarshipsByStudentId(id);
+        // Delete dependent Fees
+        feeService.deleteFeesByStudentId(id);
+        // Delete dependent Results
+        resultService.deleteResultsByStudentId(id);
+
+        // Delete dependent Placements
+        placementService.deletePlacementsByStudentId(id);
+
+        // Then delete the student
         studentRepository.deleteById(id);
     }
 

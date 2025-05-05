@@ -12,7 +12,12 @@
     <div class="row mb-4">
       <!-- Profile -->
       <div class="col-md-4 col-lg-6">
+        <div class="d-flex justify-content-between">
         <h5 class="fw-bold cn-heading">Student Profile</h5>
+        <a href="/delete-student/${student.id}" onclick="return confirm('Are you sure you want to delete this student?');">
+        <button type="button" class="btn btn-danger mt-2">Delete</button>
+      </a>
+      </div>
         <div class="card profile-card">
           <div class="card-body">
             <div class="details scard ">

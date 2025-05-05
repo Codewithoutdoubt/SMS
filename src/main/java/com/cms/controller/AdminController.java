@@ -18,6 +18,8 @@ import com.cms.services.FeeService;
 import com.cms.services.PlacementService;
 import com.cms.services.ResultService;
 import com.cms.services.SemesterService;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 public class AdminController {
@@ -83,6 +85,12 @@ public class AdminController {
         mav.addObject("documents", documentsService.getDocumentsByStudentId(id));
         mav.addObject("placements", placementService.getPlacementsByStudentId(id));
         return mav;
+    }
+
+    @GetMapping("/delete-student/{studentId}")
+    public String deleteStudent(@PathVariable Long studentId) {
+        studentService.deleteStudent(studentId);
+        return "redirect:/admin";
     }
 
 

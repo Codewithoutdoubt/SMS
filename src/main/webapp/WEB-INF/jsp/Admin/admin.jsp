@@ -34,9 +34,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach var="student" items="${students}">
+                                    <c:forEach var="student" items="${students}" varStatus="status">
                                         <tr>
-                                            <td>${student.id}</td>
+                                            <td>${status.index + 1}</td>
                                             <td>${student.rollNo}</td>
                                             <td>${student.studentName}</td>
                                             <td>${student.mobileNo}</td>
@@ -44,7 +44,7 @@
                                             <td>${student.semester.name}</td>
                                             <td>${student.admissionYear}</td>
                                             <td>
-                                                <a href="/report/${student.id}" class="btn btn-danger btn-sm">View
+                                                <a href="/report/${student.id}" onclick="confirm" class="btn btn-danger btn-sm">View
                                                     Report</a>
                                             </td>
                                         </tr>

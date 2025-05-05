@@ -15,4 +15,6 @@ public interface ScholarshipService {
     List<Scholarship> filterScholarships(String criteria); // New filtering method
 
     List<Scholarship> getScholarshipsByApplicationNo(String applicationNo);
+
+    void deleteScholarshipsByStudentId(Long studentId);
 }
