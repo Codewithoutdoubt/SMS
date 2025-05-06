@@ -10,13 +10,6 @@
                         <form action="/documents/save" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="studentId" value="${students.id}" />
                             <div class="row mb-3">
-                                <label for="aadharNo" class="col-sm-4 col-form-label">Profile id :</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="aadharNo" name="profileId"
-                                        placeholder="Enter Profile Id" required>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
                                 <label for="aadharNo" class="col-sm-4 col-form-label">Aadhar No.</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" id="aadharNo" maxlength="12" name="aadharNo"

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import org.springframework.data.domain.Sort;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,7 +46,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<Student> getAllStudents() {
         List<Student> students = new ArrayList<>();
-        studentRepository.findAll().forEach(students::add);
+        studentRepository.findAll(Sort.by(Sort.Direction.DESC, "id")).forEach(students::add);
         return students;
     }
 

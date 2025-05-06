@@ -46,7 +46,7 @@ public class DocumentController {
             @RequestParam("studentId") Long studentId,
             @ModelAttribute Documents updatedDocument) {
         documentsService.updateDocument(documentId, updatedDocument);
-        return new ModelAndView("redirect:/Admission/");
+        return new ModelAndView("redirect:/admission");
     }
 
     @GetMapping("/editdocument")

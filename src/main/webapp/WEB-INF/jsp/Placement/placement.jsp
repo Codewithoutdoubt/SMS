@@ -29,9 +29,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="sp" items="${studentPlacements}">
+                        <c:forEach var="sp" items="${studentPlacements}" varStatus="status">
                             <tr>
-                                <td>${sp.student.id}</td>
+                                <td>${status.index + 1}</td>
                                 <td>${sp.student.rollNo}</td>
                                 <td>${sp.student.studentName}</td>
                                 <td>${sp.student.mobileNo}</td>

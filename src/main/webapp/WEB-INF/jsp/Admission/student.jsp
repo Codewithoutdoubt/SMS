@@ -38,9 +38,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="student" items="${students}">
+                        <c:forEach var="student" items="${students}" varStatus="status">
                             <tr style="padding: 0px !important;">
-                                <td>${student.id}</td>
+                                <td>${status.index+1}</td>
                                 <td>${student.rollNo}</td>
                                 <td>${student.studentName}</td>
                                 <td>${student.mobileNo}</td>

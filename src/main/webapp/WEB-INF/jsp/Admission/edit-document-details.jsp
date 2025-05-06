@@ -8,13 +8,6 @@
                         <input type="hidden" name="documentId" value="${document.id}">
                         <input type="hidden" name="studentId" value="${document.student.id}">
                         <div class="row mb-3">
-                            <label for="profileId" class="col-sm-4 col-form-label">Profile Id</label>
-                            <div class="col-sm-8">
-                                <input type="text" value="${document.profileId}" class="form-control" name="profileId"
-                                    placeholder="Enter Profile Id" required>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
                             <label for="aadharNo" class="col-sm-4 col-form-label">Aadhar No.</label>
                             <div class="col-sm-8">
                                 <input type="text" value="${document.aadharNo}" maxlength="12" class="form-control" name="aadharNo"

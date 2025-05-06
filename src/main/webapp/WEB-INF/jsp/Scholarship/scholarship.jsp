@@ -10,7 +10,7 @@
                 <h4 class="text-left pt-0">Filter Data</h4>
                 <%@ include file="/static/components/department-filter.jsp" %>
                     <button type="reset" class="btn btn-primary h-75 w-100 ftr mt-3"><a class="p-0 text-center d-block"
-                            href="/admission">Reset</a></button>
+                            href="/scholarship">Reset</a></button>
             </form>
         </div>
     </div>
@@ -48,9 +48,9 @@
                     </tr>
                 </thead>
                 <tbody id="student-table">
-                    <c:forEach var="student" items="${students}">
+                    <c:forEach var="student" items="${students}" varStatus="status">
                         <tr>
-                            <td>${student.id}</td>
+                            <td>${status.index + 1}</td>
                             <td>${student.rollNo}</td>
                             <td>${student.studentName}</td>
                             <td>${student.mobileNo}</td>
@@ -69,7 +69,7 @@
                             </td>
                             <td>
                                 <button class="btn btn-danger btn-sm">
-                                    <a href="scholarship/${student.id}" class="text-white">View</a>
+                                    <a href="/scholarship/${student.id}" class="text-white">View</a>
                                 </button>
                             </td>
                         </tr>
