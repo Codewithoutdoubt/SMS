@@ -45,6 +45,16 @@ public class StudentController {
         return mav;
     }
 
+    @GetMapping("/student-details")
+    public ModelAndView studentDetails(@RequestParam("studentId") Long studentId) {
+        ModelAndView mav = new ModelAndView("Admission/student-details");
+        Student student = studentServcie.getStudentById(studentId);
+        Documents documents = documentsService.getDocumentsByStudentId(studentId);
+        mav.addObject("student", student);
+        mav.addObject("documents", documents);
+        return mav;
+    }
+
     @GetMapping("/addstudent")
     public String showStudentForm(Model model) {
         model.addAttribute("branches", branchService.getAllBranches());

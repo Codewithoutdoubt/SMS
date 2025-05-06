@@ -48,9 +48,9 @@
                                 <td>${student.semester.name}</td>
                                 <td>${student.admissionYear}</td>
                                 <td class="d-flex mb-1">
-                                    <form action="/editstudent?id=${student.id}" method="get">
+                                    <form action="/student-details?id=${student.id}" method="get">
                                         <input type="hidden" name="studentId" value="${student.id}">
-                                        <button type="submit" class="btn btn-primary btn-sm me-2">Edit</button>
+                                        <button type="submit" class="btn btn-primary btn-sm me-2">View</button>
                                     </form>
                                 </td>
                             </tr>

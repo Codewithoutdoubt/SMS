@@ -222,3 +222,85 @@ select {
 hr{
     border: solid 2px black !important;
 }
+
+
+.container-sd {
+  max-width: 1000px;
+  margin-top: 40px !important;
+  margin: auto;
+
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 30px;
+}
+
+.student-info {
+  margin-bottom: 30px;
+}
+
+.student-info h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.info-item {
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  font-size: 18px;
+}
+
+.info-label {
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 4px;
+}
+
+.info-value {
+  color: #333;
+}
+
+.document-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.document-table th, .document-table td {
+  border: 1px solid #ddd;
+  padding: 10px 15px;
+  text-align: left;
+}
+
+.document-table th {
+  background-color: #1976d2;
+  color: #fff;
+}
+
+.document-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.document-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+@media (max-width: 768px) {
+  .info-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+}

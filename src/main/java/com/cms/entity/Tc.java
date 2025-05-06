@@ -89,5 +89,11 @@ public class Tc {
         this.diplomaCertificateNo = diplomaCertificateNo;
     }
 
-    
+    public Date getTcDocumentSubmissionDate() {
+        return tcDocumentSubmissionDate;
+    }
+
+    public void setTcDocumentSubmissionDate(Date tcDocumentSubmissionDate) {
+        this.tcDocumentSubmissionDate = tcDocumentSubmissionDate;
+    }
 }

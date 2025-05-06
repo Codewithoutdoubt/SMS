@@ -88,7 +88,8 @@ public class AcademicController {
         Long studentId = tc.getStudent().getId();
         Student student = studentService.getStudentById(studentId);
         tc.setStudent(student);
-        // If tcDocumentSubmissionDate is null, set it to current date
+        // Set tcDocumentSubmissionDate to current date automatically
+        tc.setTcDocumentSubmissionDate(new java.util.Date());
         tcService.saveTc(tc);
         return new ModelAndView("redirect:/academic");
     }

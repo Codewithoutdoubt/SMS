@@ -64,9 +64,10 @@
             <label for="diplomaCertificateNo" class="form-label">Diploma Certificate Number</label>
             <input type="text" class="form-control" id="diplomaCertificateNo" name="diplomaCertificateNo" placeholder="Enter Diploma Certificate Number" value="${tc.diplomaCertificateNo}" required>
         </div>
-        <button type="submit" class="btn btn-primary">Submit TC Details</button>
+    <button type="submit" class="btn btn-primary">Submit TC Details</button>
+        </div>
     </form>
 </div>
 
-</body>
+</body> 
 </html>
