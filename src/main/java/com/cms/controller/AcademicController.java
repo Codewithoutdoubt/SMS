@@ -102,7 +102,7 @@ public class AcademicController {
 
     @GetMapping("/academic/tc/edit")
     public ModelAndView editTcForm(@org.springframework.web.bind.annotation.RequestParam Long studentId) {
-        ModelAndView mav = new ModelAndView("Academic/edit-tcdocumentform");
+        ModelAndView mav = new ModelAndView("Academic/tcdocumentform");
         List<Tc> tcList = tcService.getTcByStudentId(studentId);
         com.cms.entity.Tc tc = tcList.isEmpty() ? new com.cms.entity.Tc() : tcList.get(0);
         mav.addObject("tc", tc);
