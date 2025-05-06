@@ -44,13 +44,9 @@
                             <div class="col-sm-8">
                                 <select class="form-control" value="${scholarships.applicationStatus}" name="applicationStatus" id="status" required>
                                     <option value="" selected disabled>Select Application Status</option>
-                                    <option value="Approved">Approved</option>
-                                    <option value="Hold">Hold</option>
-                                    <option value="Payment Processed">Payment Processed</option>
-                                    <option value="Pending">Pending</option>
-                                    <option value="Rejected">Rejected</option>
-                                    <option value="Sension">Sension</option>
                                     <option value="Submitted">Submitted</option>
+                                    <option value="Approved">Approved</option>
+                                    <option value="Rejected">Rejected</option>
                                 </select>
                             </div>
                         </div>
