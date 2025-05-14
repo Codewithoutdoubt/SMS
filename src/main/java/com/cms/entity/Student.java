@@ -46,6 +46,7 @@ public class Student implements  Serializable {
     @Column(name = "gmail", length = 255)
     private String email;
     
+    
     @Column(name = "address", length = 255)
     private String address;
     
