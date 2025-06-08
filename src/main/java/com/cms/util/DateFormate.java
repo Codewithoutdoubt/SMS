@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 public class DateFormate {
     public static String formatLocalDate(LocalDate date) {
         if (date == null) {
-            return "N/A"; // या आप "" भी दे सकते हैं
+            return "N/A"; 
         }
         return date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
