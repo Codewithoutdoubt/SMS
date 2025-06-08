@@ -2,7 +2,7 @@
 
 <div class="row">
     <div class="col-md-2 col-lg-2  sidebar">
-        <h4 class="text-center">Admission Department</h4>
+        <h4 class="text-center">Faculty Department</h4>
         <hr>
         <form id="filter-form" class="ml-1" method="get" action="/filter/Faculty/student-list">
             <h4 class="text-left pt-0">Filter Data</h4>

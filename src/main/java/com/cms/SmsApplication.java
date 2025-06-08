@@ -12,7 +12,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 public class SmsApplication {
     public static void main(String[] args) throws IOException, URISyntaxException {
         SpringApplication.run(SmsApplication.class, args);
-        System.out.println("✅ Server is running on port 8081");
+        System.out.println("Server is running on port 8081");
     }
 }
  
