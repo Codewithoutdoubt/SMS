@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cms.entity.Documents;
-import com.cms.entity.Student; // Import Student entity
+import com.cms.entity.Student; 
 import com.cms.services.DocumentsService;
-import com.cms.services.StudentService; // Import StudentService
+import com.cms.services.StudentService; 
 
 @RestController
 @RequestMapping("/documents")
@@ -25,7 +25,7 @@ public class DocumentController {
     private DocumentsService documentsService;
 
     @Autowired
-    private StudentService studentService; // Add this line
+    private StudentService studentService;
 
     @PostMapping
     public ResponseEntity<Documents> createDocument(@RequestBody Documents document) {
@@ -67,7 +67,7 @@ public class DocumentController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        // Redirect back to add documents page for the same student after saving document
+        
         ModelAndView mav = new ModelAndView("redirect:/addstudent");
         mav.addObject("message", "Student details saved successfully");
         return mav;
