@@ -2,7 +2,7 @@
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
 <%
-    if (session.getAttribute("department") == null || ((com.cms.entity.Department)session.getAttribute("department")).getUsername() == null) {
+    if (session.getAttribute("department") == null || ((com.sms.entity.Department)session.getAttribute("department")).getUsername() == null) {
         response.sendRedirect("loginpage");
         return;
     }
