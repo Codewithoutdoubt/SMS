@@ -14,23 +14,21 @@
         }
         .login-container {
             max-width: 500px;
-            margin: 50px auto;
+            margin: 50px auto 20px;
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0,0,0,0.1);
             background-color: white;
-        }
+        }   
         .login-header {
             text-align: center;
             margin-bottom: 30px;
             color: #343a40;
         }
-        .form-label {
-            font-weight: 500;
-        }
+
         .btn-login {
             width: 100%;
-            padding: 10px;
+            padding: 5px;
             font-weight: 600;
         }
     </style>
@@ -38,7 +36,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand fs-4" href="#">Student Management System</a>
+            <a class="navbar-brand fs-6" href="#">Student Management System</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -48,17 +46,17 @@
     <div class="container">
         <div class="login-container">
             <div class="login-header">
-                <h2>Login to Your Account</h2>
+                <h3>Login to Your Account</h3>
                 <p class="text-muted">Enter your credentials to continue</p>
             </div>
             
             <form action="login" method="post">
-                <div class="mb-3">
+                <div class="mb-2">
                     <label for="username" class="form-label">Username</label>
                     <input type="text" class="form-control" id="username" name="username" required>
                 </div>
                 
-                <div class="mb-4">
+                <div class="mb-2">
                     <label for="password" class="form-label">Password</label>
                     <input type="password" class="form-control" id="password" name="password" required>
                 </div>

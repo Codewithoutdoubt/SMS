@@ -3,22 +3,33 @@
     <div class="row">
         <div class="col-md-2 col-lg-2  sidebar">
             <h4 class="text-center">Result Department</h4>
-            <hr>
-            <form id="filter-form" class="ml-3" method="get" action="/filter/Result/result">
-                <h4 class="text-left pt-0">Filter Data</h4>
-                <%@ include file="/static/components/department-filter.jsp" %>
-                    <button type="reset" class="btn btn-primary h-75 w-100 ftr mt-3"><a class="p-0 text-center d-block"
-                            href="/result">Reset</a></button>
+            <hr class="bg-white">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active " href="/result">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/result/subject/list">
+                        <i class="fas fa-book"></i> Subjects
+                    </a>
+                </li>
         </div>
-        </form>
-    </div>
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-2">
+    
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-2">
+            <div class="row justify-content-between">
+                <div class="col-lg-3 pt-2">
+                    <h3 class="font-weight-bold" >Student Dashboard</h3>
+                </div>
+                <div class="col-lg-9 pt-3 px-5">
+                    <form id="filter-form" class="d-flex" method="get" action="/filter/Result/result">
+                        <%@ include file="/static/components/filter.jsp" %>
+                </div>
+            </div>
                 <!-- Student Table -->
-                 <div class="d-flex justify-content-between">
-                    <h2 class="text-center font-weight-bold">Student List</h2>                    
-                 </div>
                 <div class="card">
-                    <table class="students-table p-3 table table-striped student-table">
+                    <table class="students-table p-2 table table-striped student-table">
                         <thead> 
                             <tr>
                                 <th>#</th>

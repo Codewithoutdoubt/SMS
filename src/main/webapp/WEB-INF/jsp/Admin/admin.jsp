@@ -3,58 +3,57 @@
     <div class="row">
         <div class="col-md-2 col-lg-2 sidebar">
             <%@ include file="/static/components/sidebar.jsp" %>
-            
-        </div>
-                <!-- Main Content -->
-                <main class="col-md-9 ms-sm-auto col-lg-10 px-md-2">
-                    <div class="row justify-content-between">
-                        <div class="col-lg-3">
-                            <h2>Student Dashboard</h2>
-                        </div>
-                        <div class="col-lg-9 pt-3 px-5">
-                            <form id="filter-form" class="d-flex filter-section" method="get"
-                                action="/filter/Admin/admin">
-                                <%@ include file="/static/components/filter.jsp" %>
-                        </div>
-                        </div>
 
-                        <!-- Student Table -->
-                        <div class="card">
-                            <table class="table table-striped student-table">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Roll Number</th>
-                                        <th>Name</th>
-                                        <th>Mobile No</th>
-                                        <th>Branch Name</th>
-                                        <th>Semester</th>
-                                        <th>Admission Year</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <c:forEach var="student" items="${students}" varStatus="status">
-                                        <tr>
-                                            <td>${status.index + 1}</td>
-                                            <td>${student.rollNo}</td>
-                                            <td>${student.studentName}</td>
-                                            <td>${student.mobileNo}</td>
-                                            <td>${student.branch.name}</td>
-                                            <td>${student.semester.name}</td>
-                                            <td>${student.admissionYear}</td>
-                                            <td>
-                                                <a href="/report/${student.id}" onclick="confirm" class="btn btn-danger btn-sm">View
-                                                    Report</a>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
-                                </tbody>
-                            </table>
-                        </div>
-                </main>
-            </div>
         </div>
+        <!-- Main Content -->
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-2">
+            <div class="row justify-content-between">
+                <div class="col-lg-3">
+                    <h2>Student Dashboard</h2>
+                </div>
+                <div class="col-lg-9 pt-3 px-5">
+                    <form id="filter-form" class="d-flex filter-section" method="get" action="/filter/Admin/admin">
+                        <%@ include file="/static/components/filter.jsp" %>
+                </div>
+            </div>
+
+            <!-- Student Table -->
+            <div class="card">
+                <table class="table table-striped student-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Roll Number</th>
+                            <th>Name</th>
+                            <th>Mobile No</th>
+                            <th>Branch Name</th>
+                            <th>Semester</th>
+                            <th>Admission Year</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="student" items="${students}" varStatus="status">
+                            <tr>
+                                <td>${status.index + 1}</td>
+                                <td>${student.rollNo}</td>
+                                <td>${student.studentName}</td>
+                                <td>${student.mobileNo}</td>
+                                <td>${student.branch.name}</td>
+                                <td>${student.semester.name}</td>
+                                <td>${student.admissionYear}</td>
+                                <td>
+                                    <a href="/report/${student.id}" onclick="confirm" class="btn btn-danger btn-sm">View
+                                        Report</a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    </div>
     </div>
 
     <script>

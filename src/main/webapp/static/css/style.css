@@ -1,18 +1,19 @@
 body {
     font-family: 'Arial', sans-serif;
     background-color: #ffffff;
+    box-sizing: border-box;
 }
 
 main {
-    margin-left: 270px;
+    /* margin-left: 270px; */
     margin-top: 45px !important;
 }
 
 /* Sidebar Styling */
 .sidebar {
     top: 56px;
-    position: fixed;
-    max-width: 250px;
+    /* position: fixed; */
+    /* max-width: 250px; */
     height: calc(100vh - 56px);
     /* Adjusted to start after navbar */
     background: linear-gradient(135deg, #04a2f1, #474242);
@@ -303,4 +304,58 @@ hr{
   .info-grid {
     grid-template-columns: 1fr;
   }
+}
+
+.Subject-form{
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.Subject-form{
+    form{
+        width: 700px;
+         background-color: #e8e9ec;
+         padding: 20px;
+         border-radius: 20px;
+    }
+    h5{
+        text-align: center;
+        font-size: 25px;
+        margin: 5px 0px 25px 0px;
+        font-weight: 600;
+        font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+    }
+    .form-label{
+        font-weight: 600;
+        font-size: 15px;
+    }
+    .header-controls {
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+
+    .form-card {
+      background-color: #d3d3d3;
+      padding: 30px;
+      border-radius: 8px;
+      max-width: 500px;
+      margin: auto;
+    }
+
+    .form-control {
+      background-color: #ffffff;
+    }
+
+    .form-buttons {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .form-buttons button {
+      width: 120px;
+      margin: 0 10px;
+    }
+  
 }

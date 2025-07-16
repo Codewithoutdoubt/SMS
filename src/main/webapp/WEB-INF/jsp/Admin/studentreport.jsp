@@ -170,14 +170,14 @@
             <td>1</td>
             <td>Aadhar Number</td>
             <td>
-              <c:out value="${documents.aadharNo}" />
+              <!-- <c:out value="${documents.aadharNo}" /> -->
             </td>
           </tr>
           <tr>
             <td>2</td>
             <td>Caste Certificate No.</td>
             <td>
-              <c:out value="${documents.casteCertificateNo}" />
+              <!-- <c:out value="${documents.casteCertificateNo}" /> -->
             </td>
           </tr>
 
@@ -185,14 +185,14 @@
             <td>3</td>
             <td>Income Certificate Number</td>
             <td>
-              <c:out value="${documents.incomeCertificateNo}" />
+              <!-- <c:out value="${documents.incomeCertificateNo}" /> -->
             </td>
           </tr>
           <tr>
             <td>4</td>
             <td>Residence Certificate Number</td>
             <td>
-              <c:out value="${documents.residenceCertificateNo}" />
+              <!-- <c:out value="${documents.residenceCertificateNo}" /> -->
             </td>
           </tr>
       </tbody>

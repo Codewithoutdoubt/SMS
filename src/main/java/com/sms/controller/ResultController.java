@@ -1,5 +1,6 @@
 package com.sms.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -13,15 +14,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sms.entity.Department;
 import com.sms.entity.Result;
 import com.sms.entity.Student;
+import com.sms.entity.Subject;
 import com.sms.services.BranchService;
 import com.sms.services.ResultService;
 import com.sms.services.SemesterService;
 import com.sms.services.StudentService;
+import com.sms.services.SubjectService;
 
 @Controller
 @RequestMapping("/result")
@@ -36,9 +40,19 @@ public class ResultController {
     private BranchService branchService; // Add BranchService dependency
     @Autowired
     private SemesterService semesterService; // Add SemesterService dependency
+    @Autowired
+    private SubjectService subjectService; // Add SubjectService dependency
     
     public ResultController(ResultService resultService) {
         this.resultService = resultService;
+    }
+
+    // New endpoint to get subjects by branch and semester
+    @GetMapping("/subjects")
+    @ResponseBody
+    public List<Subject> getSubjectsByBranchAndSemester(@RequestParam("branchId") Integer branchId,
+                                                        @RequestParam("semesterId") Integer semesterId) {
+        return subjectService.getSubjectByBranchAndSemester(branchId, semesterId);
     }
 
     @ModelAttribute("department")
@@ -62,6 +76,7 @@ public class ResultController {
         ModelAndView mav = new ModelAndView("Result/result-list");
         mav.addObject("results", resultService.getResultsByStudentIdOrderBySemesterIdAsc(studentId));
         mav.addObject("studentsId", studentId);
+        mav.addObject("subjects", subjectService.getAllSubjects()); // Add subjects to model
         return mav; // JSP page for list of results by student
     }
 

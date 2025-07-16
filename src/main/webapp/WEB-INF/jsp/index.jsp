@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,20 +12,15 @@
             margin: 0;
             box-sizing: border-box;
         }
-
-        html,
-        body {
-            width: 100%;
-            height: 100%;
-        }
-
         body {
             background-image: url(${pageContext.request.contextPath}/static/images/2.png);
             background-size: cover;
             background-repeat: no-repeat;
-            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            background-position: center;
+            background-attachment: fixed;
         }
-
         @keyframes textanimi {
             from {
                 font-size: 0px;
@@ -36,12 +30,10 @@
                 font-size: 80px;
             }
         }
-
         .div1 {
             height: 90px;
             position: relative;
         }
-
         .div1child1 {
             width: 20%;
             position: absolute;
@@ -49,16 +41,14 @@
             bottom: 5px;
             left: 10px;
         }
-
         img {
             width: 90px;
         }
-
         .div1child2 {
             padding-top: 10px;
-            width: 92%;
+            width: auto;
             margin-left: 5%;
-            font-size: 30px;
+            font-size: 20px;
             color: whitesmoke;
         }
 
@@ -71,7 +61,6 @@
             text-align: right;
             position: absolute;
         }
-
         ul {
             list-style-type: none;
             margin-top: 0px;
@@ -108,10 +97,8 @@
             bottom: 10px;
             color: white;
             animation: textanimi ease-in 1s;
-            font-size: 100px;
+            font-size: 80px;
             font-style: italic;
-
-
         }
 
         img {
@@ -130,17 +117,13 @@
         }
     </style>
 </head>
-
 <body>
     <div class="content">
-
         <div class="div1">
-
             <div class="div1child1">
                 <img src="${pageContext.request.contextPath}/static/images/1.jpg">
             </div>
             <div class="div1child2">POLYTECHNIC COLLEGE </div>
-
             <div class="div1child3">
                 <ul>
                     <a href="#" class="dropbtn">Home</a>
@@ -151,10 +134,8 @@
             Welcome To <br>Polytechnic <br>College Website
         </div>
     </div>
-    </div>
     <div class="footer container-fluid pt-2">
         <h4 align="center">Design And Developed by Gmd Group.</h4>
     </div>
 </body>
-
 </html>

@@ -112,24 +112,6 @@ $(document).ready(function() {
 })(jQuery);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
 }
@@ -148,3 +130,11 @@ window.onclick = function(event) {
     }
   }
 }
+document.addEventListener('DOMContentLoaded', function() {
+    const academicYearSelect = document.getElementById('academicYear');
+    if (academicYearSelect) {
+        academicYearSelect.addEventListener('change', function() {
+            document.getElementById('filterForm').submit();
+        });
+    }
+});
