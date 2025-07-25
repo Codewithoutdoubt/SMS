@@ -52,6 +52,14 @@ public class ResultController {
     @ResponseBody
     public List<Subject> getSubjectsByBranchAndSemester(@RequestParam("branchId") Integer branchId,
                                                         @RequestParam("semesterId") Integer semesterId) {
+        // int branchIdInt = Integer.valueOf(branchId);
+        // String semesterIdStr = String.valueOf(semesterId);
+
+                                                            
+        for (int i = 1; i <= 100; i++) {
+            System.out.println(i);
+        }
+
         return subjectService.getSubjectByBranchAndSemester(branchId, semesterId);
     }
 
