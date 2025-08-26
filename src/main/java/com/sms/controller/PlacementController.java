@@ -110,21 +110,21 @@ public class PlacementController {
     public ModelAndView getPlacementsByStudentId(@PathVariable Long studentId) {
         ModelAndView mav = new ModelAndView("Placement/placement-list");
         mav.addObject("placements", placementService.getPlacementsByStudentId(studentId));
-        mav.addObject("student", studentService.getStudentById(studentId));
+        mav.addObject("student", studentService.getStudentByStudentId(studentId));
         return mav;
     }
 
     @GetMapping("/add/{studentId}")
     public ModelAndView showAddPlacementForm(@PathVariable Long studentId) {
         ModelAndView mav = new ModelAndView("Placement/add-placement");
-        mav.addObject("students", studentService.getStudentById(studentId));
+        mav.addObject("students", studentService.getStudentByStudentId(studentId));
         mav.addObject("placement", new Placement());
         return mav;
     }
 
     @PostMapping
     public String addPlacement(@ModelAttribute Placement placement, @RequestParam("studentId") Long studentId, Model model) {
-        Student student = studentService.getStudentById(studentId);
+        Student student = studentService.getStudentByStudentId(studentId);
         placement.setStudent(student);
 
         // Check for duplicate placement for same student and company
@@ -157,7 +157,7 @@ public class PlacementController {
     @PostMapping("/update/{id}")
     public String updatePlacement(@PathVariable Long id, @ModelAttribute Placement placement, @RequestParam("studentId") Long studentId, Model model) {
         placement.setId(id);
-        Student student = studentService.getStudentById(studentId);
+        Student student = studentService.getStudentByStudentId(studentId);
         placement.setStudent(student);
 
         // Check for duplicate placement for same student and company excluding current placement

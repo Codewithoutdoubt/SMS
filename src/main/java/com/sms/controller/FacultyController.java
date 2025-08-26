@@ -38,7 +38,7 @@ public class FacultyController {
 
     @GetMapping("/faculty/edit-student-semester")
     public String showEditStudentSemesterForm(@RequestParam("studentId") Long studentId, Model model) {
-        Student student = studentService.getStudentById(studentId);
+        Student student = studentService.getStudentByStudentId(studentId);
         model.addAttribute("student", student);
         model.addAttribute("branches", branchService.getAllBranches());
         model.addAttribute("semesters", semesterService.getAllSemesters());
@@ -50,7 +50,7 @@ public class FacultyController {
                                         @RequestParam("semesterId") Long semesterId,
                                         RedirectAttributes redirectAttributes) {
         // Fetch existing student from DB
-        Student existingStudent = studentService.getStudentById(student.getId());
+        Student existingStudent = studentService.getStudentByStudentId(student.getId());
         if (existingStudent == null) {
             redirectAttributes.addFlashAttribute("errorMessage", "Student not found");
             return "redirect:/faculty";

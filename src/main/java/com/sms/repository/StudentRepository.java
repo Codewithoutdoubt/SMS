@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +15,12 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     @Override
     @NonNull
     List<Student> findAll();
-    
+
+    @Query("SELECT s.branch.id FROM Student s WHERE s.studentId = :studentId")
+    int findBranchIdByStudentId(Long studentId);
+
+    Student findByStudentId(Long studentId);      
+
     @Query("SELECT DISTINCT s FROM Student s LEFT JOIN FETCH s.scholarships")
     @NonNull
     List<Student> findAllWithScholarships();

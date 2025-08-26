@@ -9,9 +9,10 @@ import com.sms.entity.Student;
 @Service
 public interface StudentService {
 	Student addStudent(Student student);
-	Student getStudentById(Long studentId);
+	Student getStudentByStudentId(Long studentId);
 	List<Student> getAllStudents();
     List<Student> getAllStudentsWithScholarships();
+	int getBranchIdByStudentId(Long studentId);
     List<Student> getFilteredStudents(String branchCode, String semester, String academicYear, String status);
     List<Student> getFilteredStudents(String branchCode, String semester, String academicYear, String status, String rollNo);
 	List<Student> getFilteredStudentsForSc(String branchCode, String semester, String caste, String status);

@@ -25,7 +25,7 @@
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "id")
-        private Long id;  // Auto-generated primary key
+        private Long studentId;  // Auto-generated primary key
 
         @Column(name = "rollno", nullable = false, unique = true)
         private String rollNo;  // Not auto-generated but cannot be null
@@ -74,11 +74,11 @@
         }
 
         public Long getId() {
-            return id;
+            return studentId;
         }
 
         public void setId(Long id) {
-            this.id = id;
+            this.studentId = id;
         }
 
         public String getRollNo() {

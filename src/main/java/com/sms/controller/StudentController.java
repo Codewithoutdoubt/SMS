@@ -48,7 +48,7 @@ public class StudentController {
     @GetMapping("/student-details")
     public ModelAndView studentDetails(@RequestParam("studentId") Long studentId) {
         ModelAndView mav = new ModelAndView("Admission/student-details");
-        Student student = studentServcie.getStudentById(studentId);
+        Student student = studentServcie.getStudentByStudentId(studentId);
         Documents documents = documentsService.getDocumentsByStudentId(studentId);
         mav.addObject("student", student);
         mav.addObject("documents", documents);
@@ -82,7 +82,7 @@ public class StudentController {
     @GetMapping("/editstudent")
     public ModelAndView editStudent(@RequestParam("studentId") Long studentId) {
         ModelAndView mav = new ModelAndView("Admission/edit-student");
-        mav.addObject("student", studentServcie.getStudentById(studentId));
+        mav.addObject("student", studentServcie.getStudentByStudentId(studentId));
         mav.addObject("branches", branchService.getAllBranches());
         mav.addObject("semesters", semesterService.getAllSemesters());
         return mav;
@@ -104,7 +104,7 @@ public class StudentController {
         student.setSemester(semesterService.getSemesterById(semesterId));
 
         // Fetch existing student to preserve documents
-        Student existingStudent = studentServcie.getStudentById(student.getId());
+        Student existingStudent = studentServcie.getStudentByStudentId(student.getId());
         if (existingStudent != null) {
             student.setDocuments(existingStudent.getDocuments());
         }
@@ -126,5 +126,5 @@ public class StudentController {
         studentServcie.deleteStudent(id);   
         return "redirect:/admission";
     }
-    // Removed the conflicting getAllSemesters method
+    
 }

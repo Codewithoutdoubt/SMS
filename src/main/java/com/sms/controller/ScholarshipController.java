@@ -108,7 +108,7 @@ public class ScholarshipController {
     @GetMapping("/{id}")
     public ModelAndView getScholarshipDetails(@PathVariable Long id) {
         ModelAndView mav = new ModelAndView("Scholarship/scholarship-details");
-        Student student = studentService.getStudentById(id);
+        Student student = studentService.getStudentByStudentId(id);
         mav.addObject("document",documentsService.getDocumentsByStudentId(id));
         mav.addObject("student", student);
         mav.addObject("scholarships", scholarshipService.getScholarshipsByStudentId(id)); // Fetch scholarships
@@ -125,7 +125,7 @@ public class ScholarshipController {
 
     @PostMapping("/save")
     public ModelAndView saveScholarship(Scholarship scholarship, @RequestParam("studentId") Long studentId){
-        Student student = studentService.getStudentById(studentId);
+        Student student = studentService.getStudentByStudentId(studentId);
         scholarship.setStudent(student);
 
         // Check for duplicate applicationNo
@@ -189,7 +189,7 @@ public class ScholarshipController {
     @PostMapping("/updateProfileId")
     public ModelAndView updateProfileId(@RequestParam("studentId") Long studentId,
                                         @RequestParam("profileId") String profileId) {
-        Student student = studentService.getStudentById(studentId);
+        Student student = studentService.getStudentByStudentId(studentId);
         if (student != null) {
             student.setProfileId(profileId);
             studentService.updateStudent(student);

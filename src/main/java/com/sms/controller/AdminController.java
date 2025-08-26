@@ -77,7 +77,7 @@ public class AdminController {
     @GetMapping("/report/{id}")
     public ModelAndView getStudentReport(@PathVariable Long id) {
         ModelAndView mav = new ModelAndView("Admin/studentreport");
-        mav.addObject("student", studentService.getStudentById(id));
+        mav.addObject("student", studentService.getStudentByStudentId(id));
         mav.addObject("fees", feeService.getFeesByStudentId(id));
         mav.addObject("results", resultService.getResultsByStudentId(id));
         mav.addObject("scholarships", scholarshipService.getScholarshipsByStudentId(id));

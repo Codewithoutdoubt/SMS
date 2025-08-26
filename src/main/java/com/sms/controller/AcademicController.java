@@ -18,7 +18,7 @@ import com.sms.services.StudentService;
 import com.sms.services.UserService;
 
 @Controller
-public class AcademicController {
+public class  AcademicController {
 
     @Autowired
     private UserService userService;
@@ -67,7 +67,7 @@ public class AcademicController {
     @GetMapping("/academicreport/{id}")
     public ModelAndView getAcademicReport(@PathVariable Long id) {
         ModelAndView mav = new ModelAndView("Academic/academicreport");
-        com.sms.entity.Student student = studentService.getStudentById(id);
+        com.sms.entity.Student student = studentService.getStudentByStudentId(id);
         mav.addObject("student", student);
         mav.addObject("fees", feeService.getFeesByStudentId(id));
         mav.addObject("results", resultService.getResultsByStudentId(id));
@@ -86,7 +86,7 @@ public class AcademicController {
     @PostMapping("/academic/tc/submit")
     public ModelAndView submitTcDetails(@ModelAttribute Tc tc) {
         Long studentId = tc.getStudent().getId();
-        Student student = studentService.getStudentById(studentId);
+        Student student = studentService.getStudentByStudentId(studentId);
         tc.setStudent(student);
         // Set tcDocumentSubmissionDate to current date automatically
         tc.setTcDocumentSubmissionDate(new java.util.Date());
@@ -97,7 +97,7 @@ public class AcademicController {
     @GetMapping("/academic/tc/form")
     public ModelAndView showTcForm(@org.springframework.web.bind.annotation.RequestParam Long studentId) {
         ModelAndView mav = new ModelAndView("Academic/tcdocumentform");
-        mav.addObject("student", studentService.getStudentById(studentId));
+        mav.addObject("student", studentService.getStudentByStudentId(studentId));
         return mav;
     }
 
@@ -107,7 +107,7 @@ public class AcademicController {
         List<Tc> tcList = tcService.getTcByStudentId(studentId);
         com.sms.entity.Tc tc = tcList.isEmpty() ? new com.sms.entity.Tc() : tcList.get(0);
         mav.addObject("tc", tc);
-        mav.addObject("student", studentService.getStudentById(studentId));
+        mav.addObject("student", studentService.getStudentByStudentId(studentId));
         return mav;
     }
 

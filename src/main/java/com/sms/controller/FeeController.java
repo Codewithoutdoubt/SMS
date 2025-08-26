@@ -56,14 +56,14 @@ public class FeeController {
     public ModelAndView getFeesByStudentId(@PathVariable Long studentId) {
         ModelAndView mav = new ModelAndView("Fees/fees-list");
         mav.addObject("fees", feeService.getFeesByStudentId(studentId));
-        mav.addObject("student",studentService.getStudentById(studentId));
+        mav.addObject("student",studentService.getStudentByStudentId(studentId));
         return mav;
     }
 
     @GetMapping("/add/{studentId}")
     public ModelAndView showAddFeeForm(@PathVariable Long studentId) {
         ModelAndView mav = new ModelAndView("Fees/add-fees");
-        mav.addObject("student", studentService.getStudentById(studentId));
+        mav.addObject("student", studentService.getStudentByStudentId(studentId));
         return mav;
     }
 
@@ -87,7 +87,7 @@ public class FeeController {
     @PostMapping("/update/{id}")
     public String updateFee(@PathVariable Long id, @ModelAttribute Fee fee, @RequestParam("studentId") Long studentId) {
         fee.setId(id);
-        Student managedStudent = studentService.getStudentById(studentId);
+        Student managedStudent = studentService.getStudentByStudentId(studentId);
         fee.setStudent(managedStudent);
         feeService.saveFee(fee);
         return "redirect:/fees/" + studentId;

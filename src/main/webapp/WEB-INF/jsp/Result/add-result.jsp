@@ -9,19 +9,16 @@
                         ${errorMessage}
                     </div>
                 </c:if>
-                <form action="${pageContext.request.contextPath}/result" method="post">
-                    <c:if
-                        test="${result.student != null && result.student.branch != null && result.student.branch.id != null}">
-                        <input type="hidden" id="branchId" value="${result.student.branch.id}" />
-                    </c:if>
+                <form action="${pageContext.request.contextPath}/result/save" method="post">
+                    <input type="hidden" id="branchId" value="${student.branch.id}" />
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="studentRollNo" class="form-label">Student Roll No.:</label>
-                                <input type="text" readonly value="${result.student.rollNo}" class="form-control"
+                                <input type="text" readonly value="${student.rollNo}" class="form-control"
                                     id="studentRollNo" placeholder="Student Roll No">
                             </div>
-                            <input type="hidden" name="student.id" value="${result.student.id}" />
+                            <input type="hidden" name="student.id" value="${student.id}" />
 
                             <div class="mb-3">
                                 <label for="sgpa" class="form-label">SGPA:</label>
@@ -62,6 +59,7 @@
                             </thead>
                             <tbody id="subjectsTableBody">
                                 <!-- Subjects will be dynamically loaded here -->
+                                
                             </tbody>
                         </table>
                     </div>
@@ -78,7 +76,7 @@
 
                 semesterSelect.addEventListener('change', function () {
                     const semesterId = this.value;
-                    const branchId = branchIdInput ? branchIdInput.value : null;
+                    const branchId = branchIdInput.value;
 
                     if (!branchId) {
                         alert('Branch ID is not available.');
@@ -90,7 +88,7 @@
                         return;
                     }
 
-fetch(window.location.origin + '${pageContext.request.contextPath}' + '/result/subjects?branchId=' + branchId + '&semesterId=' + semesterId)
+                    fetch('/result/subjects?branchId=' + branchId + '&semesterId=' + semesterId)
                         .then(response => {
                             if (!response.ok) {
                                 throw new Error('Network response was not ok');
@@ -114,28 +112,19 @@ fetch(window.location.origin + '${pageContext.request.contextPath}' + '/result/s
                                 nameCell.textContent = subject.subjectName;
                                 row.appendChild(nameCell);
 
-                                const passFailCell = document.createElement('td');
-                                passFailCell.innerHTML = `
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="subjectResults[${index}].passed" id="pass-${subject.id}" value="true" required>
-                                        <label class="form-check-label" for="pass-${subject.id}">Pass</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="subjectResults[${index}].passed" id="fail-${subject.id}" value="false">
-                                        <label class="form-check-label" for="fail-${subject.id}">Fail</label>
-                                    </div>
-                                    <input type="hidden" name="subjectResults[${index}].subject.id" value="${subject.id}" />
-                                `;
-                                row.appendChild(passFailCell);
+                            const passFailCell = document.createElement('td');
+                            passFailCell.innerHTML = '<input type="radio" name="subjects[' + index + '].status" value="Pass" required> Pass <input type="radio" name="subjects[' + index + '].status" value="Fail" required> Fail <input type="hidden" name="subjects[' + index + '].subject.id" value=' + subject.id + ' required>';
 
-                                subjectsTableBody.appendChild(row);
-                            });
-                        })
-                        .catch(error => {
-                            console.error('Error fetching subjects:', error);
-                            subjectsTableBody.innerHTML = '<tr><td colspan="3" class="text-center text-danger">Error loading subjects.</td></tr>';
+                            row.appendChild(passFailCell);
+
+                            subjectsTableBody.appendChild(row);
                         });
-                });
+                })
+                    .catch(error => {
+                        console.error('Error fetching subjects:', error);
+                        subjectsTableBody.innerHTML = '<tr><td colspan="3" class="text-center text-danger">Error loading subjects.</td></tr>';
+                    });
+            });
             });
         </script>
     </body>

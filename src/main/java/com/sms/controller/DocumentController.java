@@ -28,7 +28,7 @@ public class DocumentController {
     @GetMapping("/add/{studentId}")
     public ModelAndView showAddDocumentForm(@PathVariable Long studentId) {
         ModelAndView mav = new ModelAndView("Admission/add-documents");
-        mav.addObject("students", studentService.getStudentById(studentId));
+        mav.addObject("students", studentService.getStudentByStudentId(studentId));
         return mav;
     }
 
@@ -52,7 +52,7 @@ public class DocumentController {
 
     @PostMapping("/save")
     public ModelAndView saveDocument(Documents document, @RequestParam("studentId") Long studentId) {
-        Student student = studentService.getStudentById(studentId);
+        Student student = studentService.getStudentByStudentId(studentId);
         document.setStudent(student);
         try {
             documentsService.createDocument(document);
