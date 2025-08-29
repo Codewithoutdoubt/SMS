@@ -9,5 +9,8 @@ public interface ResultService {
     void deleteById(Long id);
     void deleteResultsByStudentId(Long studentId);
     void saveResult(Result result);
+    void updateResult(Result result);
+    Result getResultById(Long id);
+    
 
 }

@@ -5,7 +5,7 @@
             <h4 class="text-center">Admission Department</h4>
             <hr>
             <form id="filter-form" class="ml-1" method="get" action="/filter/Admission/student">
-                <h4 class="text-left pt-0">Filter Data</h4>
+                <h5 class="text-left pt-0">Filter Data</h5>
                 <%@ include file="/static/components/department-filter.jsp" %>
                     <button type="reset" class="btn btn-primary h-75 w-100 ftr mt-3"><a class="p-0 text-center d-block"
                             href="/admission">Reset</a></button>

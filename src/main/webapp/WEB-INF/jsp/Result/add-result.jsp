@@ -75,68 +75,7 @@
                 </form>
             </div>
         </div>
-
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const semesterSelect = document.getElementById('semesterSelect');
-                const branchIdInput = document.getElementById('branchId');
-                const subjectsTableBody = document.getElementById('subjectsTableBody');
-                const resultImageInput = document.getElementById('resultImage');
-                const imagePreview = document.getElementById('imagePreview');
-
-                semesterSelect.addEventListener('change', function () {
-                    const semesterId = this.value;
-                    const branchId = branchIdInput.value;
-
-                    if (!branchId) {
-                        alert('Branch ID is not available.');
-                        return;
-                    }
-
-                    if (!semesterId) {
-                        subjectsTableBody.innerHTML = '';
-                        return;
-                    }
-
-                    fetch('/result/subjects?branchId=' + branchId + '&semesterId=' + semesterId)
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error('Network response was not ok');
-                            }
-                            return response.json();
-                        })
-                        .then(subjects => {
-                            subjectsTableBody.innerHTML = '';
-                            if (subjects.length === 0) {
-                                subjectsTableBody.innerHTML = '<tr><td colspan="3" class="text-center">No subjects found for selected semester and branch.</td></tr>';
-                                return;
-                            }
-                            subjects.forEach((subject, index) => {
-                                const row = document.createElement('tr');
-
-                                const srNoCell = document.createElement('td');
-                                srNoCell.textContent = index + 1;
-                                row.appendChild(srNoCell);
-
-                                const nameCell = document.createElement('td');
-                                nameCell.textContent = subject.subjectName;
-                                row.appendChild(nameCell);
-
-                                const passFailCell = document.createElement('td');
-                                passFailCell.innerHTML = '<input type="radio" name="subjects[' + index + '].status" value="Pass" required> Pass <input type="radio" name="subjects[' + index + '].status" value="Fail" required> Fail <input type="hidden" name="subjects[' + index + '].subject.id" value=' + subject.id + ' required>';
-
-                                row.appendChild(passFailCell);
-
-                                subjectsTableBody.appendChild(row);
-                            });
-                        })
-                        .catch(error => {
-                            console.error('Error fetching subjects:', error);
-                            subjectsTableBody.innerHTML = '<tr><td colspan="3" class="text-center text-danger">Error loading subjects.</td></tr>';
-                        });
-                });
-            });
-        </script>
+        <script src="${pageContext.request.contextPath}/static/js/filter.js"></script>
     </body>
 
     </html>

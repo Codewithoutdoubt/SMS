@@ -1,16 +1,20 @@
-# Task: Fix POST Method Not Supported Error in ResultController
+# Update Result Functionality Implementation
 
 ## Steps to Complete:
-1. [x] Update ResultController.java to add POST method handler for /result/save
-2. [x] Add proper imports for PostMapping and ModelAttribute annotations
-3. [x] Verify the method correctly handles Result object and redirects
 
-## Current Status:
-- Added missing POST handler method for /result/save endpoint
-- Added required imports (@PostMapping and @ModelAttribute)
-- Method correctly handles Result object and redirects to /result
-- Ready for testing
+# Update Result Functionality Implementation
 
-## Changes Made:
-- Added: `@PostMapping("/save") public String saveResult(@ModelAttribute("result") Result result)`
-- Added imports: `@PostMapping` and `@ModelAttribute`
+## Steps Completed:
+
+1.  Update ResultService Interface - Added updateResult method
+2.  Update ResultServiceImpl - Implemented updateResult method with proper update logic
+3.  Update ResultController - Added @PostMapping("/update") method with image upload handling
+4. Fix JSP button text in edit-result.jsp - Changed "Add Result" to "Update Result"
+
+## Summary:
+The update result functionality has been successfully implemented. The form at `${pageContext.request.contextPath}/result/update` now has a corresponding mapping in the ResultController that:
+- Handles file uploads for result images
+- Updates existing result records
+- Preserves existing image paths if no new image is uploaded
+- Recalculates CGPA when results are updated
+- Provides proper error handling and redirects

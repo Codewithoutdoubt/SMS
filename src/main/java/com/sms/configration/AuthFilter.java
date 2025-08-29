@@ -12,6 +12,8 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+import com.sms.entity.Department;
+
 @WebFilter(urlPatterns = {"/Admin/*", "/Admission/*", "/Fees/*", "/Result/*", "/Scholarship/*"})
 public class AuthFilter implements Filter {
     @Override
@@ -20,9 +22,9 @@ public class AuthFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
         HttpSession session = req.getSession(false);
 
-        if (session == null || session.getAttribute("department") == null || ((com.sms.entity.Department)session.getAttribute("department")).getUsername() == null) {
+        if (session == null || session.getAttribute("department") == null || ((Department)session.getAttribute("department")).getUsername() == null) {
             res.sendRedirect(req.getContextPath() + "/loginpage");
-            return;
+            return;	
         }
 
         chain.doFilter(request, response);

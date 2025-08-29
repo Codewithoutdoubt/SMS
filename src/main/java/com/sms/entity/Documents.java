@@ -49,16 +49,22 @@ public class Documents {
     @Column(name = "income_certificate_img")
     private String incomeCertificateImage;
 
-    @Column(name = "ssc_marksheet_no")
-    private String sscMarksheetNo;
+        @Column(name = "tenth_marksheet_no")
+    private String tenthMarksheetNo;
 
-    @Column(name = "ssc_marksheet_img")
-    private String sscMarksheetImage;
+    @Column(name = "tenth_marksheet_img")
+    private String tenthMarksheetImage;
 
-    @Column(name = "leaving_certificate_no")
-    private String leavingCertificateNo;
+    @Column(name = "twelfth_marksheet_no")
+    private String twelfthMarksheetNo;
 
-    @Column(name = "leaving_certificate_img")
-    private String leavingCertificateImage;
+    @Column(name = "twelfth_marksheet_img")
+    private String twelfthMarksheetImage;
+
+    @Column(name = "transfer_certificate_no")
+    private String transferCertificateNo;
+
+    @Column(name = "transfer_certificate_img")
+    private String transferCertificateImage;
 
 }

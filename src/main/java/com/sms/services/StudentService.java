@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.sms.entity.Student;
+import com.sms.entity.Subject;
 
 @Service
 public interface StudentService {
@@ -21,4 +22,5 @@ public interface StudentService {
 	boolean studentExists(String rollNo);
 
 	boolean studentExistsForUpdate(String rollNo, Long id);
+	List<Subject> getSubjectByBranchAndSemester(Integer branchId, Integer semesterId);
 }

@@ -1,13 +1,12 @@
 package com.sms.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sms.entity.Semester;
 import com.sms.repository.SemesterRepository;
-
-import java.util.List;
-
 @Service
 public class SemesterServiceImpl implements SemesterService {
 

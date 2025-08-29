@@ -36,10 +36,12 @@ public class DocumentsServiceImpl implements DocumentsService {
         existDocument.setResidenceCertificateImage(document.getResidenceCertificateImage());
         existDocument.setIncomeCertificateNo(document.getIncomeCertificateNo());
         existDocument.setIncomeCertificateImage(document.getIncomeCertificateImage());
-        existDocument.setSscMarksheetNo(document.getSscMarksheetNo());
-        existDocument.setSscMarksheetImage(document.getSscMarksheetImage());
-        existDocument.setLeavingCertificateNo(document.getLeavingCertificateNo());
-        existDocument.setLeavingCertificateImage(document.getLeavingCertificateImage());
+        existDocument.setTenthMarksheetNo(document.getTenthMarksheetNo());
+        existDocument.setTenthMarksheetImage(document.getTenthMarksheetImage());
+        existDocument.setTwelfthMarksheetNo(document.getTwelfthMarksheetNo());
+        existDocument.setTwelfthMarksheetImage(document.getTwelfthMarksheetImage());
+        existDocument.setTransferCertificateNo(document.getTransferCertificateNo());
+        existDocument.setTransferCertificateImage(document.getTransferCertificateImage());
 
         documentsRepository.save(existDocument);
         return existDocument;

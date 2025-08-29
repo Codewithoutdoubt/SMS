@@ -46,9 +46,7 @@ public class ResultServiceImpl implements ResultService {
             // This is the first result for the student. CGPA is the same as SGPA.
             result.setCgpa(result.getSgpa());
         } else {
-            // There are previous results, calculate the new cumulative GPA.
             double lastCgpa = lastResult.getCgpa();
-            // Assuming semester IDs are sequential and represent the count of semesters (1, 2, 3...).
             long currentSemesterNumber = result.getSemester().getId();
             long previousSemesterCount = currentSemesterNumber - 1;
 
@@ -62,4 +60,41 @@ public class ResultServiceImpl implements ResultService {
         resultRepository.findByStudentId(studentId).forEach(result -> resultRepository.deleteById(result.getId()));
     }
 
+    public Result getResultById(Long id) {
+        return resultRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void updateResult(Result result) {   
+        Result existingResult = resultRepository.findById(result.getId()).orElse(null);  
+        if (existingResult != null) {
+            existingResult.setSgpa(result.getSgpa());
+            existingResult.setResultStatus(result.getResultStatus());
+            existingResult.setSemester(result.getSemester());
+            
+            // Update subjects if provided
+            if (result.getSubjects() != null && !result.getSubjects().isEmpty()) {
+                existingResult.getSubjects().clear();
+                existingResult.getSubjects().addAll(result.getSubjects());
+                for (SubjectMark subjectMark : existingResult.getSubjects()) {
+                    subjectMark.setResult(existingResult);
+                }
+            }
+
+            Result lastResult = resultRepository.findTopByStudentIdOrderByIdDesc(existingResult.getStudent().getId());
+            
+            if (lastResult == null) {
+                existingResult.setCgpa(existingResult.getSgpa());
+            } else {
+                double lastCgpa = lastResult.getCgpa();
+                // Assuming semester IDs are sequential and represent the count of semesters (1, 2, 3...).
+                long currentSemesterNumber = existingResult.getSemester().getId();
+
+                double newCgpa = (lastCgpa+ result.getSgpa()) / currentSemesterNumber;
+                existingResult.setCgpa(Math.round(newCgpa * 100.0) / 100.0);
+            }
+            
+            resultRepository.save(existingResult);
+        }
+    }
 }

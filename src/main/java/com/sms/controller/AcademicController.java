@@ -1,6 +1,7 @@
 package com.sms.controller;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,11 @@ import com.sms.entity.Department;
 import com.sms.entity.Student;
 import com.sms.entity.Tc;
 import com.sms.services.BranchService;
+import com.sms.services.DocumentsService;
+import com.sms.services.FeeService;
+import com.sms.services.PlacementService;
+import com.sms.services.ResultService;
+import com.sms.services.ScholarshipService;
 import com.sms.services.SemesterService;
 import com.sms.services.StudentService;
 import com.sms.services.UserService;
@@ -33,19 +39,19 @@ public class  AcademicController {
     private SemesterService semesterService;
 
     @Autowired
-    private com.sms.services.ScholarshipService scholarshipService;
+    private ScholarshipService scholarshipService;
 
     @Autowired
-    private com.sms.services.FeeService feeService;
+    private FeeService feeService;
 
     @Autowired
-    private com.sms.services.ResultService resultService;
+    private ResultService resultService;
 
     @Autowired
-    private com.sms.services.DocumentsService documentsService;
+    private DocumentsService documentsService;
 
     @Autowired
-    private com.sms.services.PlacementService placementService;
+    private PlacementService placementService;
 
     @ModelAttribute("department")
     public Department populatedCommonObject() {

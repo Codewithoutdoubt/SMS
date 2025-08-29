@@ -52,9 +52,9 @@
                                     <td>${student.branch.name}</td>
                                     <td>${student.semester.name}</td>
                                     <td>${student.admissionYear}</td>
-                                    <td class="d-flex mb-1">
+                                    <td class="mt-0">
                                     <a href="/result/${student.id}"
-                                        class="btn btn-primary mt-0  h-50 ml-2 btn-sm">View Reult</a>
+                                        class="btn btn-primary btn-sm mb-1">View Reult</a>
                                     </td>
                                 </tr>
                             </c:forEach>

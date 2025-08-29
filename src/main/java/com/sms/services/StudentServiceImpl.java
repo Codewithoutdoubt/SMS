@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sms.entity.Student;
+import com.sms.entity.Subject;
 import com.sms.repository.StudentRepository;
 
 @Service
@@ -156,6 +157,12 @@ public class StudentServiceImpl implements StudentService {
                         (status.equals("Not Applied") && student.getScholarships().isEmpty())))
                 .collect(Collectors.toList());
 
+    }
+
+    @Override
+    public List<Subject> getSubjectByBranchAndSemester(Integer branchId, Integer semesterId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getSubjectByBranchAndSemester'");
     }
 
 }
