@@ -26,10 +26,7 @@
                         <td>${status.index + 1}</td>
                         <td>${result.semester.name}</td>
                         <td>${result.sgpa}</td>
-                        <fmt:formatNumber var="cgpa" value="${cgpa = (cgpa == null ? 0 : cgpa) + result.sgpa}" />
-                        <td>
-                            <fmt:formatNumber value="${cgpa/(status.index + 1)}" type="number" maxFractionDigits="2" minFractionDigits="2" />
-                        </td>
+                        <td>${result.cgpa}</td>
                         <td>${result.resultStatus}</td>
                         <td>
                             <c:forEach items="${result.subjects}" var="subject">

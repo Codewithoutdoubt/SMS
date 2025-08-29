@@ -28,7 +28,7 @@
                             <th>Mobile No</th>
                             <th>Branch Name</th>
                             <th>Semester</th>
-                            <th>Admission Year</th>
+                            <th>Ad. Year</th>
                             <th>Action</th>
                         </tr>
                     </thead>

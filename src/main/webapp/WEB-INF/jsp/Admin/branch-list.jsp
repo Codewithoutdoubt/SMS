@@ -14,7 +14,7 @@
                 </div>
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-hover">
-                        <thead class="thead-dark">
+                        <thead class="bg-primary text-white">
                             <tr>
                                 <th>ID</th>
                                 <th>Branch Name</th>

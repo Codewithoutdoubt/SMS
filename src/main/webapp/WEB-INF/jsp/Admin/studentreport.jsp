@@ -7,7 +7,7 @@
     </div>
 
     <!-- Main Content -->
-    <main class="col-md-10 p-4"style="margin-left:270px;margin-top:45px !important;">
+    <main class="col-md-10 p-4">
 
     <div class="row mb-4">
       <!-- Profile -->

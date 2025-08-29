@@ -7,11 +7,11 @@
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-1">
         <div class="container mt-3">
             <div class="row justify-content-between mx-1 my-2">
-                <h2 class="mb-0 ">
+                <h3 class="mb-0 ">
                     <i class="fas fa-users mr-2 "></i>User Management
-                </h2>
-                <a href="addUser" class="btn btn-success pt-2" style="font-size: 18px;">
-                    <i class="fas fa-plus "></i>Add New User
+                </h3>
+                <a href="addUser" class="btn btn-primary p-2" style="font-size: 16px;">
+                    <i class="fas fa-plus mr-1"></i>Add New User
                 </a>
             </div>
 
@@ -35,15 +35,14 @@
                             <tbody>
                                 <c:forEach var="user" items="${users}" varStatus="loop">
                                     <tr>
-                                        <td class="text-center">${loop.index + 1}</td>
+                                        <td class="text-center pt-4">${loop.index + 1}</td>
                                         <td>
                                             <div class="d-flex align-items-center">
                                                 <div class="avatar mr-3">
                                                     <i class="fas fa-user-circle fa-2x text-primary"></i>
                                                 </div>
                                                 <div>
-                                                    <h6 class="mb-0">${user.username}</h6>
-                                                    <small class="text-muted">Last active: Today</small>
+                                                    <h6 class="pb-1">${user.username}</h6>
                                                 </div>
                                             </div>
                                         </td>

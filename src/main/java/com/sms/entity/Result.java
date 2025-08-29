@@ -27,8 +27,14 @@ public class Result {
     @Column(nullable = false)
     private Double sgpa;
 
+    @Column(nullable = false)
+    private Double cgpa;
+
     @Column(name = "result_status", nullable = false)
     private String resultStatus;
+
+    @Column(name = "image_path")
+    private String imagePath;
 
     @ManyToOne
     @JoinColumn(name = "semester_id", nullable = false)

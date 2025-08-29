@@ -12,4 +12,7 @@ import com.sms.entity.Student;
 public interface ResultRepository extends JpaRepository<Result, Long> {
     void deleteById(Long id);
     List<Result> findByStudentId(Long studentId);
+    Result findTopByStudentIdOrderByIdDesc(Long studentId);
+    Result findByStudentIdAndSemesterId(Long id, Long id2);
+
 }
