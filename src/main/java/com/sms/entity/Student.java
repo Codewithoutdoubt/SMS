@@ -1,19 +1,20 @@
     package com.sms.entity;
 
     import java.io.Serializable;
-    import java.util.List;
+import java.util.List;
 
-    import jakarta.persistence.CascadeType;
-    import jakarta.persistence.Column;
-    import jakarta.persistence.Entity;
-    import jakarta.persistence.GeneratedValue;
-    import jakarta.persistence.GenerationType;
-    import jakarta.persistence.Id;
-    import jakarta.persistence.JoinColumn;
-    import jakarta.persistence.ManyToOne;
-    import jakarta.persistence.OneToMany;
-    import jakarta.persistence.Table;
-    import lombok.Data;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import lombok.Data;
 
     @Data
 
@@ -48,7 +49,6 @@
         @Column(name = "gmail", length = 255)
         private String email;
         
-        
         @Column(name = "address", length = 255)
         private String address;
         
@@ -60,8 +60,8 @@
         @JoinColumn(name = "semester_id", nullable = false)
         private Semester semester;
         
-        @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
-        private List<Documents> documents; // Updated field name
+        @OneToOne(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+        private Documents document; // Updated field name
 
         @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
         private List<Scholarship> scholarships;
@@ -160,15 +160,7 @@
         public void setSemester(Semester semester) {
             this.semester = semester;
         }
-
-        public List<Documents> getDocuments() {
-            return documents;
-        }
-
-        public void setDocuments(List<Documents> documents) {
-            this.documents = documents;
-        }
-
+        
         public List<Scholarship> getScholarships() {
             return scholarships;
         }

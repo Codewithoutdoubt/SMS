@@ -110,3 +110,36 @@ document.getElementById('rollNoSearch').addEventListener('input', function () {
     });
 });
 
+// Function to validate form and check file size limits
+function validateForm() {
+    const maxSize = 400 * 1024; // 400KB in bytes
+    
+    // Get all file input elements
+    const fileInputs = document.querySelectorAll('input[type="file"]');
+    
+    for (let i = 0; i < fileInputs.length; i++) {
+        const input = fileInputs[i];
+        
+        // Check if file is selected
+        if (input.files.length > 0) {
+            const file = input.files[0];
+            
+            // Check file size
+            if (file.size > maxSize) {
+                alert(`File "${file.name}" exceeds the maximum allowed size of 400KB. Please choose a smaller file.`);
+                input.value = ''; // Clear the input
+                return false;
+            }
+            
+            // Check if file is an image (additional validation)
+            if (!file.type.startsWith('image/')) {
+                alert(`File "${file.name}" is not a valid image file. Please select an image file.`);
+                input.value = ''; // Clear the input
+                return false;
+            }
+        }
+    }
+    
+    return true; // All validations passed
+}
+

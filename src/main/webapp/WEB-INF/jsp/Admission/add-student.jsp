@@ -7,11 +7,11 @@
             <div class="card-header text-center">Student Details Form</div>
             <div class="card-body">
 
-                <c:if test="${not empty param.message}">
-                    <script>
-                        alert("${param.message}");
-                    </script>
-                </c:if>
+                    <c:if test="${not empty message}">
+        <script type="text/javascript">
+            alert('${message}');
+        </script>
+    </c:if>
 
                 <form action="savestudent" method="post">
                     <div class="row">

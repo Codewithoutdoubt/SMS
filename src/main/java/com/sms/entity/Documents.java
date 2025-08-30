@@ -1,11 +1,14 @@
 package com.sms.entity;
 
+import java.util.Base64;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -27,44 +30,55 @@ public class Documents {
     @Column(name = "aadhar_no")
     private String aadharNo;
 
-
-    @Column(name = "aadhar_img")
-    private String aadharImage;
+    @Lob
+    @Column(name = "aadhar_img", columnDefinition = "LONGBLOB")
+    private byte[] aadharImage;
 
     @Column(name = "cast_certificate_no")
     private String castCertificateNo;
 
-    @Column(name = "cast_certificate_img")
-    private String castCertificateImage;
+    @Lob
+    @Column(name = "cast_certificate_img", columnDefinition = "LONGBLOB")
+    private byte[] castCertificateImage;
 
     @Column(name = "residence_certificate_no")
     private String residenceCertificateNo;
 
-    @Column(name = "residence_certificate_img")
-    private String residenceCertificateImage;
+    @Lob
+    @Column(name = "residence_certificate_img", columnDefinition = "LONGBLOB")
+    private byte[] residenceCertificateImage;
 
     @Column(name = "income_certificate_no")
     private String incomeCertificateNo;
 
-    @Column(name = "income_certificate_img")
-    private String incomeCertificateImage;
+    @Lob
+    @Column(name = "income_certificate_img", columnDefinition = "LONGBLOB")
+    private byte[] incomeCertificateImage;
 
-        @Column(name = "tenth_marksheet_no")
+    @Column(name = "tenth_marksheet_no")
     private String tenthMarksheetNo;
 
-    @Column(name = "tenth_marksheet_img")
-    private String tenthMarksheetImage;
+    @Lob
+    @Column(name = "tenth_marksheet_img", columnDefinition = "LONGBLOB")
+    private byte[] tenthMarksheetImage;
 
     @Column(name = "twelfth_marksheet_no")
     private String twelfthMarksheetNo;
 
-    @Column(name = "twelfth_marksheet_img")
-    private String twelfthMarksheetImage;
+    @Lob
+    @Column(name = "twelfth_marksheet_img", columnDefinition = "LONGBLOB")
+    private byte[] twelfthMarksheetImage;
 
     @Column(name = "transfer_certificate_no")
     private String transferCertificateNo;
 
-    @Column(name = "transfer_certificate_img")
-    private String transferCertificateImage;
+    @Lob
+    @Column(name = "transfer_certificate_img", columnDefinition = "LONGBLOB")
+    private byte[] transferCertificateImage;
 
+    @Lob
+    @Column(name = "profile_img", columnDefinition = "LONGBLOB")
+    private byte[] profileImage;
+
+    
 }

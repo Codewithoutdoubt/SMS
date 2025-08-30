@@ -56,9 +56,12 @@ public class StudentController {
     }
 
     @GetMapping("/addstudent")
-    public String showStudentForm(Model model) {
+    public String showStudentForm(Model model, @RequestParam(value = "message", required = false) String message) {
         model.addAttribute("branches", branchService.getAllBranches());
         model.addAttribute("semesters", semesterService.getAllSemesters());
+        if (message != null) {
+            model.addAttribute("message", message);
+        }
         return "Admission/add-student"; // Updated JSP file name
     }
 
@@ -106,7 +109,7 @@ public class StudentController {
         // Fetch existing student to preserve documents
         Student existingStudent = studentServcie.getStudentByStudentId(student.getId());
         if (existingStudent != null) {
-            student.setDocuments(existingStudent.getDocuments());
+            student.setDocument(existingStudent.getDocument());
         }
 
         studentServcie.updateStudent(student);

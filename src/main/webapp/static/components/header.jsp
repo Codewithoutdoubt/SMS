@@ -2,12 +2,12 @@
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<!-- <%
+<%
     if (session.getAttribute("department") == null || ((com.sms.entity.Department)session.getAttribute("department")).getUsername() == null) {
         response.sendRedirect("/loginpage");
         return;
     }
-%> -->
+%> 
 
 <!DOCTYPE html>
 <html lang="en">

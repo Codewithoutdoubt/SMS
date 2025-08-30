@@ -28,6 +28,7 @@ public class DocumentsServiceImpl implements DocumentsService {
     @Override
     public Documents updateDocument(Long id, Documents document) {
         Documents existDocument = getDocumentById(id);
+        existDocument.setProfileImage(document.getProfileImage());
         existDocument.setAadharNo(document.getAadharNo());
         existDocument.setAadharImage(document.getAadharImage());
         existDocument.setCastCertificateNo(document.getCastCertificateNo());

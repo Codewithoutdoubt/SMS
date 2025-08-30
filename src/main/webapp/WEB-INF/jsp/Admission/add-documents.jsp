@@ -6,7 +6,7 @@
                     <div class="card p-4 shadow">
                         <h2 class="text-center mb-4">Document Upload Details</h2>
 
-                        <form action="/documents/save" method="post" enctype="multipart/form-data">
+                        <form action="/documents/save" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
                             <input type="hidden" name="studentId" value="${students.id}" />
                             <div class="row mb-3">
                                 <label for="profileImage" class="col-sm-4 col-form-label">Profile Image</label>
@@ -29,7 +29,7 @@
                                 <div class="col-sm-8">
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="10thMarksheetNo"
-                                            name="10thMarksheetNo" placeholder="Enter 10th Marksheet No." required>
+                                            name="tenthMarksheetNo" placeholder="Enter 10th Marksheet No." required>
                                         <input type="file" class="form-control ml-3" id="10thMarksheetImage" name="10thMarksheetImage" accept="image/*" style="width: 40px;">
                                     </div>
                                 </div>
@@ -39,7 +39,7 @@
                                 <div class="col-sm-8">
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="12thMarksheetNo"
-                                            name="12thMarksheetNo" placeholder="Enter 12th Marksheet No." required>
+                                            name="twelfthMarksheetNo" placeholder="Enter 12th Marksheet No." required>
                                         <input type="file" class="form-control ml-3" id="12thMarksheetImage" name="12thMarksheetImage" accept="image/*" style="width: 40px;">
                                     </div>
                                 </div>
@@ -49,7 +49,7 @@
                                 <div class="col-sm-8">
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="transferCertificate"
-                                            name="transferCertificate" placeholder="Enter Transfer Certificate No." required>
+                                            name="transferCertificateNo" placeholder="Enter Transfer Certificate No." required>
                                         <input type="file" class="form-control ml-3" id="transferCertificateImage" name="transferCertificateImage" accept="image/*" style="width: 40px;">
                                     </div>
                                 </div>
@@ -59,7 +59,7 @@
                                 <div class="col-sm-8">
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="casteCertificate"
-                                            name="casteCertificateNo" placeholder="Enter Caste Certificate No." required>
+                                            name="castCertificateNo" placeholder="Enter Caste Certificate No." required>
                                         <input type="file" class="form-control ml-3" id="casteCertificateImage" name="casteCertificateImage" accept="image/*" style="width: 40px;">
                                     </div>
                                 </div>
@@ -94,6 +94,7 @@
         </div>
 
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+                <script src="${pageContext.request.contextPath}/static/js/filter.js"></script>
         <script>
             document.getElementById('sameAsProfile').addEventListener('change', function () {
                 var profileImage = document.getElementById('profileImage');
