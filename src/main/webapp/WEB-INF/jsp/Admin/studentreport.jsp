@@ -20,23 +20,30 @@
       </div>
         <div class="card profile-card">
           <div class="card-body">
-            <div class="details scard ">
-              <h4>Name : </h4>
-              <p>
-                <c:out value="${student.studentName}" />
-              </p>
-            </div>
-            <div class="deatails scard">
-              <h4>Roll No. :</h4>
-              <p>
-                <c:out value="${student.rollNo}" />
-              </p>
-            </div>
-            <div class="deatails scard">
-              <h4>Branch :</h4>
-              <p>
-                <c:out value="${student.branch.name}" />
-              </p>
+            <div class="row">
+              <div class="col-md-4 text-center">
+                <img src="/documents/image/profile/${student.id}" class="img-fluid rounded-circle" alt="Profile Image" style="width: 150px; height: 150px;">
+              </div>
+              <div class="col-md-8">
+                <div class="details scard ">
+                  <h4>Name : </h4>
+                  <p>
+                    <c:out value="${student.studentName}" />
+                  </p>
+                </div>
+                <div class="deatails scard">
+                  <h4>Roll No. :</h4>
+                  <p>
+                    <c:out value="${student.rollNo}" />
+                  </p>
+                </div>
+                <div class="deatails scard">
+                  <h4>Branch :</h4>
+                  <p>
+                    <c:out value="${student.branch.name}" />
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -163,6 +170,7 @@
           <th class="report-sr">Sr. No.</th>
           <th class="w-50">Document Name</th>
           <th>Document Number</th>
+          <th>View</th>
         </tr>
       </thead>
       <tbody>
@@ -170,30 +178,58 @@
             <td>1</td>
             <td>Aadhar Number</td>
             <td>
-              <!-- <c:out value="${documents.aadharNo}" /> -->
+              <c:out value="${documents.aadharNo}" />
             </td>
+            <td><a href="/documents/image/aadhar/${student.id}" target="_blank" class="btn btn-primary">View</a></td>
           </tr>
           <tr>
             <td>2</td>
             <td>Caste Certificate No.</td>
             <td>
-              <!-- <c:out value="${documents.casteCertificateNo}" /> -->
+              <c:out value="${documents.castCertificateNo}" />
             </td>
+            <td><a href="/documents/image/caste/${student.id}" target="_blank" class="btn btn-primary">View</a></td>
           </tr>
 
           <tr>
             <td>3</td>
             <td>Income Certificate Number</td>
             <td>
-              <!-- <c:out value="${documents.incomeCertificateNo}" /> -->
+              <c:out value="${documents.incomeCertificateNo}" />
             </td>
+            <td><a href="/documents/image/income/${student.id}" target="_blank" class="btn btn-primary">View</a></td>
           </tr>
           <tr>
             <td>4</td>
             <td>Residence Certificate Number</td>
             <td>
-              <!-- <c:out value="${documents.residenceCertificateNo}" /> -->
+              <c:out value="${documents.residenceCertificateNo}" />
             </td>
+            <td><a href="/documents/image/residence/${student.id}" target="_blank" class="btn btn-primary">View</a></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>10th Marksheet Number</td>
+            <td>
+              <c:out value="${documents.tenthMarksheetNo}" />
+            </td>
+            <td><a href="/documents/image/tenth/${student.id}" target="_blank" class="btn btn-primary">View</a></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>12th Marksheet Number</td>
+            <td>
+              <c:out value="${documents.twelfthMarksheetNo}" />
+            </td>
+            <td><a href="/documents/image/twelfth/${student.id}" target="_blank" class="btn btn-primary">View</a></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>Transfer Certificate Number</td>
+            <td>
+              <c:out value="${documents.transferCertificateNo}" />
+            </td>
+            <td><a href="/documents/image/transfer/${student.id}" target="_blank" class="btn btn-primary">View</a></td>
           </tr>
       </tbody>
     </table>

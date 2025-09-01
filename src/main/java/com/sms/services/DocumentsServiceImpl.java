@@ -25,24 +25,15 @@ public class DocumentsServiceImpl implements DocumentsService {
         return document.orElse(null);
     }
 
-    @Override
     public Documents updateDocument(Long id, Documents document) {
         Documents existDocument = getDocumentById(id);
-        existDocument.setProfileImage(document.getProfileImage());
         existDocument.setAadharNo(document.getAadharNo());
-        existDocument.setAadharImage(document.getAadharImage());
         existDocument.setCastCertificateNo(document.getCastCertificateNo());
-        existDocument.setCastCertificateImage(document.getCastCertificateImage());
         existDocument.setResidenceCertificateNo(document.getResidenceCertificateNo());
-        existDocument.setResidenceCertificateImage(document.getResidenceCertificateImage());
         existDocument.setIncomeCertificateNo(document.getIncomeCertificateNo());
-        existDocument.setIncomeCertificateImage(document.getIncomeCertificateImage());
         existDocument.setTenthMarksheetNo(document.getTenthMarksheetNo());
-        existDocument.setTenthMarksheetImage(document.getTenthMarksheetImage());
         existDocument.setTwelfthMarksheetNo(document.getTwelfthMarksheetNo());
-        existDocument.setTwelfthMarksheetImage(document.getTwelfthMarksheetImage());
         existDocument.setTransferCertificateNo(document.getTransferCertificateNo());
-        existDocument.setTransferCertificateImage(document.getTransferCertificateImage());
 
         documentsRepository.save(existDocument);
         return existDocument;

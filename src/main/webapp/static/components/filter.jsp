@@ -29,7 +29,7 @@
             </c:forEach>
         </select>
     </div>
-    <button type="submit" class="btn btn-primary mx-2 h-75 ftr">Apply</button>
+    <button type="submit" class="btn btn-primary mx-2 h-75">Apply</button>
     <a href="/${sessionScope.department.access}" class="btn btn-primary h-75">Reset</a>
 </form>
 

@@ -81,7 +81,7 @@ public class AdminController {
         mav.addObject("fees", feeService.getFeesByStudentId(id));
         mav.addObject("results", resultService.getResultsByStudentId(id));
         mav.addObject("scholarships", scholarshipService.getScholarshipsByStudentId(id));
-        // mav.addObject("documents", documentsService.getDocumentsByStudentId(id));
+        mav.addObject("documents", documentsService.getDocumentsByStudentId(id));
         mav.addObject("placements", placementService.getPlacementsByStudentId(id));
         return mav;
     }
