@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,11 +36,17 @@ public class DocumentController {
 
     @Autowired
     private StudentService studentService;
+    
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.setDisallowedFields("profileImage", "aadharImage", "castCertificateImage", "residenceCertificateImage", "incomeCertificateImage", "tenthMarksheetImage", "twelfthMarksheetImage", "transferCertificateImage");
+    }
 
     @GetMapping("/add/{studentId}")
     public ModelAndView showAddDocumentForm(@PathVariable Long studentId) {
         ModelAndView mav = new ModelAndView("Admission/add-documents");
         mav.addObject("students", studentService.getStudentByStudentId(studentId));
+        mav.addObject("document", new Documents());
         return mav;
     }
 
@@ -60,84 +68,33 @@ public class DocumentController {
     }
 
     @PostMapping("/save")
-    public ModelAndView saveDocument(@RequestParam("studentId") Long studentId,
-                                   @RequestParam("aadharNo") String aadharNo,
-                                   @RequestParam("castCertificateNo") String castCertificateNo,
-                                   @RequestParam("residenceCertificateNo") String residenceCertificateNo,
-                                   @RequestParam("incomeCertificateNo") String incomeCertificateNo,
-                                   @RequestParam("tenthMarksheetNo") String tenthMarksheetNo,
-                                   @RequestParam("twelfthMarksheetNo") String twelfthMarksheetNo,
-                                   @RequestParam("transferCertificateNo") String transferCertificateNo,
-                                   @RequestParam("profileImage") MultipartFile profileImage,
-                                   @RequestParam("aadharImage") MultipartFile aadharImage,
-                                   @RequestParam("10thMarksheetImage") MultipartFile marksheet10thImage,
-                                   @RequestParam("12thMarksheetImage") MultipartFile marksheet12thImage,
-                                   @RequestParam("transferCertificateImage") MultipartFile transferCertificateImage,
-                                   @RequestParam("casteCertificateImage") MultipartFile casteCertificateImage,
-                                   @RequestParam("incomeCertificateImage") MultipartFile incomeCertificateImage,
-                                   @RequestParam("residenceCertificateImage") MultipartFile residenceCertificateImage) {
-        
-        Documents document = new Documents();
+    public ModelAndView saveDocument(@ModelAttribute Documents document,
+            @RequestParam("studentId") Long studentId,
+            @RequestParam("profileImage") MultipartFile profileImage,
+            @RequestParam("aadharImage") MultipartFile aadharImage,
+            @RequestParam("tenthMarksheetImage") MultipartFile tenthMarksheetImage,
+            @RequestParam("twelfthMarksheetImage") MultipartFile twelfthMarksheetImage,
+            @RequestParam("transferCertificateImage") MultipartFile transferCertificateImage,
+            @RequestParam("casteCertificateImage") MultipartFile casteCertificateImage,
+            @RequestParam("incomeCertificateImage") MultipartFile incomeCertificateImage,
+            @RequestParam("residenceCertificateImage") MultipartFile residenceCertificateImage) throws IOException {
+
         Student student = studentService.getStudentByStudentId(studentId);
         document.setStudent(student);
-        document.setAadharNo(aadharNo);
-        document.setCastCertificateNo(castCertificateNo);
-        document.setResidenceCertificateNo(residenceCertificateNo);
-        document.setIncomeCertificateNo(incomeCertificateNo);
-        document.setTenthMarksheetNo(tenthMarksheetNo);
-        document.setTwelfthMarksheetNo(twelfthMarksheetNo);
-        document.setTransferCertificateNo(transferCertificateNo);
-        
-        try {
-            // Process and save profile image
-            if (!profileImage.isEmpty()) {
-                document.setProfileImage(compressImage(profileImage));
-            }
 
-            // Process and save aadhar image
-            if (!aadharImage.isEmpty()) {
-                document.setAadharImage(compressImage(aadharImage));
-            }
+        document.setProfileImage(profileImage.getBytes());
+        document.setAadharImage(aadharImage.getBytes());
+        document.setTenthMarksheetImage(tenthMarksheetImage.getBytes());
+        document.setTwelfthMarksheetImage(twelfthMarksheetImage.getBytes());
+        document.setTransferCertificateImage(transferCertificateImage.getBytes());
+        document.setCastCertificateImage(casteCertificateImage.getBytes());
+        document.setIncomeCertificateImage(incomeCertificateImage.getBytes());
+        document.setResidenceCertificateImage(residenceCertificateImage.getBytes());
 
-            // Process and save 10th marksheet image
-            if (!marksheet10thImage.isEmpty()) {
-                document.setTenthMarksheetImage(compressImage(marksheet10thImage));
-            }
-
-            // Process and save 12th marksheet image
-            if (!marksheet12thImage.isEmpty()) {
-                document.setTwelfthMarksheetImage(compressImage(marksheet12thImage));
-            }
-
-            // Process and save transfer certificate image
-            if (!transferCertificateImage.isEmpty()) {
-                document.setTransferCertificateImage(compressImage(transferCertificateImage));
-            }
-
-            // Process and save caste certificate image
-            if (!casteCertificateImage.isEmpty()) {
-                document.setCastCertificateImage(compressImage(casteCertificateImage));
-            }
-
-            // Process and save income certificate image
-            if (!incomeCertificateImage.isEmpty()) {
-                document.setIncomeCertificateImage(compressImage(incomeCertificateImage));
-            }
-
-            // Process and save residence certificate image
-            if (!residenceCertificateImage.isEmpty()) {
-                document.setResidenceCertificateImage(compressImage(residenceCertificateImage));
-            }
-
-            documentsService.createDocument(document);
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        
-        ModelAndView mav = new ModelAndView("redirect:/addstudent?message=Student%20documents%20saved%20successfully");
-        return mav;
+        documentsService.createDocument(document);
+        return new ModelAndView("redirect:/admission");
     }
+
 
     @GetMapping("/student/{studentId}")
     public ModelAndView getDocumentsByStudent(@PathVariable Long studentId) {
